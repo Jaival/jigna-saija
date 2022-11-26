@@ -29,29 +29,29 @@ export default function Hero() {
           />
         </div>
       </div>
-      <div className="container mt-10">
+      <div className="container mt-14">
         <div className="text-center mb-10">
-          <h2 className='text-4xl font-bold'>
+          <p className='text-4xl font-bold'>
             Why Chose Me?
-          </h2>
+          </p>
         </div>
 
-        <div className='grid grid-flow-col grid-rows-2 gap-4'>
+        <div className='grid grid-flow-col grid-rows-2 gap-14'>
           <div className="card">
-            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+            <h5 className="mb-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
               Design Approach
             </h5>
-            <p className="font-normal text-gray-700 dark:text-gray-400">
+            <p className="font-normal text-lg text-gray-700 dark:text-gray-400">
               We hear the customer, we set the customers and their requirements
               in the heart of our design.
             </p>
           </div>
 
           <div className="card">
-            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+            <h5 className="mb-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
               Transparency
             </h5>
-            <p className="font-normal text-gray-700 dark:text-gray-400">
+            <p className="font-normal text-lg text-gray-700 dark:text-gray-400">
               We provide complete transparency on all matters. Our BOGs (bill of
               quality) & bring clarity in each step/material we select and
               order.
@@ -59,29 +59,29 @@ export default function Hero() {
           </div>
 
           <div className="card">
-            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+            <h5 className="mb-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
               Trust
             </h5>
-            <p className="font-normal text-gray-700 dark:text-gray-400">
+            <p className="font-normal text-lg text-gray-700 dark:text-gray-400">
               We work to build trust. Our work & transparency speaks it all.
             </p>
           </div>
 
           <div className="card">
-            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+            <h5 className="mb-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
               Quality
             </h5>
-            <p className="font-normal text-gray-700 dark:text-gray-400">
+            <p className="font-normal text-lg text-gray-700 dark:text-gray-400">
               The design approach helps us offer well-planned, beautifully
               detailed long-lasting & high-satisfactory products.
             </p>
           </div>
 
           <div className="card">
-            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+            <h5 className="mb-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
               Fast & Hassle Free
             </h5>
-            <p className="font-normal text-gray-700 dark:text-gray-400">
+            <p className="font-normal text-lg text-gray-700 dark:text-gray-400">
               We handle the project from start to end. Clients need not
               co-ordinate when with team & contractors. We will manage all when
               the total responsibility has been given.

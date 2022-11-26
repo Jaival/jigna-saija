@@ -1,10 +1,10 @@
-import GalleryComponent from '../components/galleryCompanent';
+import GalleryComponent from '../components/gallery';
 import MainContainer from '../components/mainContainer';
 
 export default function Gallery() {
   return (
     <MainContainer>
-      <GalleryComponent/>
+      <GalleryComponent />
     </MainContainer>
   );
 }

@@ -2,15 +2,17 @@ import { ThemeProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
 import '../styles/globals.css';
 
-
 function MyApp({ Component, pageProps }: AppProps) {
+
   return (
     <ThemeProvider
       defaultTheme="dark"
-      attribute="class">  
+      attribute="class"
+    >
       <Component {...pageProps} />
-    </ThemeProvider> 
+    </ThemeProvider>
   );
+
 }
 
 export default MyApp;

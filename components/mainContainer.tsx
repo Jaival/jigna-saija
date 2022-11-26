@@ -44,9 +44,9 @@ export default function MainContainer({ children, ...customMeta }: any) {
                     <meta property="article:published_time" content={meta.date} />
                 )} */}
       </Head>
-      <main className="m-16">
+      <main className="mx-20 mt-12">
         <Navbar />
-        <div className='p-12'>{children}</div>
+        <div className='p-6'>{children}</div>
         <Footer />
       </main>
     </div>

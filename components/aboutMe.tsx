@@ -2,8 +2,7 @@ import Image from 'next/image';
 
 export default function AboutMeComponent() {
   return (
-    <div className="container mt-5">
-
+    <div className="container mt-14">
       <div className="text-center m-10">
         <h2 className='text-4xl font-bold'>About Me</h2>
       </div>
@@ -25,8 +24,8 @@ export default function AboutMeComponent() {
           </div>
         </div>
 
-        <div className='text-2xl min-w-min ml-10'>
-          <p>
+        <div className='flex min-w-min ml-10'>
+          <p className='text-2xl'>
             I gracefully designs from concept to completion with over ten years of design experience
             in residential and commercial interiors.
             I is a versatile designer with an ability to effortlessly conceive elegant concepts and
@@ -40,20 +39,20 @@ export default function AboutMeComponent() {
 
         <div className="card">
           <div className="card-body p-4">
-            <h5 className="font-bold">10</h5>
-            <p className="">Years of Experience</p>
+            <h5 className="font-bold text-2xl">10</h5>
+            <p className="text-lg">Years of Experience</p>
           </div>
         </div>
         <div className="card">
           <div className="card-body p-4">
-            <h5 className="font-bold">10</h5>
-            <p className="">Project Completed</p>
+            <h5 className="font-bold text-2xl">10</h5>
+            <p className="text-lg">Project Completed</p>
           </div>
         </div>
         <div className="card">
           <div className="card-body p-4">
-            <h5 className="font-bold">10</h5>
-            <p className="">Awards Gained</p>
+            <h5 className="font-bold text-2xl">10</h5>
+            <p className="text-lg">Awards Gained</p>
           </div>
         </div>
       </div>

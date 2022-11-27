@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import userData from "../data/data";
 
 export default function ProjectsComponent() {
@@ -19,6 +20,7 @@ export default function ProjectsComponent() {
               title={proj.title}
               year={proj.year}
               imgUrl={proj.imgUrl}
+              redirectLink={proj.link}
               number={`${idx + 1}`}
             />
           ))}
@@ -40,6 +42,7 @@ export default function ProjectsComponent() {
               title={proj.title}
               year={proj.year}
               imgUrl={proj.imgUrl}
+              redirectLink={proj.link}
               number={`${idx + 1}`}
             />
           ))}
@@ -49,29 +52,29 @@ export default function ProjectsComponent() {
   );
 }
 
-// TODO: Image url for thr project card
-const ProjectCard = ({ title, year, number, imgUrl }: { title: string, year: number, number: string, imgUrl: string }) => {
+// TODO: Image url redirects to that particular project
+const ProjectCard = ({ title, year, number, imgUrl, redirectLink }: { title: string, year: number, number: string, imgUrl: string, redirectLink: string }) => {
   return (
-    // <a href={link} className="w-full block shadow-2xl">
-    <div className="relative overflow-hidden rounded-xl">
-      <div className="h-72 object-cover">
-        <Image
-          src={imgUrl}
-          fill={true}
-          alt="portfolio"
-          className="h-full w-full transform hover:scale-125 transition duration-2000 ease-out object-cover"
-        />
+    <Link href={redirectLink} className="w-full block shadow-2xl">
+      <div className="relative overflow-hidden rounded-xl">
+        <div className="h-72 object-cover">
+          <Image
+            src={imgUrl}
+            fill={true}
+            alt="portfolio"
+            className="h-full w-full transform hover:scale-110 transition duration-500 ease-in-out object-cover"
+          />
+        </div>
+        <h1 className="absolute top-10 left-10 text-gray-50 font-bold text-xl bg-red-500 rounded-md px-2">
+          {title}
+        </h1>
+        <h1 className="absolute bottom-10 left-10 text-gray-50 font-bold text-xl">
+          {number.length === 1 ? "0" + number : number}
+        </h1>
+        <h1 className="absolute bottom-10 right-10 text-gray-50 font-bold text-xl">
+          {year}
+        </h1>
       </div>
-      <h1 className="absolute top-10 left-10 text-gray-50 font-bold text-xl bg-red-500 rounded-md px-2">
-        {title}
-      </h1>
-      <h1 className="absolute bottom-10 left-10 text-gray-50 font-bold text-xl">
-        {number.length === 1 ? "0" + number : number}
-      </h1>
-      <h1 className="absolute bottom-10 right-10 text-gray-50 font-bold text-xl">
-        {year}
-      </h1>
-    </div>
-    // </a>
+    </Link>
   );
 };

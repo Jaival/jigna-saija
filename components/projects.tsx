@@ -7,7 +7,7 @@ export default function ProjectsComponent() {
     <section className="bg-silver dark:bg-blue-dark">
       {/* Interior Projects*/}
       <div className="max-w-6xl mx-auto ">
-        <h1 className="text-2xl md:text-7xl font-bold py-10 text-center md:text-left">
+        <h1 className="text-xl md:text-4xl font-bold py-10 text-center md:text-left">
           Interior Projects
         </h1>
       </div>
@@ -29,7 +29,7 @@ export default function ProjectsComponent() {
 
       {/* Architecture Projects*/}
       <div className="max-w-6xl mx-auto">
-        <h1 className=" text-2xl md:text-7xl font-bold py-10 text-center md:text-left">
+        <h1 className="text-xl md:text-4xl font-bold py-10 text-center md:text-left">
           Architecture Projects
         </h1>
       </div>

@@ -8,7 +8,7 @@ export default function GalleryComponent() {
 
       {/* Interior Projects*/}
       <div className="max-w-6xl mx-auto ">
-        <h1 className="text-2xl md:text-5xl font-bold py-10 text-center md:text-left">
+        <h1 className="text-xl md:text-4xl font-bold py-10 text-center md:text-left">
           Interior Gallery
         </h1>
       </div>
@@ -27,7 +27,7 @@ export default function GalleryComponent() {
       </div>
       {/* Architecture Projects*/}
       <div className="max-w-6xl mx-auto">
-        <h1 className=" text-2xl md:text-5xl font-bold py-10 text-center md:text-left">
+        <h1 className="text-xl md:text-4xl font-bold py-10 text-center md:text-left">
           Architecture Gallery
         </h1>
       </div>

@@ -3,11 +3,11 @@ import Image from 'next/image';
 export default function AboutMeComponent() {
   return (
     <div className="container mt-14">
-      <div className="text-center m-10">
-        <h2 className='text-4xl font-bold'>About Me</h2>
+      <div className="text-left md:text-center m-10">
+        <h2 className='text-xl md:text-4xl font-bold'>About Me</h2>
       </div>
 
-      <div className="flex flex-row gap-2 items-center">
+      <div className="flex md:flex-row flex-col gap-2 items-center">
         <div className="flex flex-col">
           <Image
             className="rounded-lg"
@@ -18,14 +18,14 @@ export default function AboutMeComponent() {
               '/images/pexels-isaw-company-955733.jpg'
             }
           />
-          <div className="text-center p-2">
-            <q className="font-thin">We believe in complete design</q>
-            <p className="font-light h-6"> - Jigna Saija </p>
+          <div className="text-left md:text-center py-2">
+            <q className="font-light md:text-base">We believe in complete design</q>
+            <p className="font-thin text-sm md:text-base md:h-6"> - Jigna Saija </p>
           </div>
         </div>
 
-        <div className='flex min-w-min ml-10'>
-          <p className='text-2xl'>
+        <div className='flex flex-col md:ml-10'>
+          <p className='text-base md:text-2xl'>
             I gracefully designs from concept to completion with over ten years of design experience
             in residential and commercial interiors.
             I is a versatile designer with an ability to effortlessly conceive elegant concepts and
@@ -35,24 +35,24 @@ export default function AboutMeComponent() {
       </div>
 
       {/* <!-- Experience Cards--> */}
-      <div className="grid grid-flow-col gap-4 mt-10">
+      <div className="grid grid-flow-col grid-rows-3 md:grid-rows-1 gap-4 mt-10">
 
         <div className="card">
           <div className="card-body p-4">
-            <h5 className="font-bold text-2xl">10</h5>
-            <p className="text-lg">Years of Experience</p>
+            <h5 className="font-bold text-lg md:text-2xl">10</h5>
+            <p className="text-base md:text-lg">Years of Experience</p>
           </div>
         </div>
         <div className="card">
           <div className="card-body p-4">
-            <h5 className="font-bold text-2xl">10</h5>
-            <p className="text-lg">Project Completed</p>
+            <h5 className="font-bold text-lg md:text-2xl">10</h5>
+            <p className="text-base md:text-lg">Project Completed</p>
           </div>
         </div>
         <div className="card">
           <div className="card-body p-4">
-            <h5 className="font-bold text-2xl">10</h5>
-            <p className="text-lg">Awards Gained</p>
+            <h5 className="font-bold text-lg md:text-2xl">10</h5>
+            <p className="text-base md:text-lg">Awards Gained</p>
           </div>
         </div>
       </div>

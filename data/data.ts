@@ -67,6 +67,12 @@ const userData = {
                 link: "/gallery",
                 imgUrl: "/images/architecture_projects/project_pic_1/project_pic_1.jpg",
             },
+            {
+                title: "Bungalow at Bopal",
+                year: 2022,
+                link: "/gallery",
+                imgUrl: "/images/architecture_projects/bungalow_at_bopal/bungalow_at_bopal_1.jpg",
+            },
         ]
     },
 };

@@ -1,34 +1,39 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Nunito:wght@300;400;500;600;700;800;900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Nunito:wght@300;400;500;600;700;800;900&display=swap");
-
 body {
-  font-family: "Nunito", sans-serif;
+    font-family: "Nunito", sans-serif;
 }
 
 @layer components {
-  .navbar-li {
-    @apply text-lg
-    py-2 px-4
-    md:p-2
-    text-gray-700
-    rounded
-    hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700
-    dark:text-gray-400 md:dark:hover:text-white dark:hover:text-white;
-  }
-  .card {
-    @apply block
-    p-6 
-    max-w-sm
-    bg-white 
-    rounded-2xl
-    border 
-    border-gray-200 
-    shadow-md
-    hover:bg-gray-700
-    dark:bg-gray-800 dark:border-gray-800
-    dark:hover:bg-gray-700;
-  }
+    .navbar-li {
+        @apply text-lg
+        py-2 px-4
+        md:p-2
+        text-blue-dark
+        dark:text-light-periwinkle
+        rounded
+        hover:bg-cg-blue
+        md:hover:bg-transparent
+        md:border-0
+        md:hover:text-blue-dark
+        md:dark:hover:text-star-command-blue;
+    }
+
+    .card {
+        @apply block
+        p-6
+        max-w-sm
+        bg-eton-blue
+        rounded-2xl
+        text-black
+        shadow-md
+        dark:text-white
+        hover:bg-dark-sea-green
+        dark:bg-amaranth-purple
+        dark:hover:bg-dogwood-rose;
+    }
 }

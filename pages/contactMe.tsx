@@ -3,8 +3,8 @@ import MainContainer from '../components/mainContainer';
 
 export default function ContactMe() {
   return (
-    <MainContainer>
-      <ContactMeComponent />
-    </MainContainer>
+     <MainContainer>
+       <ContactMeComponent/>
+     </MainContainer>
   );
 }

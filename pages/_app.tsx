@@ -5,12 +5,12 @@ import '../styles/globals.css';
 function MyApp({Component, pageProps}: AppProps) {
 
   return (
-     <ThemeProvider
-        defaultTheme="dark"
-        attribute="class"
-     >
-       <Component {...pageProps} />
-     </ThemeProvider>
+    <ThemeProvider
+      defaultTheme="dark"
+      attribute="class"
+    >
+      <Component {...pageProps} />
+    </ThemeProvider>
   );
 }
 

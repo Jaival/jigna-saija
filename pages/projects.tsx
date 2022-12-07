@@ -3,8 +3,8 @@ import ProjectsComponent from '../components/projects';
 
 export default function Projects() {
   return (
-     <MainContainer>
-       <ProjectsComponent/>
-     </MainContainer>
+    <MainContainer>
+      <ProjectsComponent/>
+    </MainContainer>
   );
 }

@@ -1,6 +1,6 @@
-import Image from "next/image";
-import Link from "next/link";
-import userData from "../data/data";
+import Image from 'next/image';
+import Link from 'next/link';
+import userData from '../data/data';
 
 export default function ProjectsComponent() {
   return (
@@ -74,7 +74,7 @@ const ProjectCard = ({
           {title}
         </h1>
         <h1 className="absolute bottom-10 left-10 text-white font-bold text-xl">
-          {number.length === 1 ? "0" + number : number}
+          {number.length === 1 ? '0' + number : number}
         </h1>
         <h1 className="absolute bottom-10 right-10 text-white font-bold text-xl">
           {year}

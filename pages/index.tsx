@@ -5,10 +5,10 @@ import MainContainer from '../components/mainContainer';
 
 export default function Home() {
   return (
-     <MainContainer>
-       <Hero/>
-       <AboutMeComponent/>
-       <DesignProcessComponent/>
-     </MainContainer>
+    <MainContainer>
+      <Hero/>
+      <AboutMeComponent/>
+      <DesignProcessComponent/>
+    </MainContainer>
   );
 }

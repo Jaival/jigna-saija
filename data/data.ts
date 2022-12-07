@@ -4,45 +4,10 @@ const userData = {
     projects: {
         interiorProjects: [
             {
-                title: "Best Site",
-                year: 2021,
-                link: "/gallery",
-                imgUrl: "/images/interior_projects/best_site_pics/best_stall_site_pic_1.jpg",
-
-            },
-            {
-                title: "Book Stall",
-                year: 2021,
-                link: "/gallery",
-                imgUrl: "/images/interior_projects/book_stall_pics/book_stall_site_pic_1.jpg",
-
-            },
-            {
-                title: "Guruji Site",
-                year: 2021,
-                link: "/gallery",
-                imgUrl: "/images/interior_projects/guruji_site_pics/guruji_site_pic_1.jpg",
-
-            },
-            {
                 title: "Mr. Bhadoraia Site",
                 year: 2021,
                 link: "/gallery",
                 imgUrl: "/images/interior_projects/mr_bhadoria_site/mr_bhadoria_site_pic_1.jpg",
-
-            },
-            {
-                title: "Mr. Rathi Site",
-                year: 2021,
-                link: "/gallery",
-                imgUrl: "/images/interior_projects/mr_rathi_site_pic/mr_rathi_site_pic_1.jpg",
-
-            },
-            {
-                title: "Mr. Sadhwani Site",
-                year: 2021,
-                link: "/gallery",
-                imgUrl: "/images/interior_projects/mr_sadhwani_site_pic/mr_sadhwani_site_pic_1.jpg",
 
             },
             {
@@ -53,10 +18,45 @@ const userData = {
 
             },
             {
-                title: "Varsoda Site",
+                title: "Best Site",
                 year: 2021,
                 link: "/gallery",
+                imgUrl: "/images/interior_projects/best_site_pics/best_stall_site_pic_1.jpg",
+
+            },
+            {
+                title: "Mr. Sadhwani Site",
+                year: 2018,
+                link: "/gallery",
+                imgUrl: "/images/interior_projects/mr_sadhwani_site_pic/mr_sadhwani_site_pic_1.jpg",
+
+            },
+            {
+                title: "Varsoda Site",
+                year: 2012,
+                link: "/gallery",
                 imgUrl: "/images/interior_projects/varsoda_site_pics/varsoda_site_pic_1.jpg",
+
+            },
+            {
+                title: "Guruji Site",
+                year: 2011,
+                link: "/gallery",
+                imgUrl: "/images/interior_projects/guruji_site_pics/guruji_site_pic_1.jpg",
+
+            },
+            {
+                title: "Mr. Rathi Site",
+                year: 2009,
+                link: "/gallery",
+                imgUrl: "/images/interior_projects/mr_rathi_site_pic/mr_rathi_site_pic_1.jpg",
+
+            },
+            {
+                title: "Book Stall",
+                year: 2008,
+                link: "/gallery",
+                imgUrl: "/images/interior_projects/book_stall_pics/book_stall_site_pic_1.jpg",
 
             },
         ],

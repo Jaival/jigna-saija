@@ -7,8 +7,8 @@ export default function GalleryComponent() {
     <section className="">
       {/* Interior Projects*/}
       <div className="max-w-6xl mx-auto ">
-        <h1 className="text-xl md:text-4xl font-bold py-10 text-left">
-           Interior Gallery
+        <h1 className="text-xl md:text-4xl font-bold py-2 text-left">
+          Interior Gallery
         </h1>
       </div>
       {/* Grid starts here */}
@@ -27,7 +27,7 @@ export default function GalleryComponent() {
       {/* Architecture Projects*/}
       <div className="max-w-6xl mx-auto">
         <h1 className="text-xl md:text-4xl font-bold py-10 text-left">
-           Architecture Gallery
+          Architecture Gallery
         </h1>
       </div>
       {/* Grid starts here */}

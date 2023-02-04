@@ -1,10 +1,10 @@
 import Head from 'next/head';
-import {useRouter} from 'next/router';
+import { useRouter } from 'next/router';
 import Footer from './footer';
 import Navbar from './navBar';
 
 
-export default function MainContainer({children, ...customMeta}: any) {
+export default function MainContainer({ children, ...customMeta }: any) {
   const router = useRouter();
 
   const meta = {
@@ -21,7 +21,7 @@ export default function MainContainer({children, ...customMeta}: any) {
         <title>{meta.title}</title>
         <meta
           name="robots"
-          content="follow, index"/>
+          content="follow, index" />
         {/* <meta content={meta.description} name="description" /> */}
         <meta
           property="og:url"
@@ -33,10 +33,10 @@ export default function MainContainer({children, ...customMeta}: any) {
         />
         <meta
           property="og:type"
-          content={meta.type}/>
+          content={meta.type} />
         <meta
           property="og:site_name"
-          content="Jigna Saija"/>
+          content="Jigna Saija" />
         {/* <meta property="og:description" content={meta.description} /> */}
         {/* <meta property="og:title" content={meta.title} /> */}
         {/* <meta property="og:image" content={meta.image} /> */}
@@ -45,9 +45,9 @@ export default function MainContainer({children, ...customMeta}: any) {
                 )} */}
       </Head>
       <main className="px-10 md:px-20 pt-12 bg-white-dark dark:bg-blue-dark">
-        <Navbar/>
-        <div className='p-6'>{children}</div>
-        <Footer/>
+        <Navbar />
+        <div className='px-4 py-2'>{children}</div>
+        <Footer />
       </main>
     </div>
   );

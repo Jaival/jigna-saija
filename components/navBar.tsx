@@ -1,11 +1,11 @@
-import {useTheme} from 'next-themes';
+import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 
 export default function NavBar() {
   const [navbar, setNavbar] = useState(false);
-  const {theme, setTheme} = useTheme();
+  const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -16,17 +16,17 @@ export default function NavBar() {
     <nav className="w-full">
       <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
 
-        <div className="flex items-center justify-between py-3 md:py-5 md:block">
+        <div className="flex items-center justify-between py-3 md:py-2 md:block">
           <Link href="/" className="flex items-center w-48">
             {
               theme == 'light' ?
                 <Image className={'w-64 flex-no-shrink fill-current'}
                   alt={'Jigna Saija'} width={320} height={320}
-                  src={'/logos/jigna_saija_dark.png'}/>
+                  src={'/logos/jigna_saija_dark.png'} />
                 :
                 <Image className={'w-64 flex-no-shrink fill-current'}
                   alt={'Jigna Saija'} width={320} height={320}
-                  src={'/logos/jigna_saija_light.png'}/>
+                  src={'/logos/jigna_saija_light.png'} />
             }
           </Link>
           <div className="absolute right-10 md:hidden lg:hidden xl:hidden">
@@ -62,23 +62,23 @@ export default function NavBar() {
 
         <div>
           <div
-            className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${navbar ? 'block' : 'hidden'
-            }`}
+            className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 
+            ${navbar ? 'block' : 'hidden'}`}
           >
             <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
               <li>
                 <Link href="/projects" className="navbar-li">
-                   Projects
+                  Projects
                 </Link>
               </li>
               <li>
                 <Link href="/gallery" className="navbar-li">
-                   Gallery
+                  Gallery
                 </Link>
               </li>
               <li>
                 <Link href="/contactMe" className="navbar-li">
-                   Contact Me
+                  Contact Me
                 </Link>
               </li>
               <button

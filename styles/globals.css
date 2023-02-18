@@ -5,12 +5,12 @@
 @tailwind utilities;
 
 body {
-    font-family: "Nunito", sans-serif;
+  font-family: "Nunito", sans-serif;
 }
 
 @layer components {
-    .navbar-li {
-        @apply text-lg
+  .navbar-li {
+    @apply text-lg
         py-2 px-4
         md:p-2
         text-blue-dark
@@ -21,10 +21,10 @@ body {
         md:border-0
         md:hover:text-blue-dark
         md:dark:hover:text-star-command-blue;
-    }
+  }
 
-    .card {
-        @apply block
+  .card {
+    @apply block
         p-6
         max-w-sm
         bg-eton-blue
@@ -35,5 +35,13 @@ body {
         hover:bg-dark-sea-green
         dark:bg-amaranth-purple
         dark:hover:bg-dogwood-rose;
-    }
+  }
+}
+
+.background {
+  width: 100%;
+  /* height: 100%; */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url("/images/waves-5.svg");
 }

@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import Footer from './footer';
 import Navbar from './navBar';
 
-
 export default function MainContainer({ children, ...customMeta }: any) {
   const router = useRouter();
 
@@ -19,24 +18,18 @@ export default function MainContainer({ children, ...customMeta }: any) {
     <div>
       <Head>
         <title>{meta.title}</title>
-        <meta
-          name="robots"
-          content="follow, index" />
+        <meta name='robots' content='follow, index' />
         {/* <meta content={meta.description} name="description" /> */}
         <meta
-          property="og:url"
+          property='og:url'
           content={`https://yourwebsite.com${router.asPath}`}
         />
         <link
-          rel="canonical"
+          rel='canonical'
           href={`https://yourwebsite.com${router.asPath}`}
         />
-        <meta
-          property="og:type"
-          content={meta.type} />
-        <meta
-          property="og:site_name"
-          content="Jigna Saija" />
+        <meta property='og:type' content={meta.type} />
+        <meta property='og:site_name" content="Jigna Saija' />
         {/* <meta property="og:description" content={meta.description} /> */}
         {/* <meta property="og:title" content={meta.title} /> */}
         {/* <meta property="og:image" content={meta.image} /> */}
@@ -44,7 +37,7 @@ export default function MainContainer({ children, ...customMeta }: any) {
                     <meta property="article:published_time" content={meta.date} />
                 )} */}
       </Head>
-      <main className="px-10 md:px-20 pt-12 bg-white-dark dark:bg-blue-dark">
+      <main className='px-10 md:px-20 pt-12 bg-white-dark dark:bg-blue-dark background'>
         <Navbar />
         <div className='px-4 py-2'>{children}</div>
         <Footer />

@@ -15,6 +15,7 @@ module.exports = {
     },
     extend: {
       colors: {
+        'button-blue': '#1D6793',
         'blue-dark': '#001B29',
         'light-periwinkle': '#C3C9E9',
         'black': '#00171F',
@@ -32,7 +33,8 @@ module.exports = {
         'gray-light': '#cbc0d3',
         'gray': '#adb5bd',
         // 'white-dark': '#E7F0FF', // Alice blue
-        'white-dark': '#D3E1E2', // Alice blue
+        //'white-dark': '#D3E1E2', // Alice blue
+        'white-dark': '#F6F6F1', // Alice blue
         'text-holder': '#C2D8FF', //Periwinkle Crayola
         'white': '#F2F5FF',
       },

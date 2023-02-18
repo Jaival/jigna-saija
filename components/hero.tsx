@@ -8,13 +8,13 @@ export default function Hero() {
         <div className="flex flex-col gap-6 md:justify-center md:items-center md:m-8">
           <h1 className="text-xl md:text-5xl">Building your next big project.</h1>
           <p className="text-l md:text-2xl w-auto">
-             Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium
-             voluptates distinctio odit, consequuntur fugiat omnis, praesentium
-             saepe non.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium
+            voluptates distinctio odit, consequuntur fugiat omnis, praesentium
+            saepe non.
           </p>
           <Link href='/projects'
-            className="bg-blue-500 hover:bg-blue-700 text-white text-center font-bold py-2 px-4 w-60 rounded">
-             See projects
+            className="bg-button-blue hover:bg-blue-700 text-white text-center font-bold py-2 px-4 w-60 rounded">
+            See projects
           </Link>
         </div>
 
@@ -35,59 +35,59 @@ export default function Hero() {
         <div className='container mt-14'>
           <div className="text-left md:text-center mb-10">
             <p className='text-xl md:text-4xl font-bold'>
-               Why Chose Me?
+              Why Chose Me?
             </p>
           </div>
 
           <div className='grid grid-flow-col grid-rows-5 md:grid-rows-2 gap-4 md:gap-14'>
             <div className="card">
               <h5 className="mb-2 text-l md:text-3xl font-bold tracking-tight text-black dark:text-white">
-                 Design Approach
+                Design Approach
               </h5>
               <p className="font-normal text-base md:text-lg text-gray-700 dark:text-gray-400">
-                 We hear the customer, we set the customers and their requirements
-                 in the heart of our design.
+                We hear the customer, we set the customers and their requirements
+                in the heart of our design.
               </p>
             </div>
 
             <div className="card">
               <h5 className="mb-2 text-l md:text-3xl font-bold tracking-tight text-black dark:text-white">
-                 Transparency
+                Transparency
               </h5>
               <p className="font-normal text-base md:text-lg text-gray-700 dark:text-gray-400">
-                 We provide complete transparency on all matters. Our BOGs (bill of
-                 quality) & bring clarity in each step/material we select and
-                 order.
+                We provide complete transparency on all matters. Our BOGs (bill of
+                quality) & bring clarity in each step/material we select and
+                order.
               </p>
             </div>
 
             <div className="card">
               <h5 className="mb-2 text-l md:text-3xl  font-bold tracking-tight text-black dark:text-white">
-                 Trust
+                Trust
               </h5>
               <p className="font-normal text-base md:text-lg text-gray-700 dark:text-gray-400">
-                 We work to build trust. Our work & transparency speaks it all.
+                We work to build trust. Our work & transparency speaks it all.
               </p>
             </div>
 
             <div className="card">
               <h5 className="mb-2 text-l md:text-3xl font-bold tracking-tight text-black dark:text-white">
-                 Quality
+                Quality
               </h5>
               <p className="font-normal text-base md:text-lg text-gray-700 dark:text-gray-400">
-                 The design approach helps us offer well-planned, beautifully
-                 detailed long-lasting & high-satisfactory products.
+                The design approach helps us offer well-planned, beautifully
+                detailed long-lasting & high-satisfactory products.
               </p>
             </div>
 
             <div className="card">
               <h5 className="mb-2 text-l md:text-3xl font-bold tracking-tight text-black dark:text-white">
-                 Fast & Hassle Free
+                Fast & Hassle Free
               </h5>
               <p className="font-normal text-base md:text-lg text-gray-700 dark:text-gray-400">
-                 We handle the project from start to end. Clients need not
-                 co-ordinate when with team & contractors. We will manage all when
-                 the total responsibility has been given.
+                We handle the project from start to end. Clients need not
+                co-ordinate when with team & contractors. We will manage all when
+                the total responsibility has been given.
               </p>
             </div>
           </div>

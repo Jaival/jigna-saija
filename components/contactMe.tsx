@@ -6,10 +6,10 @@ export default function ContactMeComponent() {
         <div className="md:ml-4 order-2 md:order-1">
           <header>
             <h1 className="font-semibold text-2xl">
-               Get in touch, let&apos;s talk.
+              Get in touch, let&apos;s talk.
             </h1>
             <p className="font-light text-base mt-2">
-               Fill in the details and I&apos;ll get back to you as soon as I can.
+              Fill in the details and I&apos;ll get back to you as soon as I can.
             </p>
           </header>
           <div className="icons-container flex justify-between md:inline-flex flex-row md:flex-col my-20">
@@ -43,7 +43,7 @@ export default function ContactMeComponent() {
                 viewBox="0 0 16 16"
               >
                 <path
-                  d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z"/>
+                  d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z" />
               </svg>
               <p className="   font-light text-sm">
                 {/* {userData.email} */}
@@ -60,7 +60,7 @@ export default function ContactMeComponent() {
                 viewBox="0 0 16 16"
               >
                 <path
-                  d="M4.146.146A.5.5 0 0 1 4.5 0h7a.5.5 0 0 1 .5.5c0 .68-.342 1.174-.646 1.479-.126.125-.25.224-.354.298v4.431l.078.048c.203.127.476.314.751.555C12.36 7.775 13 8.527 13 9.5a.5.5 0 0 1-.5.5h-4v4.5c0 .276-.224 1.5-.5 1.5s-.5-1.224-.5-1.5V10h-4a.5.5 0 0 1-.5-.5c0-.973.64-1.725 1.17-2.189A5.921 5.921 0 0 1 5 6.708V2.277a2.77 2.77 0 0 1-.354-.298C4.342 1.674 4 1.179 4 .5a.5.5 0 0 1 .146-.354z"/>
+                  d="M4.146.146A.5.5 0 0 1 4.5 0h7a.5.5 0 0 1 .5.5c0 .68-.342 1.174-.646 1.479-.126.125-.25.224-.354.298v4.431l.078.048c.203.127.476.314.751.555C12.36 7.775 13 8.527 13 9.5a.5.5 0 0 1-.5.5h-4v4.5c0 .276-.224 1.5-.5 1.5s-.5-1.224-.5-1.5V10h-4a.5.5 0 0 1-.5-.5c0-.973.64-1.725 1.17-2.189A5.921 5.921 0 0 1 5 6.708V2.277a2.77 2.77 0 0 1-.354-.298C4.342 1.674 4 1.179 4 .5a.5.5 0 0 1 .146-.354z" />
               </svg>
               <p className="font-light text-sm">
                 {/* {userData.address} */}
@@ -81,7 +81,7 @@ export default function ContactMeComponent() {
                 viewBox="0 0 16 16"
               >
                 <path
-                  d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+                  d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" />
               </svg>
             </a>
             <a
@@ -118,39 +118,39 @@ export default function ContactMeComponent() {
         </div>
         <form className="form rounded-lg dark:bg-blue p-4 flex flex-col order-1 md:order-2">
           <label htmlFor="name" className="text-sm mx-4">
-             Name
+            Name
           </label>
           <input
             type="text"
-            className="font-light rounded-md bg-text-holder dark:bg-blue-dark text-blue-dark dark:text-white focus:outline-none py-2 mt-2 px-2 mx-4"
+            className="font-light rounded-md bg-white dark:bg-blue-dark text-blue-dark dark:text-white focus:outline-none py-2 mt-2 px-2 mx-4"
             name="name"
           />
           <label htmlFor="email" className="text-sm mx-4 mt-4">
-             Email
+            Email
           </label>
           <input
             type="text"
-            className="font-light rounded-md bg-text-holder dark:bg-blue-dark text-blue-dark dark:text-white focus:outline-none py-2 mt-2 px-2 mx-4"
+            className="font-light rounded-md bg-white dark:bg-blue-dark text-blue-dark dark:text-white focus:outline-none py-2 mt-2 px-2 mx-4"
             name="email"
           />
           <label
             htmlFor="message"
             className="text-sm mx-4 mt-4"
           >
-             Message
+            Message
           </label>
           <textarea
             rows={4}
             typeof="text"
-            className="font-light rounded-md bg-text-holder dark:bg-blue-dark text-blue-dark dark:text-white resize-none overflow-hidden focus:outline-none py-2 mt-2 px-2 mx-4"
+            className="font-light rounded-md bg-white dark:bg-blue-dark text-blue-dark dark:text-white resize-none overflow-hidden focus:outline-none py-2 mt-2 px-2 mx-4"
             name="message"
           >
           </textarea>
           <button
             type="submit"
-            className="bg-sandy-brown m-4 rounded-md w-1/2 mt-8 py-2 text-xs font-bold"
+            className="bg-button-blue m-4 rounded-md w-1/2 mt-8 py-2 text-xs font-bold"
           >
-             Send Message
+            Send Message
           </button>
         </form>
       </div>

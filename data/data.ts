@@ -11,13 +11,6 @@ const userData = {
 
       },
       {
-        title: 'Rajivbhai Site',
-        year: 2021,
-        link: '/gallery',
-        imgUrl: '/images/interior_projects/rajivbhai_site_pics/rajivbhai_site_pic_1.jpg',
-
-      },
-      {
         title: 'Best Site',
         year: 2021,
         link: '/gallery',
@@ -46,6 +39,13 @@ const userData = {
 
       },
       {
+        title: 'Rajivbhai Site',
+        year: 2010,
+        link: '/gallery',
+        imgUrl: '/images/interior_projects/rajivbhai_site_pics/rajivbhai_site_pic_1.jpg',
+
+      },
+      {
         title: 'Mr. Rathi Site',
         year: 2009,
         link: '/gallery',
@@ -62,7 +62,7 @@ const userData = {
     ],
     architectureProjects: [
       {
-        title: 'Project One',
+        title: 'Farm House',
         year: 2022,
         link: '/gallery',
         imgUrl: '/images/architecture_projects/project_pic_1/project_pic_1.jpg',

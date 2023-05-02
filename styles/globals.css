@@ -9,20 +9,6 @@ body {
 }
 
 @layer components {
-  .navbar-li {
-    @apply text-lg
-        py-2 px-4
-        md:p-2
-        text-blue-dark
-        dark:text-light-periwinkle
-        rounded
-        hover:bg-cg-blue
-        md:hover:bg-transparent
-        md:border-0
-        md:hover:text-blue-dark
-        md:dark:hover:text-star-command-blue;
-  }
-
   .card {
     @apply block
         p-6
@@ -43,5 +29,5 @@ body {
   /* height: 100%; */
   background-size: cover;
   background-repeat: no-repeat;
-  background-image: url("/images/waves-5.svg");
+  background-image: url("/images/cool-background.svg");
 }

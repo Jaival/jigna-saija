@@ -1,26 +1,52 @@
+import { Resolver, useForm } from 'react-hook-form';
+
 export default function ContactMeComponent() {
+  type FormValues = {
+    name: string;
+    email: string;
+    message: string;
+  };
+  
+  const resolver: Resolver<FormValues> = async (values) => {
+    return {
+      values: values.name ? values : {},
+      errors: !values.name
+        ? {
+          name: {
+            type: 'required', 
+            message: 'This is required.',
+          },
+        }
+        : {},
+    };
+  };
+  const { register, handleSubmit, formState: { errors } } = useForm<FormValues>({ resolver });
+
+  
+  const onSubmit = handleSubmit((data) => console.log(data));
+
   return (
     <div
-      className="relative z-10 rounded-md shadow-md bg-aquamarine text-white p-4 md:p-10 lg:p-20 max-w-6xl mx-auto mb-20 -mt-4">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="md:ml-4 order-2 md:order-1">
+      className="relative z-10 max-w-6xl p-4 mx-auto mb-20 -mt-4 text-white rounded-md shadow-md bg-aquamarine md:p-10 lg:p-20">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div className="order-2 md:ml-4 md:order-1">
           <header>
-            <h1 className="font-semibold text-2xl">
+            <h1 className="text-2xl font-semibold">
               Get in touch, let&apos;s talk.
             </h1>
-            <p className="font-light text-base mt-2">
+            <p className="mt-2 text-base font-light">
               Fill in the details and I&apos;ll get back to you as soon as I can.
             </p>
           </header>
-          <div className="icons-container flex justify-between md:inline-flex flex-row md:flex-col my-20">
+          <div className="flex flex-row justify-between my-20 icons-container md:inline-flex md:flex-col">
             <div
-              className="flex flex-row items-center space-x-6 rounded-md border border-blue hover:border hover:border-aero p-4">
+              className="flex flex-row items-center p-4 space-x-6 border rounded-md border-blue hover:border hover:border-aero">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
                 height="16"
                 fill="currentColor"
-                className="bi bi-telephone-fill h-4 w-4   "
+                className="w-4 h-4 bi bi-telephone-fill "
                 viewBox="0 0 16 16"
               >
                 <path
@@ -28,56 +54,56 @@ export default function ContactMeComponent() {
                   d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"
                 />
               </svg>
-              <p className="font-light text-sm">
+              <p className="text-sm font-light">
                 {/* {userData.phone} */}
               </p>
             </div>
             <div
-              className="flex flex-row items-center space-x-6 rounded-md border border-blue hover:border hover:border-aero p-4">
+              className="flex flex-row items-center p-4 space-x-6 border rounded-md border-blue hover:border hover:border-aero">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
                 height="16"
                 fill="currentColor"
-                className="bi bi-envelope-fill h-4 w-4   "
+                className="w-4 h-4 bi bi-envelope-fill "
                 viewBox="0 0 16 16"
               >
                 <path
                   d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z" />
               </svg>
-              <p className="   font-light text-sm">
+              <p className="text-sm font-light ">
                 {/* {userData.email} */}
               </p>
             </div>
             <div
-              className="flex flex-row items-center space-x-6 rounded-md border border-blue hover:border hover:border-aero p-4">
+              className="flex flex-row items-center p-4 space-x-6 border rounded-md border-blue hover:border hover:border-aero">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
                 height="16"
                 fill="currentColor"
-                className="bi bi-pin-fill h-4 w-4   "
+                className="w-4 h-4 bi bi-pin-fill "
                 viewBox="0 0 16 16"
               >
                 <path
                   d="M4.146.146A.5.5 0 0 1 4.5 0h7a.5.5 0 0 1 .5.5c0 .68-.342 1.174-.646 1.479-.126.125-.25.224-.354.298v4.431l.078.048c.203.127.476.314.751.555C12.36 7.775 13 8.527 13 9.5a.5.5 0 0 1-.5.5h-4v4.5c0 .276-.224 1.5-.5 1.5s-.5-1.224-.5-1.5V10h-4a.5.5 0 0 1-.5-.5c0-.973.64-1.725 1.17-2.189A5.921 5.921 0 0 1 5 6.708V2.277a2.77 2.77 0 0 1-.354-.298C4.342 1.674 4 1.179 4 .5a.5.5 0 0 1 .146-.354z" />
               </svg>
-              <p className="font-light text-sm">
+              <p className="text-sm font-light">
                 {/* {userData.address} */}
               </p>
             </div>
           </div>
-          <div className="social-icons flex flex-row space-x-8">
+          <div className="flex flex-row space-x-8 social-icons">
             <a
               // href={userData.socialLinks.twitter}
-              className="h-10 w-10 rounded-full hover:border hover:border-aero flex items-center justify-center cursor-pointer"
+              className="flex items-center justify-center w-10 h-10 rounded-full cursor-pointer hover:border hover:border-aero"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
                 height="16"
                 fill="currentColor"
-                className="bi bi-twitter h-5 w-5"
+                className="w-5 h-5 bi bi-twitter"
                 viewBox="0 0 16 16"
               >
                 <path
@@ -86,12 +112,12 @@ export default function ContactMeComponent() {
             </a>
             <a
               // href={userData.socialLinks.instagram}
-              className="h-10 w-10 rounded-full hover:border hover:border-aero flex items-center justify-center cursor-pointer"
+              className="flex items-center justify-center w-10 h-10 rounded-full cursor-pointer hover:border hover:border-aero"
             >
               <svg
                 width="24"
                 height="24"
-                className="  "
+                className=""
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -116,39 +142,43 @@ export default function ContactMeComponent() {
             </a>
           </div>
         </div>
-        <form className="form rounded-lg dark:bg-blue p-4 flex flex-col order-1 md:order-2">
-          <label htmlFor="name" className="text-sm mx-4">
+        <form className="flex flex-col order-1 p-4 rounded-lg form dark:bg-blue md:order-2" onSubmit={onSubmit}>
+          <label htmlFor="name" className="mx-4 text-sm">
             Name
           </label>
           <input
+            {...register('name')}
             type="text"
-            className="font-light rounded-md bg-white dark:bg-blue-dark text-blue-dark dark:text-white focus:outline-none py-2 mt-2 px-2 mx-4"
+            className="px-2 py-2 mx-4 mt-2 font-light bg-white rounded-md dark:bg-blue-dark text-blue-dark dark:text-white focus:outline-none"
             name="name"
           />
-          <label htmlFor="email" className="text-sm mx-4 mt-4">
+          {errors?.name && <p>{errors.name.message}</p>}
+          <label htmlFor="email" className="mx-4 mt-4 text-sm">
             Email
           </label>
           <input
+            {...register('email')}
             type="text"
-            className="font-light rounded-md bg-white dark:bg-blue-dark text-blue-dark dark:text-white focus:outline-none py-2 mt-2 px-2 mx-4"
+            className="px-2 py-2 mx-4 mt-2 font-light bg-white rounded-md dark:bg-blue-dark text-blue-dark dark:text-white focus:outline-none"
             name="email"
           />
           <label
             htmlFor="message"
-            className="text-sm mx-4 mt-4"
+            className="mx-4 mt-4 text-sm"
           >
             Message
           </label>
           <textarea
+            {...register('message')}
             rows={4}
             typeof="text"
-            className="font-light rounded-md bg-white dark:bg-blue-dark text-blue-dark dark:text-white resize-none overflow-hidden focus:outline-none py-2 mt-2 px-2 mx-4"
+            className="px-2 py-2 mx-4 mt-2 overflow-hidden font-light bg-white rounded-md resize-none dark:bg-blue-dark text-blue-dark dark:text-white focus:outline-none"
             name="message"
           >
           </textarea>
           <button
             type="submit"
-            className="bg-button-blue m-4 rounded-md w-1/2 mt-8 py-2 text-xs font-bold"
+            className="w-1/2 py-2 m-4 mt-8 text-xs font-bold rounded-md bg-button-blue"
           >
             Send Message
           </button>

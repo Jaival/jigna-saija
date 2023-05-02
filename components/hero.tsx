@@ -7,13 +7,13 @@ export default function Hero() {
       <div className="flex flex-row gap-5">
         <div className="flex flex-col gap-6 md:justify-center md:items-center md:m-8">
           <h1 className="text-xl md:text-5xl">Building your next big project.</h1>
-          <p className="text-l md:text-2xl w-auto">
+          <p className="w-auto text-l md:text-2xl">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium
             voluptates distinctio odit, consequuntur fugiat omnis, praesentium
             saepe non.
           </p>
           <Link href='/projects'
-            className="bg-button-blue hover:bg-blue-700 text-white text-center font-bold py-2 px-4 w-60 rounded">
+            className="px-4 py-2 font-bold text-center text-white rounded bg-button-blue hover:bg-honolulu-blue w-60">
             See projects
           </Link>
         </div>
@@ -33,28 +33,28 @@ export default function Hero() {
       </div>
       <div className='flex md:justify-center md:items-center'>
         <div className='container mt-14'>
-          <div className="text-left md:text-center mb-10">
-            <p className='text-xl md:text-4xl font-bold'>
+          <div className="mb-10 text-left md:text-center">
+            <p className='text-xl font-bold md:text-4xl'>
               Why Chose Me?
             </p>
           </div>
 
-          <div className='grid grid-flow-col grid-rows-5 md:grid-rows-2 gap-4 md:gap-14'>
+          <div className='grid grid-flow-col grid-rows-5 gap-4 md:grid-rows-2 md:gap-14'>
             <div className="card">
-              <h5 className="mb-2 text-l md:text-3xl font-bold tracking-tight text-black dark:text-white">
+              <h5 className="mb-2 font-bold tracking-tight text-white text-l md:text-3xl">
                 Design Approach
               </h5>
-              <p className="font-normal text-base md:text-lg text-gray-700 dark:text-gray-400">
+              <p className="text-base font-normal md:text-lg text-white-dark">
                 We hear the customer, we set the customers and their requirements
                 in the heart of our design.
               </p>
             </div>
 
             <div className="card">
-              <h5 className="mb-2 text-l md:text-3xl font-bold tracking-tight text-black dark:text-white">
+              <h5 className="mb-2 font-bold tracking-tight text-white text-l md:text-3xl">
                 Transparency
               </h5>
-              <p className="font-normal text-base md:text-lg text-gray-700 dark:text-gray-400">
+              <p className="text-base font-normal md:text-lg text-white-dark">
                 We provide complete transparency on all matters. Our BOGs (bill of
                 quality) & bring clarity in each step/material we select and
                 order.
@@ -62,29 +62,29 @@ export default function Hero() {
             </div>
 
             <div className="card">
-              <h5 className="mb-2 text-l md:text-3xl  font-bold tracking-tight text-black dark:text-white">
+              <h5 className="mb-2 font-bold tracking-tight text-white text-l md:text-3xl">
                 Trust
               </h5>
-              <p className="font-normal text-base md:text-lg text-gray-700 dark:text-gray-400">
+              <p className="text-base font-normal md:text-lg text-white-dark">
                 We work to build trust. Our work & transparency speaks it all.
               </p>
             </div>
 
             <div className="card">
-              <h5 className="mb-2 text-l md:text-3xl font-bold tracking-tight text-black dark:text-white">
+              <h5 className="mb-2 font-bold tracking-tight text-white text-l md:text-3xl">
                 Quality
               </h5>
-              <p className="font-normal text-base md:text-lg text-gray-700 dark:text-gray-400">
+              <p className="text-base font-normal md:text-lg text-white-dark">
                 The design approach helps us offer well-planned, beautifully
                 detailed long-lasting & high-satisfactory products.
               </p>
             </div>
 
             <div className="card">
-              <h5 className="mb-2 text-l md:text-3xl font-bold tracking-tight text-black dark:text-white">
+              <h5 className="mb-2 font-bold tracking-tight text-white text-l md:text-3xl">
                 Fast & Hassle Free
               </h5>
-              <p className="font-normal text-base md:text-lg text-gray-700 dark:text-gray-400">
+              <p className="text-base font-normal md:text-lg text-white-dark">
                 We handle the project from start to end. Clients need not
                 co-ordinate when with team & contractors. We will manage all when
                 the total responsibility has been given.

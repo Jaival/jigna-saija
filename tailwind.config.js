@@ -1,4 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+
+const colors = require('tailwindcss/colors')
+
 module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
@@ -15,28 +18,20 @@ module.exports = {
     },
     extend: {
       colors: {
+        transparent: 'transparent',
+        'aquamarine': '#264653',
         'button-blue': '#1D6793',
+        'honolulu-blue': '#2278AA', 
         'blue-dark': '#001B29',
         'light-periwinkle': '#C3C9E9',
         'black': '#00171F',
-        'earth-yellow': '#E9B872',
-        'cg-blue': '#407899',
         'amaranth-purple': '#A40E4C',
         'dogwood-rose': '#BC1058',
-        'aquamarine': '#264653',
-        'sandy-brown': '#F4A261',
-        'eton-blue': '#82C09A',
-        'dark-sea-green': '#92C8A7',
-        'star-command-blue': '#0E79B2',
-        'magic-mint': '#B2FFD6',
-        'gray-dark': '#8e9aaf',
-        'gray-light': '#cbc0d3',
-        'gray': '#adb5bd',
-        // 'white-dark': '#E7F0FF', // Alice blue
-        //'white-dark': '#D3E1E2', // Alice blue
         'white-dark': '#F6F6F1', // Alice blue
         'text-holder': '#C2D8FF', //Periwinkle Crayola
         'white': '#F2F5FF',
+        'white-hover': '#94a3b8',
+        'gold': '#fb923c'
       },
       transitionDuration: {
         0: '0ms',

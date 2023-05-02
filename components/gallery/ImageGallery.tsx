@@ -26,13 +26,13 @@ export default function ImageGallery({ id, title, imageUrls }: { id: number, tit
         <div className="flex flex-row justify-between">
           <div className="w-5/6">
             <h1
-              className="text-center text-white text-gray-50 font-bold text-l md:text-3xl bg-amaranth-purple rounded-lg p-3">
+              className="p-3 font-bold text-center text-white rounded-lg text-l md:text-3xl bg-amaranth-purple">
               {title}
             </h1>
           </div>
-          <div className="flex justify-center items-center">
+          <div className="flex items-center justify-center">
             {showCurrent ?
-              <button className="bg-star-command-blue p-2 md:p-4 rounded-full" onClick={() => toggleCurrent()}>
+              <button className="p-2 rounded-full bg-button-blue md:p-4" onClick={() => toggleCurrent()}>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M12 18.0001H9.33004C6.02005 18.0001 4.66005 15.6501 6.32005 12.7801L7.66004 10.4701L9.00005 8.16007C10.66 5.29007 13.37 5.29007 15.03 8.16007L16.37 10.4701L17.71 12.7801C19.37 15.6501 18.01 18.0001 14.7 18.0001H12Z"
@@ -40,7 +40,7 @@ export default function ImageGallery({ id, title, imageUrls }: { id: number, tit
                     strokeLinejoin="round" />
                 </svg>
               </button> :
-              <button className="bg-star-command-blue p-2 md:p-4 rounded-full" onClick={() => setCurrent(id)}>
+              <button className="p-2 rounded-full bg-button-blue md:p-4" onClick={() => setCurrent(id)}>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M12.0001 6H14.6701C17.9801 6 19.3401 8.35 17.6801 11.22L16.3401 13.53L15.0001 15.84C13.3401 18.71 10.6301 18.71 8.97005 15.84L7.63005 13.53L6.29005 11.22C4.66005 8.35 6.01005 6 9.33005 6H12.0001Z"
@@ -51,17 +51,17 @@ export default function ImageGallery({ id, title, imageUrls }: { id: number, tit
           </div>
         </div>
         {showCurrent ?
-          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 py-4">
+          <div className="grid max-w-6xl grid-cols-1 gap-8 py-4 mx-auto md:grid-cols-3">
             {imageUrls.slice(0, next).map((imageUrl: string, idx: number) => (
               <div className="relative overflow-hidden rounded-xl" key={idx}>
-                <div className="h-72 object-cover">
+                <div className="object-cover h-72">
                   <BlurImage image={imageUrl} key={idx} />
                 </div>
               </div>
             ))}
             {next < imageUrls?.length && (
               <button
-                className="my-3 bg-star-command-blue text-white text-lg font-bold py-2 px-4 rounded"
+                className="px-4 py-2 my-3 text-lg font-bold text-white rounded bg-star-command-blue"
                 onClick={handleMoreImage}
               >
                 Load more

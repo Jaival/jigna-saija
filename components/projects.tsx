@@ -7,13 +7,13 @@ export default function ProjectsComponent() {
     <section className="">
       {/* Interior Projects*/}
       <div className="max-w-6xl mx-auto">
-        < h1 className="text-xl md:text-4xl font-bold py-2 text-left">
+        < h1 className="py-2 text-xl font-bold text-left md:text-4xl">
           Interior Projects
         </ h1>
       </div>
       {/* Grid starts here */}
       <div className="">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 py-2">
+        <div className="grid max-w-6xl grid-cols-1 gap-8 py-2 mx-auto md:grid-cols-2">
           {userData.projects.interiorProjects.map((proj, idx) => (
             <ProjectCard
               key={idx}
@@ -28,13 +28,13 @@ export default function ProjectsComponent() {
       </div>
       {/* Architecture Projects*/}
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-xl md:text-4xl font-bold py-10 text-left">
+        <h1 className="py-10 text-xl font-bold text-left md:text-4xl">
           Architecture Projects
         </h1>
       </div>
       {/* Grid starts here */}
       <div className="">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 py-2">
+        <div className="grid max-w-6xl grid-cols-1 gap-8 py-2 mx-auto md:grid-cols-2">
           {userData.projects.architectureProjects.map((proj, idx) => (
             <ProjectCard
               key={idx}
@@ -60,23 +60,23 @@ const ProjectCard = ({
   redirectLink
 }: { title: string, year: number, number: string, imgUrl: string, redirectLink: string }) => {
   return (
-    <Link href={redirectLink} className="w-full block shadow-2xl">
+    <Link href={redirectLink} className="block w-full shadow-2xl">
       <div className="relative overflow-hidden rounded-xl">
-        <div className="h-72 object-cover">
+        <div className="object-cover h-72">
           <Image
             src={imgUrl}
             fill={true}
             alt="portfolio"
-            className="h-full w-full transform hover:scale-110 transition duration-500 ease-in-out object-cover"
+            className="object-cover w-full h-full transition duration-500 ease-in-out transform hover:scale-110"
           />
         </div>
-        <h1 className="absolute top-10 left-10 text-white font-bold text-xl bg-earth-yellow rounded-md px-2">
+        <h1 className="absolute px-2 text-xl font-bold text-white rounded-md top-10 left-10 bg-white-hover">
           {title}
         </h1>
-        <h1 className="absolute bottom-10 left-10 text-white font-bold text-xl">
+        <h1 className="absolute text-xl font-bold text-white bottom-10 left-10">
           {number.length === 1 ? '0' + number : number}
         </h1>
-        <h1 className="absolute bottom-10 right-10 text-white font-bold text-xl">
+        <h1 className="absolute text-xl font-bold text-white bottom-10 right-10">
           {year}
         </h1>
       </div>

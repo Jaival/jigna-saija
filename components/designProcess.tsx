@@ -1,5 +1,5 @@
-import {useTheme} from 'next-themes';
-import {VerticalTimeline, VerticalTimelineElement} from 'react-vertical-timeline-component';
+import { useTheme } from 'next-themes';
+import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 
 export default function DesignProcessComponent() {
@@ -8,8 +8,8 @@ export default function DesignProcessComponent() {
     <div className='flex md:justify-center md:items-center'>
       <div className="container mt-5">
 
-        <div className="text-left md:text-center my-10">
-          <h2 className='text:xl md:text-4xl font-bold'>Design Process</h2>
+        <div className="my-10 text-left md:text-center">
+          <h2 className='font-bold text:xl md:text-4xl'>Design Process</h2>
         </div>
         <div className="container">
           <VerticalTimeline lineColor={theme === 'dark' ? 'white' : 'black'}>
@@ -21,7 +21,7 @@ export default function DesignProcessComponent() {
               iconStyle={{background: '#0E79B2', color: '#fff'}}
               // icon={<WorkIcon />}
             >
-              <h3 className="vertical-timeline-element-title font-semibold text-l md:text-2xl">Layout Options</h3>
+              <h3 className="font-semibold vertical-timeline-element-title text-l md:text-2xl">Layout Options</h3>
               {/* <h4 className="vertical-timeline-element-subtitle">Miami, FL</h4> */}
               <p className='text-base'>
                  We create a couple of format alternatives with the aid of using knowledge of clients requirements,
@@ -36,7 +36,7 @@ export default function DesignProcessComponent() {
               contentStyle={{background: '#A40E4C', color: '#fff'}}
               // icon={<SchoolIcon />}
             >
-              <h3 className="vertical-timeline-element-title font-semibold text-l md:text-2xl">Presentation</h3>
+              <h3 className="font-semibold vertical-timeline-element-title text-l md:text-2xl">Presentation</h3>
               {/* <h4 className="vertical-timeline-element-subtitle">Certification</h4> */}
               <p className='text-base'>
                  Considering customers preferences, we create several design concepts for you to choose.
@@ -50,7 +50,7 @@ export default function DesignProcessComponent() {
               iconStyle={{background: '#0E79B2', color: '#fff'}}
               // icon={<WorkIcon />}
             >
-              <h3 className="vertical-timeline-element-title font-semibold text-l md:text-2xl">3D Views</h3>
+              <h3 className="font-semibold vertical-timeline-element-title text-l md:text-2xl">3D Views</h3>
               {/* <h4 className="vertical-timeline-element-subtitle">Miami, FL</h4> */}
               <p className='text-base'>
                  After concept confirmation, we only detail and create 3D if necessary.
@@ -64,7 +64,7 @@ export default function DesignProcessComponent() {
               contentStyle={{background: '#A40E4C', color: '#fff'}}
               // icon={<SchoolIcon />}
             >
-              <h3 className="vertical-timeline-element-title font-semibold text-l md:text-2xl">Bill of Quality</h3>
+              <h3 className="font-semibold vertical-timeline-element-title text-l md:text-2xl">Bill of Quality</h3>
               <h4 className="vertical-timeline-element-subtitle">BOQ</h4>
               <p className='text-base'>
                  Based on the material selection, we create detailed cost estimates.
@@ -78,7 +78,7 @@ export default function DesignProcessComponent() {
               iconStyle={{background: '#0E79B2', color: '#fff'}}
               // icon={<WorkIcon />}
             >
-              <h3 className="vertical-timeline-element-title font-semibold text-l md:text-2xl">Material Selection</h3>
+              <h3 className="font-semibold vertical-timeline-element-title text-l md:text-2xl">Material Selection</h3>
               {/* <h4 className="vertical-timeline-element-subtitle">Miami, FL</h4> */}
               <p className='text-base'>
                  Depending on your budget, we offer your preferred material selection and combination.

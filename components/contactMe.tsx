@@ -1,33 +1,35 @@
-import { Resolver, useForm } from 'react-hook-form';
+// import { Resolver, useForm } from 'react-hook-form';
+import Image from 'next/image';
+import userData from '../data/data';
 
 export default function ContactMeComponent() {
-  type FormValues = {
-    name: string;
-    email: string;
-    message: string;
-  };
+  // type FormValues = {
+  //   name: string;
+  //   email: string;
+  //   message: string;
+  // };
   
-  const resolver: Resolver<FormValues> = async (values) => {
-    return {
-      values: values.name ? values : {},
-      errors: !values.name
-        ? {
-          name: {
-            type: 'required', 
-            message: 'This is required.',
-          },
-        }
-        : {},
-    };
-  };
-  const { register, handleSubmit, formState: { errors } } = useForm<FormValues>({ resolver });
+  // const resolver: Resolver<FormValues> = async (values) => {
+  //   return {
+  //     values: values.name ? values : {},
+  //     errors: !values.name
+  //       ? {
+  //         name: {
+  //           type: 'required', 
+  //           message: 'This is required.',
+  //         },
+  //       }
+  //       : {},
+  //   };
+  // };
+  // const { register, handleSubmit, formState: { errors } } = useForm<FormValues>({ resolver });
 
   
-  const onSubmit = handleSubmit((data) => console.log(data));
+  // const onSubmit = handleSubmit((data) => console.log(data));
 
   return (
     <div
-      className="relative z-10 max-w-6xl p-4 mx-auto mb-20 -mt-4 text-white rounded-md shadow-md bg-aquamarine md:p-10 lg:p-20">
+      className="relative z-10 max-w-3xl p-4 mx-auto mb-20 -mt-4 text-white rounded-md shadow-md bg-aquamarine md:p-10 lg:p-20">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <div className="order-2 md:ml-4 md:order-1">
           <header>
@@ -39,7 +41,7 @@ export default function ContactMeComponent() {
             </p>
           </header>
           <div className="flex flex-row justify-between my-20 icons-container md:inline-flex md:flex-col">
-            <div
+            {/* <div
               className="flex flex-row items-center p-4 space-x-6 border rounded-md border-blue hover:border hover:border-aero">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -55,9 +57,9 @@ export default function ContactMeComponent() {
                 />
               </svg>
               <p className="text-sm font-light">
-                {/* {userData.phone} */}
+               {userData.phone} 
               </p>
-            </div>
+            </div>*/}
             <div
               className="flex flex-row items-center p-4 space-x-6 border rounded-md border-blue hover:border hover:border-aero">
               <svg
@@ -72,10 +74,10 @@ export default function ContactMeComponent() {
                   d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z" />
               </svg>
               <p className="text-sm font-light ">
-                {/* {userData.email} */}
+                {userData.email}
               </p>
             </div>
-            <div
+            {/* <div
               className="flex flex-row items-center p-4 space-x-6 border rounded-md border-blue hover:border hover:border-aero">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -89,10 +91,10 @@ export default function ContactMeComponent() {
                   d="M4.146.146A.5.5 0 0 1 4.5 0h7a.5.5 0 0 1 .5.5c0 .68-.342 1.174-.646 1.479-.126.125-.25.224-.354.298v4.431l.078.048c.203.127.476.314.751.555C12.36 7.775 13 8.527 13 9.5a.5.5 0 0 1-.5.5h-4v4.5c0 .276-.224 1.5-.5 1.5s-.5-1.224-.5-1.5V10h-4a.5.5 0 0 1-.5-.5c0-.973.64-1.725 1.17-2.189A5.921 5.921 0 0 1 5 6.708V2.277a2.77 2.77 0 0 1-.354-.298C4.342 1.674 4 1.179 4 .5a.5.5 0 0 1 .146-.354z" />
               </svg>
               <p className="text-sm font-light">
-                {/* {userData.address} */}
+                 {userData.address} 
               </p>
-            </div>
-          </div>
+            </div>*/}
+          </div> 
           <div className="flex flex-row space-x-8 social-icons">
             <a
               // href={userData.socialLinks.twitter}
@@ -142,14 +144,17 @@ export default function ContactMeComponent() {
             </a>
           </div>
         </div>
-        <form className="flex flex-col order-1 p-4 rounded-lg form dark:bg-blue md:order-2" onSubmit={onSubmit}>
+        <div className='flex flex-col order-1 p-4 rounded-lg form dark:bg-blue md:order-2'>
+          <Image src={'/images/jignasaija.png'}  width={1000} height={1000} alt='qr-code'></Image>
+        </div>
+        {/* <form className="flex flex-col order-1 p-4 rounded-lg form dark:bg-blue md:order-2" onSubmit={onSubmit}>
           <label htmlFor="name" className="mx-4 text-sm">
             Name
           </label>
           <input
             {...register('name')}
             type="text"
-            className="px-2 py-2 mx-4 mt-2 font-light bg-white rounded-md dark:bg-blue-dark text-blue-dark dark:text-white focus:outline-none"
+            className="px-2 py-2 mx-4 mt-2 font-light bg-white rounded-md text-blue-dark focus:outline-none"
             name="name"
           />
           {errors?.name && <p>{errors.name.message}</p>}
@@ -159,7 +164,7 @@ export default function ContactMeComponent() {
           <input
             {...register('email')}
             type="text"
-            className="px-2 py-2 mx-4 mt-2 font-light bg-white rounded-md dark:bg-blue-dark text-blue-dark dark:text-white focus:outline-none"
+            className="px-2 py-2 mx-4 mt-2 font-light bg-white rounded-md text-blue-dark focus:outline-none"
             name="email"
           />
           <label
@@ -172,7 +177,7 @@ export default function ContactMeComponent() {
             {...register('message')}
             rows={4}
             typeof="text"
-            className="px-2 py-2 mx-4 mt-2 overflow-hidden font-light bg-white rounded-md resize-none dark:bg-blue-dark text-blue-dark dark:text-white focus:outline-none"
+            className="px-2 py-2 mx-4 mt-2 overflow-hidden font-light bg-white rounded-md resize-none text-blue-dark focus:outline-none"
             name="message"
           >
           </textarea>
@@ -182,7 +187,7 @@ export default function ContactMeComponent() {
           >
             Send Message
           </button>
-        </form>
+        </form> */}
       </div>
     </div>
   );

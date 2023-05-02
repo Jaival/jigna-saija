@@ -1,6 +1,6 @@
 // TODO: Add list of individual project image urls
 const userData = {
-  email: '',
+  email: 'jignasaija@gmail.com',
   projects: {
     interiorProjects: [
       {

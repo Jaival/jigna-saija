@@ -4,11 +4,11 @@ export default function AboutMeComponent() {
   return (
     <div className='flex md:justify-center md:items-center'>
       <div className="container mt-14">
-        <div className="text-left md:text-center my-10">
-          <h2 className='text-xl md:text-4xl font-bold'>About Me</h2>
+        <div className="my-10 text-left md:text-center">
+          <h2 className='text-xl font-bold md:text-4xl'>About Me</h2>
         </div>
 
-        <div className="flex md:flex-row flex-col gap-2 items-center">
+        <div className="flex flex-col items-center gap-2 md:flex-row">
           <div className="flex flex-col">
             <Image
               className="rounded-lg"
@@ -19,9 +19,9 @@ export default function AboutMeComponent() {
                 '/images/pexels-isaw-company-955733.jpg'
               }
             />
-            <div className="text-left md:text-center py-2">
+            <div className="py-2 text-left md:text-center">
               <q className="font-light md:text-base">We believe in complete design</q>
-              <p className="font-thin text-sm md:text-base md:h-6"> - Jigna Saija </p>
+              <p className="text-sm font-thin md:text-base md:h-6"> - Jigna Saija </p>
             </div>
           </div>
 
@@ -36,24 +36,24 @@ export default function AboutMeComponent() {
         </div>
 
         {/* <!-- Experience Cards--> */}
-        <div className="grid grid-flow-col grid-rows-3 md:grid-rows-1 gap-4 mt-10">
+        <div className="grid grid-flow-col grid-rows-3 gap-4 mt-10 md:grid-rows-1">
 
           <div className="card">
-            <div className="card-body p-4">
-              <h5 className="font-bold text-lg md:text-2xl">10</h5>
-              <p className="text-base md:text-lg">Years of Experience</p>
+            <div className="p-4 card-body">
+              <h5 className="text-lg font-bold text-white md:text-2xl">10</h5>
+              <p className="text-base md:text-lg text-white-dark">Years of Experience</p>
             </div>
           </div>
           <div className="card">
-            <div className="card-body p-4">
-              <h5 className="font-bold text-lg md:text-2xl">10</h5>
-              <p className="text-base md:text-lg">Project Completed</p>
+            <div className="p-4 card-body">
+              <h5 className="text-lg font-bold text-white md:text-2xl">10</h5>
+              <p className="text-base md:text-lg text-white-dark">Project Completed</p>
             </div>
           </div>
           <div className="card">
-            <div className="card-body p-4">
-              <h5 className="font-bold text-lg md:text-2xl">10</h5>
-              <p className="text-base md:text-lg">Awards Gained</p>
+            <div className="p-4 card-body">
+              <h5 className="text-lg font-bold text-white md:text-2xl">10</h5>
+              <p className="text-base md:text-lg text-white-dark">Awards Gained</p>
             </div>
           </div>
         </div>

@@ -19,17 +19,17 @@ export default function NavBar() {
           <div className="absolute hidden md:block right-48">
             <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
               <li>
-                <Link href="/projects" className="block px-3 py-2 text-base font-medium text-white rounded-md hover:bg-gray-700">
+                <Link href="/projects" className="block px-3 py-2 text-base font-medium text-white rounded-md hover:text-white-hover">
                   Projects
                 </Link>
               </li>
               <li>
-                <Link href="/gallery" className="block px-3 py-2 text-base font-medium text-white rounded-md hover:bg-gray-700">
+                <Link href="/gallery" className="block px-3 py-2 text-base font-medium text-white rounded-md hover:text-white-hover">
                   Gallery
                 </Link>
               </li>
               <li>
-                <Link href="/contactMe" className="block px-3 py-2 text-base font-medium text-white rounded-md hover:bg-gray-700">
+                <Link href="/contactMe" className="block px-3 py-2 text-base font-medium text-white rounded-md hover:text-white-hover">
                   Contact Me
                 </Link>
               </li>
@@ -97,17 +97,17 @@ export default function NavBar() {
             <div ref={ref} className="px-2 py-2 space-y-1 sm:px-3">
               <ul className="items-center justify-center space-y-2 md:flex md:space-x-6 md:space-y-0">
                 <li>
-                  <Link href="/projects" className="block px-3 py-2 text-base font-medium text-white rounded-md hover:bg-gray-700">
+                  <Link href="/projects" className="block px-3 py-2 text-base font-medium text-white rounded-md hover:text-white-hover">
                   Projects
                   </Link>
                 </li>
                 <li>
-                  <Link href="/gallery" className="block px-3 py-2 text-base font-medium text-white rounded-md hover:bg-gray-700">
+                  <Link href="/gallery" className="block px-3 py-2 text-base font-medium text-white rounded-md hover:text-white-hover">
                   Gallery
                   </Link>
                 </li>
                 <li>
-                  <Link href="/contactMe" className="block px-3 py-2 text-base font-medium text-white rounded-md hover:bg-gray-700">
+                  <Link href="/contactMe" className="block px-3 py-2 text-base font-medium text-white rounded-md hover:text-white-hover">
                   Contact Me
                   </Link>
                 </li>

@@ -61,7 +61,7 @@ export default function ImageGallery({ id, title, imageUrls }: { id: number, tit
             ))}
             {next < imageUrls?.length && (
               <button
-                className="px-4 py-2 my-3 text-lg font-bold text-white rounded bg-star-command-blue"
+                className="px-4 py-2 my-3 text-lg font-bold text-white rounded bg-button-blue"
                 onClick={handleMoreImage}
               >
                 Load more

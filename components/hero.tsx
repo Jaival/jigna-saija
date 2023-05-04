@@ -6,11 +6,9 @@ export default function Hero() {
     <div className='mt-10'>
       <div className="flex flex-row gap-5">
         <div className="flex flex-col gap-6 md:justify-center md:items-center md:m-8">
-          <h1 className="text-xl md:text-5xl">Building your next big project.</h1>
+          <h1 className="text-xl md:text-5xl">Building the future, one project at a time.</h1>
           <p className="w-auto text-l md:text-2xl">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium
-            voluptates distinctio odit, consequuntur fugiat omnis, praesentium
-            saepe non.
+            Turning your big ideas into impressive reality.
           </p>
           <Link href='/projects'
             className="px-4 py-2 font-bold text-center text-white rounded bg-button-blue hover:bg-honolulu-blue w-60">
@@ -23,10 +21,10 @@ export default function Hero() {
             className="rounded-lg"
             alt="architecture"
             priority={false}
-            width={1600}
+            width={1100}
             height={1100}
             src={
-              'https://images.unsplash.com/photo-1435575653489-b0873ec954e2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
+              '/images/architecture_projects/project_pic_1/project_pic_2.jpg'
             }
           />
         </div>

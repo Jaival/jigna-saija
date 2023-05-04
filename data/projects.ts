@@ -3,9 +3,21 @@ const projectData = {
   projects: {
     interiorProjects: [
       {
+        title: 'A Small Banquet',
+        year: 2022,
+        imgUrls: [
+          '/images/interior_projects/a_small_banquet/a_small_banquet_1.jpg',
+          '/images/interior_projects/a_small_banquet/a_small_banquet_2.jpg',
+          '/images/interior_projects/a_small_banquet/a_small_banquet_3.jpg',
+          '/images/interior_projects/a_small_banquet/a_small_banquet_4.jpg',
+          '/images/interior_projects/a_small_banquet/a_small_banquet_5.jpg',
+          '/images/interior_projects/a_small_banquet/a_small_banquet_6.jpg',
+          '/images/interior_projects/a_small_banquet/a_small_banquet_7.jpg',
+        ],
+      },
+      {
         title: 'Mr. Bhadoraia Site',
         year: 2021,
-        // link: "https://github.com/Jaival",
         imgUrls: [
           '/images/interior_projects/mr_bhadoria_site/mr_bhadoria_site_pic_1.jpg',
           '/images/interior_projects/mr_bhadoria_site/mr_bhadoria_site_pic_10.jpg',
@@ -48,7 +60,6 @@ const projectData = {
       {
         title: 'Best Site',
         year: 2021,
-        // link: "https://github.com/Jaival",
         imgUrls: [
           '/images/interior_projects/best_site_pics/best_stall_site_pic_1.jpg',
           '/images/interior_projects/best_site_pics/best_stall_site_pic_10.jpg',
@@ -102,10 +113,10 @@ const projectData = {
           '/images/interior_projects/best_site_pics/best_stall_site_pic_9.jpg',
         ],
       },
-      {//4
+      {
+        //4
         title: 'Mr. Sadhwani Site',
         year: 2018,
-        // link: "https://github.com/Jaival",
         imgUrls: [
           '/images/interior_projects/mr_sadhwani_site_pic/mr_sadhwani_site_pic_1.jpg',
           '/images/interior_projects/mr_sadhwani_site_pic/mr_sadhwani_site_pic_10.jpg',
@@ -122,7 +133,6 @@ const projectData = {
       {
         title: 'Varsoda Site',
         year: 2012,
-        // link: "https://github.com/Jaival",
         imgUrls: [
           '/images/interior_projects/varsoda_site_pics/varsoda_site_pic_1.jpg',
           '/images/interior_projects/varsoda_site_pics/varsoda_site_pic_10.jpg',
@@ -153,7 +163,6 @@ const projectData = {
       {
         title: 'Guruji Site',
         year: 2011,
-        // link: "https://github.com/Jaival",
         imgUrls: [
           '/images/interior_projects/guruji_site_pics/guruji_site_pic_1.jpg',
           '/images/interior_projects/guruji_site_pics/guruji_site_pic_10.jpg',
@@ -170,7 +179,6 @@ const projectData = {
       {
         title: 'Rajivbhai Site',
         year: 2010,
-        // link: "https://github.com/Jaival",
         imgUrls: [
           '/images/interior_projects/rajivbhai_site_pics/rajivbhai_site_pic_1.jpg',
           '/images/interior_projects/rajivbhai_site_pics/rajivbhai_site_pic_10.jpg',
@@ -215,7 +223,6 @@ const projectData = {
       {
         title: 'Mr. Rathi Site',
         year: 2009,
-        // link: "https://github.com/Jaival",
         imgUrls: [
           '/images/interior_projects/mr_rathi_site_pic/mr_rathi_site_pic_1.jpg',
           '/images/interior_projects/mr_rathi_site_pic/mr_rathi_site_pic_10.jpg',
@@ -235,7 +242,6 @@ const projectData = {
       {
         title: 'Book Stall',
         year: 2008,
-        // link: "https://github.com/Jaival",
         imgUrls: [
           '/images/interior_projects/book_stall_pics/book_stall_site_pic_1.jpg',
           '/images/interior_projects/book_stall_pics/book_stall_site_pic_10.jpg',
@@ -262,9 +268,17 @@ const projectData = {
     ],
     architectureProjects: [
       {
+        title: 'Avdheshbhai Bunglow',
+        year: 2023,
+        imgUrls: [
+          '/images/architecture_projects/avdhesh_bhai_bunglow/avdhesh_bhai_bunglow_1.jpg',
+          '/images/architecture_projects/avdhesh_bhai_bunglow/avdhesh_bhai_bunglow_2.jpg',
+          '/images/architecture_projects/avdhesh_bhai_bunglow/avdhesh_bhai_bunglow_3.jpg',
+        ],
+      },
+      {
         title: 'Farm House',
         year: 2022,
-        // link: "https://github.com/Jaival",
         imgUrls: [
           '/images/architecture_projects/project_pic_1/project_pic_1.jpg',
           '/images/architecture_projects/project_pic_1/project_pic_2.jpg',
@@ -273,7 +287,6 @@ const projectData = {
       {
         title: 'Bungalow at Bopal',
         year: 2022,
-        // link: "https://github.com/Jaival",
         imgUrls: [
           '/images/architecture_projects/bungalow_at_bopal/bungalow_at_bopal_1.jpg',
           '/images/architecture_projects/bungalow_at_bopal/bungalow_at_bopal_2.jpg',

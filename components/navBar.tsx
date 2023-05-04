@@ -13,7 +13,7 @@ export default function NavBar() {
           <Link href="/" className="flex items-center w-48">
             <Image className={'w-64 flex-no-shrink fill-current'}
               alt={'Jigna Saija'} width={320} height={320}
-              src={'/logos/jigna_saija_light.png'} priority/>
+              src={'/logos/jigna_saija_light.png'} priority />
           </Link>
 
           <div className="absolute hidden md:block right-48">
@@ -36,12 +36,12 @@ export default function NavBar() {
             </ul>
           </div>
         </div>
-          
+
         <div className="flex -mr-2 md:hidden">
           <button
             onClick={() => setIsOpen(!isOpen)}
             type="button"
-            className="inline-flex items-center justify-center p-2 text-gray-400 bg-gray-900 rounded-md hover:text-white hover:bg-gray-800 focus:outline-none "
+            className="inline-flex items-center justify-center p-2 text-white rounded-md focus:outline-none"
             aria-controls="mobile-menu"
             aria-expanded="false"
           >
@@ -98,21 +98,21 @@ export default function NavBar() {
               <ul className="items-center justify-center space-y-2 md:flex md:space-x-6 md:space-y-0">
                 <li>
                   <Link href="/projects" className="block px-3 py-2 text-base font-medium text-white rounded-md hover:text-white-hover">
-                  Projects
+                    Projects
                   </Link>
                 </li>
                 <li>
                   <Link href="/gallery" className="block px-3 py-2 text-base font-medium text-white rounded-md hover:text-white-hover">
-                  Gallery
+                    Gallery
                   </Link>
                 </li>
                 <li>
                   <Link href="/contactMe" className="block px-3 py-2 text-base font-medium text-white rounded-md hover:text-white-hover">
-                  Contact Me
+                    Contact Me
                   </Link>
                 </li>
               </ul>
-              
+
             </div>
           </div>
         )}

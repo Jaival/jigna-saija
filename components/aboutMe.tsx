@@ -11,12 +11,12 @@ export default function AboutMeComponent() {
         <div className="flex flex-col items-center gap-2 md:flex-row">
           <div className="flex flex-col">
             <Image
-              className="rounded-lg"
+              className="rounded-lg aspect-auto"
               alt="architecture"
-              width={2500}
-              height={1667}
+              width={3248}
+              height={4062.1}
               src={
-                '/images/pexels-isaw-company-955733.jpg'
+                '/images/jignasaija.jpg'
               }
             />
             <div className="py-2 text-left md:text-center">
@@ -26,11 +26,8 @@ export default function AboutMeComponent() {
           </div>
 
           <div className='flex flex-col md:ml-10'>
-            <p className='text-base md:text-2xl'>
-               I gracefully designs from concept to completion with over ten years of design experience
-               in residential and commercial interiors.
-               I is a versatile designer with an ability to effortlessly conceive elegant concepts and
-               then translate them into functional and Inspiring spaces.
+            <p className='text-base leading-relaxed tracking-wide md:text-2xl'>
+              With more than fifteen years of experience designing both residential and commercial architectures and interiors, I gracefully oversee projects from concept to completion. As a versatile designer, I have an innate ability to conceive elegant and inspiring concepts and transform them into functional spaces that are both beautiful and practical.
             </p>
           </div>
         </div>
@@ -40,20 +37,14 @@ export default function AboutMeComponent() {
 
           <div className="card">
             <div className="p-4 card-body">
-              <h5 className="text-lg font-bold text-white md:text-2xl">10</h5>
+              <h5 className="text-lg font-bold text-white md:text-2xl">20</h5>
               <p className="text-base md:text-lg text-white-dark">Years of Experience</p>
             </div>
           </div>
           <div className="card">
             <div className="p-4 card-body">
               <h5 className="text-lg font-bold text-white md:text-2xl">10</h5>
-              <p className="text-base md:text-lg text-white-dark">Project Completed</p>
-            </div>
-          </div>
-          <div className="card">
-            <div className="p-4 card-body">
-              <h5 className="text-lg font-bold text-white md:text-2xl">10</h5>
-              <p className="text-base md:text-lg text-white-dark">Awards Gained</p>
+              <p className="text-base md:text-lg text-white-dark">Projects Completed</p>
             </div>
           </div>
         </div>

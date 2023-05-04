@@ -1,35 +1,57 @@
-// import { Resolver, useForm } from 'react-hook-form';
 import Image from 'next/image';
+import Link from 'next/link';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import userData from '../data/data';
+import { sendContactForm } from '../lib/sendMailapi';
+import FormValues from '../lib/types/contactFormType';
+import { useToast } from './use-toast';
+
 
 export default function ContactMeComponent() {
-  // type FormValues = {
-  //   name: string;
-  //   email: string;
-  //   message: string;
-  // };
-  
+  const { toast } = useToast()
+
   // const resolver: Resolver<FormValues> = async (values) => {
   //   return {
-  //     values: values.name ? values : {},
-  //     errors: !values.name
+  //     values: values.name || values.email || values.subject || values.userMessage ? values : {},
+  //     errors: !values
   //       ? {
-  //         name: {
-  //           type: 'required', 
-  //           message: 'This is required.',
+  //         root: {
+  //           message: 'All the fields are required'
   //         },
+  //         name: {
+  //           type: 'required',
+  //           message: 'Your name is required.',
+  //         },
+  //         email: {
+  //           type: 'required',
+  //           message: 'Your email is required.',
+  //         },
+  //         subject: {
+  //           type: 'required',
+  //           message: 'The subject is required.',
+  //         },
+  //         userMessage: {
+  //           type: 'required',
+  //           message: 'Your message is required.',
+  //         }
   //       }
   //       : {},
   //   };
   // };
-  // const { register, handleSubmit, formState: { errors } } = useForm<FormValues>({ resolver });
+  const { register, handleSubmit, formState: { errors }, reset } = useForm<FormValues>({});
 
-  
-  // const onSubmit = handleSubmit((data) => console.log(data));
+  const onSubmit: SubmitHandler<FormValues> = data => {
+    console.log(data);
+    sendContactForm(data);
+    toast({
+      description: 'Your message has been sent.',
+    });
+    reset();
+  };
 
   return (
     <div
-      className="relative z-10 max-w-3xl p-4 mx-auto mb-20 -mt-4 text-white rounded-md shadow-md bg-aquamarine md:p-10 lg:p-20">
+      className="relative z-10 max-w-4xl p-4 mx-auto mb-20 -mt-4 text-white rounded-md shadow-md bg-aquamarine md:p-10 lg:p-20">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <div className="order-2 md:ml-4 md:order-1">
           <header>
@@ -40,28 +62,9 @@ export default function ContactMeComponent() {
               Fill in the details and I&apos;ll get back to you as soon as I can.
             </p>
           </header>
-          <div className="flex flex-row justify-between my-20 icons-container md:inline-flex md:flex-col">
-            {/* <div
-              className="flex flex-row items-center p-4 space-x-6 border rounded-md border-blue hover:border hover:border-aero">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                className="w-4 h-4 bi bi-telephone-fill "
-                viewBox="0 0 16 16"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"
-                />
-              </svg>
-              <p className="text-sm font-light">
-               {userData.phone} 
-              </p>
-            </div>*/}
+          <div className="flex flex-row justify-between my-10 icons-container md:inline-flex md:flex-col">
             <div
-              className="flex flex-row items-center p-4 space-x-6 border rounded-md border-blue hover:border hover:border-aero">
+              className="flex flex-row items-center p-4 space-x-6 border rounded-md border-white-dark">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -77,28 +80,17 @@ export default function ContactMeComponent() {
                 {userData.email}
               </p>
             </div>
-            {/* <div
-              className="flex flex-row items-center p-4 space-x-6 border rounded-md border-blue hover:border hover:border-aero">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                className="w-4 h-4 bi bi-pin-fill "
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M4.146.146A.5.5 0 0 1 4.5 0h7a.5.5 0 0 1 .5.5c0 .68-.342 1.174-.646 1.479-.126.125-.25.224-.354.298v4.431l.078.048c.203.127.476.314.751.555C12.36 7.775 13 8.527 13 9.5a.5.5 0 0 1-.5.5h-4v4.5c0 .276-.224 1.5-.5 1.5s-.5-1.224-.5-1.5V10h-4a.5.5 0 0 1-.5-.5c0-.973.64-1.725 1.17-2.189A5.921 5.921 0 0 1 5 6.708V2.277a2.77 2.77 0 0 1-.354-.298C4.342 1.674 4 1.179 4 .5a.5.5 0 0 1 .146-.354z" />
-              </svg>
-              <p className="text-sm font-light">
-                 {userData.address} 
-              </p>
-            </div>*/}
-          </div> 
+
+            <div className='flex flex-col pt-4 rounded-lg'>
+              <Image src={'/images/jignasaijaQR.png'} width={200} height={200} alt='qr-code' priority></Image>
+            </div>
+
+          </div>
           <div className="flex flex-row space-x-8 social-icons">
-            <a
-              // href={userData.socialLinks.twitter}
-              className="flex items-center justify-center w-10 h-10 rounded-full cursor-pointer hover:border hover:border-aero"
+
+            <Link
+              href={userData.socialLinks.facebook}
+              className="flex items-center justify-center w-10 h-10 rounded-lg cursor-pointer hover:border hover:border-aero"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -111,10 +103,10 @@ export default function ContactMeComponent() {
                 <path
                   d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" />
               </svg>
-            </a>
-            <a
-              // href={userData.socialLinks.instagram}
-              className="flex items-center justify-center w-10 h-10 rounded-full cursor-pointer hover:border hover:border-aero"
+            </Link>
+            <Link
+              href={userData.socialLinks.instagram}
+              className="flex items-center justify-center w-10 h-10 rounded-lg cursor-pointer hover:border hover:border-aero"
             >
               <svg
                 width="24"
@@ -141,53 +133,61 @@ export default function ContactMeComponent() {
                   fill="currentColor"
                 />
               </svg>
-            </a>
+            </Link>
           </div>
         </div>
-        <div className='flex flex-col order-1 p-4 rounded-lg form dark:bg-blue md:order-2'>
-          <Image src={'/images/jignasaija.png'}  width={1000} height={1000} alt='qr-code'></Image>
-        </div>
-        {/* <form className="flex flex-col order-1 p-4 rounded-lg form dark:bg-blue md:order-2" onSubmit={onSubmit}>
+        <form className="flex flex-col order-1 pl-3 rounded-lg form md:order-2" onSubmit={handleSubmit(onSubmit)}>
           <label htmlFor="name" className="mx-4 text-sm">
             Name
           </label>
           <input
-            {...register('name')}
+            {...register('name', { required: 'Your name is required.' })}
             type="text"
             className="px-2 py-2 mx-4 mt-2 font-light bg-white rounded-md text-blue-dark focus:outline-none"
             name="name"
           />
-          {errors?.name && <p>{errors.name.message}</p>}
+          {errors?.name && <span className='pt-1 pl-6 text-sm'>{errors.name.message}</span>}
           <label htmlFor="email" className="mx-4 mt-4 text-sm">
-            Email
+            Email Id
           </label>
           <input
-            {...register('email')}
-            type="text"
+            {...register('email', { required: 'Your email is required.' })}
+            type="email"
             className="px-2 py-2 mx-4 mt-2 font-light bg-white rounded-md text-blue-dark focus:outline-none"
             name="email"
           />
+          {errors?.email && <span className='pt-1 pl-6 text-sm'>{errors.email.message}</span>}
+          <label htmlFor="subject" className="mx-4 mt-4 text-sm">
+            Subject
+          </label>
+          <input
+            {...register('subject', { required: 'The subject is required.' })}
+            type="text"
+            className="px-2 py-2 mx-4 mt-2 font-light bg-white rounded-md text-blue-dark focus:outline-none"
+            name="subject"
+          />
+          {errors?.subject && <span className='pt-1 pl-6 text-sm'>{errors.subject.message}</span>}
           <label
-            htmlFor="message"
+            htmlFor="userMessage"
             className="mx-4 mt-4 text-sm"
           >
             Message
           </label>
+
           <textarea
-            {...register('message')}
+            {...register('userMessage', { required: 'Your message is required.', })}
             rows={4}
             typeof="text"
             className="px-2 py-2 mx-4 mt-2 overflow-hidden font-light bg-white rounded-md resize-none text-blue-dark focus:outline-none"
-            name="message"
+            name="userMessage"
           >
           </textarea>
-          <button
+          {errors?.userMessage && <span className='pt-1 pl-6 text-sm'>{errors.userMessage.message}</span>}
+          <input
             type="submit"
             className="w-1/2 py-2 m-4 mt-8 text-xs font-bold rounded-md bg-button-blue"
-          >
-            Send Message
-          </button>
-        </form> */}
+          />
+        </form>
       </div>
     </div>
   );

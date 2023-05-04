@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Footer from './footer';
 import Navbar from './navBar';
+import { Toaster } from './toaster';
 
 export default function MainContainer({ children, ...customMeta }: any) {
   const router = useRouter();
@@ -40,6 +41,7 @@ export default function MainContainer({ children, ...customMeta }: any) {
       <main className='px-10 pt-12 md:px-20 bg-white-dark dark:bg-blue-dark background'>
         <Navbar />
         <div className='px-4 py-2'>{children}</div>
+        <Toaster />
         <Footer />
       </main>
     </div>

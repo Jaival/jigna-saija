@@ -290,6 +290,10 @@ const projectData = {
         imgUrls: [
           '/images/architecture_projects/bungalow_at_bopal/bungalow_at_bopal_1.jpg',
           '/images/architecture_projects/bungalow_at_bopal/bungalow_at_bopal_2.jpg',
+          '/images/architecture_projects/bungalow_at_bopal/bungalow_at_bopal_3.jpg',
+          '/images/architecture_projects/bungalow_at_bopal/bungalow_at_bopal_4.jpg',
+          '/images/architecture_projects/bungalow_at_bopal/bungalow_at_bopal_5.jpg',
+          '/images/architecture_projects/bungalow_at_bopal/bungalow_at_bopal_6.jpg',
         ],
       },
     ],

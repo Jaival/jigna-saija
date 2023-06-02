@@ -6,9 +6,8 @@ import { sendContactForm } from '../lib/sendMailapi';
 import FormValues from '../lib/types/contactFormType';
 import { useToast } from './use-toast';
 
-
 export default function ContactMeComponent() {
-  const { toast } = useToast()
+  const { toast } = useToast();
 
   // const resolver: Resolver<FormValues> = async (values) => {
   //   return {
@@ -38,20 +37,31 @@ export default function ContactMeComponent() {
   //       : {},
   //   };
   // };
-  const { register, handleSubmit, formState: { errors }, reset } = useForm<FormValues>({});
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<FormValues>({});
 
-  const onSubmit: SubmitHandler<FormValues> = data => {
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
     console.log(data);
-    sendContactForm(data);
-    toast({
-      description: 'Your message has been sent.',
-    });
+    const res = await sendContactForm(data);
+    console.log(res.message);
+    if (res.success === true) {
+      toast({
+        description: 'Your message has been sent.',
+      });
+    } else {
+      toast({
+        description: res.message,
+      });
+    }
     reset();
   };
 
   return (
-    <div
-      className="relative z-10 max-w-4xl p-4 mx-auto mb-20 -mt-4 text-white rounded-md shadow-md bg-aquamarine md:p-10 lg:p-20">
+    <div className="relative z-10 max-w-4xl p-4 mx-auto mb-20 -mt-4 text-white rounded-md shadow-md bg-aquamarine md:p-10 lg:p-20">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <div className="order-2 md:ml-4 md:order-1">
           <header>
@@ -59,7 +69,8 @@ export default function ContactMeComponent() {
               Get in touch, let&apos;s talk.
             </h1>
             <p className="mt-2 text-base font-light">
-              Fill in the details and I&apos;ll get back to you as soon as I can.
+              Fill in the details and I&apos;ll get back to you as soon as I
+              can.
             </p>
           </header>
           <div className="flex flex-col justify-between my-10 md:inline-flex">
@@ -72,22 +83,23 @@ export default function ContactMeComponent() {
                 className="w-4 h-4 bi bi-envelope-fill "
                 viewBox="0 0 16 16"
               >
-                <path
-                  d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z" />
+                <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z" />
               </svg>
-              <p className="text-sm font-light ">
-                {userData.email}
-              </p>
+              <p className="text-sm font-light ">{userData.email}</p>
             </div>
 
-            <div className='flex flex-row items-center p-4 space-x-6 rounded-md '>
-              <Image src={'/images/jignasaijaQR.png'} width={200} height={200} alt='qr-code' priority></Image>
+            <div className="flex flex-row items-center p-4 space-x-6 rounded-md ">
+              <Image
+                src={'/images/jignasaijaQR.png'}
+                width={200}
+                height={200}
+                alt="qr-code"
+                priority
+              ></Image>
             </div>
-
           </div>
-          
-          <div className="flex flex-row space-x-8 social-icons">
 
+          <div className="flex flex-row space-x-8 social-icons">
             <Link
               href={userData.socialLinks.facebook}
               className="flex items-center justify-center w-10 h-10 rounded-lg cursor-pointer hover:border hover:border-white-dark"
@@ -105,7 +117,7 @@ export default function ContactMeComponent() {
                 />
               </svg>
             </Link>
-            
+
             <Link
               href={userData.socialLinks.instagram}
               className="flex items-center justify-center w-10 h-10 rounded-lg cursor-pointer hover:border hover:border-white-dark"
@@ -125,7 +137,10 @@ export default function ContactMeComponent() {
             </Link>
           </div>
         </div>
-        <form className="flex flex-col order-1 pl-3 rounded-lg form md:order-2" onSubmit={handleSubmit(onSubmit)}>
+        <form
+          className="flex flex-col order-1 pl-3 rounded-lg form md:order-2"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <label htmlFor="name" className="mx-4 text-sm">
             Name
           </label>
@@ -135,7 +150,9 @@ export default function ContactMeComponent() {
             className="px-2 py-2 mx-4 mt-2 font-light bg-white rounded-md text-blue-dark focus:outline-none"
             name="name"
           />
-          {errors?.name && <span className='pt-1 pl-6 text-sm'>{errors.name.message}</span>}
+          {errors?.name && (
+            <span className="pt-1 pl-6 text-sm">{errors.name.message}</span>
+          )}
           <label htmlFor="email" className="mx-4 mt-4 text-sm">
             Email Id
           </label>
@@ -145,7 +162,9 @@ export default function ContactMeComponent() {
             className="px-2 py-2 mx-4 mt-2 font-light bg-white rounded-md text-blue-dark focus:outline-none"
             name="email"
           />
-          {errors?.email && <span className='pt-1 pl-6 text-sm'>{errors.email.message}</span>}
+          {errors?.email && (
+            <span className="pt-1 pl-6 text-sm">{errors.email.message}</span>
+          )}
           <label htmlFor="subject" className="mx-4 mt-4 text-sm">
             Subject
           </label>
@@ -155,23 +174,27 @@ export default function ContactMeComponent() {
             className="px-2 py-2 mx-4 mt-2 font-light bg-white rounded-md text-blue-dark focus:outline-none"
             name="subject"
           />
-          {errors?.subject && <span className='pt-1 pl-6 text-sm'>{errors.subject.message}</span>}
-          <label
-            htmlFor="userMessage"
-            className="mx-4 mt-4 text-sm"
-          >
+          {errors?.subject && (
+            <span className="pt-1 pl-6 text-sm">{errors.subject.message}</span>
+          )}
+          <label htmlFor="userMessage" className="mx-4 mt-4 text-sm">
             Message
           </label>
 
           <textarea
-            {...register('userMessage', { required: 'Your message is required.', })}
+            {...register('userMessage', {
+              required: 'Your message is required.',
+            })}
             rows={4}
             typeof="text"
             className="px-2 py-2 mx-4 mt-2 overflow-hidden font-light bg-white rounded-md resize-none text-blue-dark focus:outline-none"
             name="userMessage"
-          >
-          </textarea>
-          {errors?.userMessage && <span className='pt-1 pl-6 text-sm'>{errors.userMessage.message}</span>}
+          ></textarea>
+          {errors?.userMessage && (
+            <span className="pt-1 pl-6 text-sm">
+              {errors.userMessage.message}
+            </span>
+          )}
           <input
             type="submit"
             className="w-1/2 py-2 m-4 mt-8 text-xs font-bold rounded-md bg-button-blue"

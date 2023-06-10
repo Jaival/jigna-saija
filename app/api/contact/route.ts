@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { mailOptions, transporter } from '../../lib/transporter';
-import FormValues from '../../lib/types/contactFormType';
+import { NextRequest, NextResponse } from 'next/server';
+import { mailOptions, transporter } from '../../../lib/transporter';
+import FormValues from '../../../lib/types/contactFormType';
 
 const generateEmailContent = (data: FormValues) => {
   return {
@@ -10,31 +11,58 @@ const generateEmailContent = (data: FormValues) => {
   };
 };
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method == 'POST') {
-    const data = req.body;
-    if (
-      !data ||
-      !data.name ||
-      !data.email ||
-      !data.subject ||
-      !data.userMessage
-    ) {
-      return res.status(400).send({ message: 'Bad request' });
-    }
+export async function GET() {
+  return NextResponse.json({ message: 'GET Method Called' }, { status: 200 });
+}
 
-    try {
-      await transporter.sendMail({
-        ...mailOptions,
-        ...generateEmailContent(data),
-      });
-
-      return res.status(200).json({ success: true });
-    } catch (error) {
-      return res.status(400).json({ message: error });
-    }
+export async function POST(req: NextRequest) {
+  const data = await req.json();
+  if (
+    !data ||
+    !data.name ||
+    !data.email ||
+    !data.subject ||
+    !data.userMessage
+  ) {
+    return NextResponse.json({ error: 'Data sent is broken' }, { status: 404 });
   }
-  return res.status(400).json({ message: 'Bad request' });
-};
 
-export default handler;
+  try {
+    await transporter.sendMail({
+      ...mailOptions,
+      ...generateEmailContent(data),
+    });
+    return NextResponse.json({ message: 'Sent' }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json({ message:error }, { status: 404 });
+  }
+}
+
+// const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+//   if (req.method == 'POST') {
+//     const data = req.body;
+//     if (
+//       !data ||
+//       !data.name ||
+//       !data.email ||
+//       !data.subject ||
+//       !data.userMessage
+//     ) {
+//       return res.status(400).send({ message: 'Bad request' });
+//     }
+
+//     try {
+//       await transporter.sendMail({
+//         ...mailOptions,
+//         ...generateEmailContent(data),
+//       });
+
+//       return res.status(200).json({ success: true });
+//     } catch (error) {
+//       return res.status(400).json({ message: error });
+//     }
+//   }
+//   return res.status(400).json({ message: 'Bad request' });
+// };
+
+// export default handler;

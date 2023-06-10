@@ -1,3 +1,5 @@
+'use client'
+
 import { Transition } from '@headlessui/react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -29,7 +31,7 @@ export default function NavBar() {
                 </Link>
               </li>
               <li>
-                <Link href="/contactMe" className="block px-3 py-2 text-base font-medium text-white rounded-md hover:text-white-hover">
+                <Link href="/contact-me" className="block px-3 py-2 text-base font-medium text-white rounded-md hover:text-white-hover">
                   Contact Me
                 </Link>
               </li>

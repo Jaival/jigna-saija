@@ -1,10 +1,11 @@
+'use client'
 import Image from 'next/image';
 import Link from 'next/link';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import userData from '../data/data';
 import { sendContactForm } from '../lib/sendMailapi';
 import FormValues from '../lib/types/contactFormType';
-import { useToast } from './use-toast';
+import { useToast } from './ui/use-toast';
 
 export default function ContactMeComponent() {
   const { toast } = useToast();

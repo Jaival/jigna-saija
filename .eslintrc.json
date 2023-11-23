@@ -8,17 +8,12 @@
     "next/core-web-vitals",
     "plugin:@next/next/recommended",
     "eslint:recommended",
-    "next"
+    "next",
+    "prettier"
   ],
   "rules": {
     "no-unused-vars": "off",
-    "indent": [
-      "warn",
-      2
-    ],
-    "quotes": [
-      "error",
-      "single"
-    ]
+    "indent": ["warn", 2, { "SwitchCase": 1 }],
+    "quotes": ["error", "single"]
   }
 }

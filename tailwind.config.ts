@@ -5,15 +5,9 @@ module.exports = {
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
   ],
   theme: {
-    screens: {
-      'sm': '640px',
-      'md': '768px',
-      'lg': '1024px',
-      'xl': '1280px',
-      '2xl': '1536px',
-    },
     container: {
       center: true,
       padding: '2rem',
@@ -24,19 +18,19 @@ module.exports = {
     extend: {
       colors: {
         transparent: 'transparent',
-        'aquamarine': '#264653',
+        aquamarine: '#264653',
         'button-blue': '#1D6793',
-        'honolulu-blue': '#2278AA', 
+        'honolulu-blue': '#2278AA',
         'blue-dark': '#001B29',
         'light-periwinkle': '#C3C9E9',
-        'black': '#00171F',
+        black: '#00171F',
         'amaranth-purple': '#A40E4C',
         'dogwood-rose': '#BC1058',
         'white-dark': '#F6F6F1', // Alice blue
         'text-holder': '#C2D8FF', //Periwinkle Crayola
-        'white': '#F2F5FF',
+        white: '#F2F5FF',
         'white-hover': '#94a3b8',
-        'gold': '#fb923c',
+        gold: '#fb923c',
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
@@ -93,4 +87,4 @@ module.exports = {
     },
   },
   plugins: [require('tailwindcss-animate')],
-}
+};

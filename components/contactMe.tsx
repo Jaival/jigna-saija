@@ -5,7 +5,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import userData from '../data/data';
 import { sendContactForm } from '../lib/sendMailapi';
 import FormValues from '../lib/types/contactFormType';
-import { useToast } from './ui/use-toast';
+import { useToast } from '../lib/use-toast';
 
 export default function ContactMeComponent() {
   const { toast } = useToast();

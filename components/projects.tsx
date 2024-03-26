@@ -1,6 +1,6 @@
+import userData from '@/data/data';
 import Image from 'next/image';
 import Link from 'next/link';
-import userData from '../data/data';
 
 export default function ProjectsComponent() {
   return (

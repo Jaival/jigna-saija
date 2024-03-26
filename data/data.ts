@@ -8,6 +8,13 @@ const userData = {
   projects: {
     interiorProjects: [
       {
+        title: 'Mr Jain',
+        year: 2023,
+        link: '/gallery',
+        imgUrl:
+          '/images/interior_projects/mr_jain_site_pics/mr_jain_site_pic_1.jpg',
+      },
+      {
         title: 'A Small Banquet',
         year: 2022,
         link: '/gallery',

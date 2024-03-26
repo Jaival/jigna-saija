@@ -3,6 +3,17 @@ const projectData = {
   projects: {
     interiorProjects: [
       {
+        title: 'Mr. Jain',
+        year: 2023,
+        imgUrls: [
+          '/images/interior_projects/mr_jain_site_pics/mr_jain_site_pic_1.jpg',
+          '/images/interior_projects/mr_jain_site_pics/mr_jain_site_pic_2.jpg',
+          '/images/interior_projects/mr_jain_site_pics/mr_jain_site_pic_3.jpg',
+          '/images/interior_projects/mr_jain_site_pics/mr_jain_site_pic_4.jpg',
+          '/images/interior_projects/mr_jain_site_pics/mr_jain_site_pic_5.jpg',
+        ],        
+      },
+      {
         title: 'A Small Banquet',
         year: 2022,
         imgUrls: [

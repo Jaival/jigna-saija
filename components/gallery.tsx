@@ -1,4 +1,4 @@
-import projectData from '../data/projects';
+import projectData from '@/data/projects';
 import ImageGallery from './gallery/ImageGallery';
 
 export default function GalleryComponent() {

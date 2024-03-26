@@ -1,7 +1,7 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { mailOptions, transporter } from '@/lib/transporter';
+import FormValues from '@/lib/types/contactFormType';
+// import type { NextApiRequest, NextApiResponse } from 'next';
 import { NextRequest, NextResponse } from 'next/server';
-import { mailOptions, transporter } from '../../../lib/transporter';
-import FormValues from '../../../lib/types/contactFormType';
 
 const generateEmailContent = (data: FormValues) => {
   return {

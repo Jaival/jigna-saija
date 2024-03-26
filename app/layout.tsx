@@ -1,10 +1,10 @@
+import Footer from '@/components/footer';
+import Navbar from '@/components/navBar';
+import { Providers } from '@/components/provider';
+import { Toaster } from '@/components/ui/toaster';
 import { Metadata } from 'next';
 import { Figtree } from 'next/font/google';
 import React from 'react';
-import Footer from '../components/footer';
-import Navbar from '../components/navBar';
-import { Providers } from '../components/provider';
-import { Toaster } from '../components/ui/toaster';
 import './globals.css';
 
 const figtree = Figtree({

@@ -8,6 +8,20 @@ const userData = {
   projects: {
     interiorProjects: [
       {
+        title: 'Noorani Residence',
+        year: 2024,
+        link: '/gallery',
+        imgUrl:
+          '/images/interior_projects/noorani_residence_pics/noorani_residence_1.jpg',
+      },
+      {
+        title: 'Office at Navaratna',
+        year: 2024,
+        link: '/gallery',
+        imgUrl:
+          '/images/interior_projects/office_at_navaratna_ahmedabad_pics/office_at_navaratna_ahmedabad_1.jpg',
+      },
+      {
         title: 'Mr Jain',
         year: 2023,
         link: '/gallery',

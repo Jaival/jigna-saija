@@ -96,7 +96,7 @@ export default function NavBar() {
       >
         {(ref) => (
           <div className="md:hidden" id="mobile-menu">
-            <div ref={ref} className="px-2 py-2 space-y-1 sm:px-3">
+            <div ref={ref as React.RefObject<HTMLDivElement>} className="px-2 py-2 space-y-1 sm:px-3">
               <ul className="items-center justify-center space-y-2 md:flex md:space-x-6 md:space-y-0">
                 <li>
                   <Link href="/projects" className="block px-3 py-2 text-base font-medium text-white rounded-md hover:text-white-hover">

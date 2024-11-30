@@ -6,7 +6,7 @@
   },
   "extends": [
     "next/core-web-vitals",
-    "plugin:@next/next/recommended",
+    // "plugin:@next/next/recommended",
     "eslint:recommended",
     "next",
     "prettier"

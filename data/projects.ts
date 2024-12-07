@@ -3,9 +3,40 @@ const projectData = {
   projects: {
     interiorProjects: [
       {
+        title: 'Shekhani Office',
+        year: 2024,
+        imgUrls: [
+          '/images/interior_projects/shekhani_office/shekhani_office_1.jpg',
+          '/images/interior_projects/shekhani_office/shekhani_office_2.jpg',
+          '/images/interior_projects/shekhani_office/shekhani_office_3.jpg',
+          '/images/interior_projects/shekhani_office/shekhani_office_4.jpg',
+          '/images/interior_projects/shekhani_office/shekhani_office_5.jpg',
+          '/images/interior_projects/shekhani_office/shekhani_office_6.jpg',
+          '/images/interior_projects/shekhani_office/shekhani_office_7.jpg',
+          '/images/interior_projects/shekhani_office/shekhani_office_8.jpg',
+        ],
+      },
+      {
+        title: 'Showroom',
+        year: 2024,
+        imgUrls: [
+          '/images/interior_projects/showroom/showroom_1.jpg',
+          '/images/interior_projects/showroom/showroom_10.jpg',
+          '/images/interior_projects/showroom/showroom_11.jpg',
+          '/images/interior_projects/showroom/showroom_2.jpg',
+          '/images/interior_projects/showroom/showroom_3.jpg',
+          '/images/interior_projects/showroom/showroom_4.jpg',
+          '/images/interior_projects/showroom/showroom_5.jpg',
+          '/images/interior_projects/showroom/showroom_6.jpg',
+          '/images/interior_projects/showroom/showroom_7.jpg',
+          '/images/interior_projects/showroom/showroom_8.jpg',
+          '/images/interior_projects/showroom/showroom_9.jpg',
+        ],
+      },
+      {
         title: 'Noorani Residence',
         year: 2024,
-        imgUrls:[
+        imgUrls: [
           '/images/interior_projects/noorani_residence_pics/noorani_residence_1.jpg',
           '/images/interior_projects/noorani_residence_pics/noorani_residence_10.jpg',
           '/images/interior_projects/noorani_residence_pics/noorani_residence_11.jpg',
@@ -30,12 +61,12 @@ const projectData = {
           '/images/interior_projects/noorani_residence_pics/noorani_residence_7.jpg',
           '/images/interior_projects/noorani_residence_pics/noorani_residence_8.jpg',
           '/images/interior_projects/noorani_residence_pics/noorani_residence_9.jpg',
-        ]
+        ],
       },
       {
         title: 'Office at Navaratna',
         year: 2024,
-        imgUrls:[
+        imgUrls: [
           '/images/interior_projects/office_at_navaratna_ahmedabad_pics/office_at_navaratna_ahmedabad_1.jpg',
           '/images/interior_projects/office_at_navaratna_ahmedabad_pics/office_at_navaratna_ahmedabad_10.jpg',
           '/images/interior_projects/office_at_navaratna_ahmedabad_pics/office_at_navaratna_ahmedabad_11.jpg',
@@ -100,7 +131,7 @@ const projectData = {
           '/images/interior_projects/office_at_navaratna_ahmedabad_pics/office_at_navaratna_ahmedabad_7.jpg',
           '/images/interior_projects/office_at_navaratna_ahmedabad_pics/office_at_navaratna_ahmedabad_8.jpg',
           '/images/interior_projects/office_at_navaratna_ahmedabad_pics/office_at_navaratna_ahmedabad_9.jpg',
-        ]
+        ],
       },
       {
         title: 'Mr. Jain',
@@ -111,7 +142,7 @@ const projectData = {
           '/images/interior_projects/mr_jain_site_pics/mr_jain_site_pic_3.jpg',
           '/images/interior_projects/mr_jain_site_pics/mr_jain_site_pic_4.jpg',
           '/images/interior_projects/mr_jain_site_pics/mr_jain_site_pic_5.jpg',
-        ],        
+        ],
       },
       {
         title: 'A Small Banquet',
@@ -378,6 +409,36 @@ const projectData = {
       },
     ],
     architectureProjects: [
+      {
+        title: 'Mr Singhi',
+        year: 2023,
+        imgUrls: ['/images/architecture_projects/mr_singhi/mr_singhi_1.jpg'],
+      },
+      {
+        title: 'Sunjay Bhai',
+        year: 2023,
+        imgUrls: [
+          '/images/architecture_projects/sunjay_bhai/sunjay_bhai_1.jpg',
+          '/images/architecture_projects/sunjay_bhai/sunjay_bhai_2.jpg',
+        ],
+      },
+      {
+        title: 'Mr babulal jain',
+        year: 2023,
+        imgUrls: [
+          '/images/architecture_projects/mr_babulal_jain/mr_babulal_jain_1.jpg',
+          '/images/architecture_projects/mr_babulal_jain/mr_babulal_jain_2.jpg',
+          '/images/architecture_projects/mr_babulal_jain/mr_babulal_jain_3.jpg',
+          '/images/architecture_projects/mr_babulal_jain/mr_babulal_jain_4.jpg',
+        ],
+      },
+      {
+        title: 'Mr Dilip Jain',
+        year: 2023,
+        imgUrls: [
+          '/images/architecture_projects/mr_dilip_jain/mr_dilip_jain_1.jpg',
+        ],
+      },
       {
         title: 'Avdheshbhai Bunglow',
         year: 2023,

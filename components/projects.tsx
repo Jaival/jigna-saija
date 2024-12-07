@@ -4,12 +4,12 @@ import Link from 'next/link';
 
 export default function ProjectsComponent() {
   return (
-    <section className="">
+    <section className="flex flex-col">
       {/* Interior Projects*/}
       <div className="max-w-6xl mx-auto">
-        < h1 className="py-2 text-xl font-bold text-left md:text-4xl">
+        <h1 className="py-2 text-xl font-bold text-left md:text-4xl">
           Interior Projects
-        </ h1>
+        </h1>
       </div>
       {/* Grid starts here */}
       <div className="">
@@ -57,8 +57,14 @@ const ProjectCard = ({
   year,
   number,
   imgUrl,
-  redirectLink
-}: { title: string, year: number, number: string, imgUrl: string, redirectLink: string }) => {
+  redirectLink,
+}: {
+  title: string;
+  year: number;
+  number: string;
+  imgUrl: string;
+  redirectLink: string;
+}) => {
   return (
     <Link href={redirectLink} className="block w-full shadow-2xl">
       <div className="relative overflow-hidden rounded-xl">

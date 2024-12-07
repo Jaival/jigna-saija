@@ -4,20 +4,20 @@ import Link from 'next/link';
 import { useRef } from 'react';
 
 export default function Hero() {
-  const whychoseme = {
+  const why_choose_me = {
     'Design Approach': {
       description:
         'We hear the customer, we set the customers and their requirements in the heart of our design.',
     },
-    'Transparency': {
+    Transparency: {
       description:
         'We provide complete transparency on all matters. Our BOGs (bill of quality) & bring clarity in each step/material we select and order',
     },
-    'Trust': {
+    Trust: {
       description:
         'We work to build trust. Our work & transparency speaks it all.',
     },
-    'Quality': {
+    Quality: {
       description:
         'The design approach helps us offer well-planned, beautifully detailed long-lasting & high-satisfactory products.',
     },
@@ -112,7 +112,7 @@ export default function Hero() {
               whileInView={{ opacity: 1 }}
               className="text-xl font-bold md:text-4xl"
             >
-              Why Chose Me?
+              Why Choose Me?
             </motion.p>
           </div>
 
@@ -120,7 +120,7 @@ export default function Hero() {
             // ref={scrollRef}
             className="grid grid-flow-col grid-rows-5 gap-4 md:grid-rows-2 md:gap-14"
           >
-            {Object.entries(whychoseme).map(([key, value]) => (
+            {Object.entries(why_choose_me).map(([key, value]) => (
               <motion.div
                 initial={{ opacity: 0, scale: 0 }}
                 whileInView={{ opacity: 1, scale: 1 }}

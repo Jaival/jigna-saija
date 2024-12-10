@@ -200,7 +200,7 @@ const projectData = {
         ],
       },
       {
-        title: 'Best Site',
+        title: 'Miscellaneous Site',
         year: 2021,
         imgUrls: [
           '/images/interior_projects/best_site_pics/best_stall_site_pic_1.jpg',
@@ -410,6 +410,23 @@ const projectData = {
     ],
     architectureProjects: [
       {
+        title: 'Mr babulal jain',
+        year: 2024,
+        imgUrls: [
+          '/images/architecture_projects/mr_babulal_jain/mr_babulal_jain_1.jpg',
+          '/images/architecture_projects/mr_babulal_jain/mr_babulal_jain_2.jpg',
+          '/images/architecture_projects/mr_babulal_jain/mr_babulal_jain_3.jpg',
+          '/images/architecture_projects/mr_babulal_jain/mr_babulal_jain_4.jpg',
+        ],
+      },
+      {
+        title: 'Mr Dilip Jain',
+        year: 2024,
+        imgUrls: [
+          '/images/architecture_projects/mr_dilip_jain/mr_dilip_jain_1.jpg',
+        ],
+      },
+      {
         title: 'Mr Singhi',
         year: 2023,
         imgUrls: ['/images/architecture_projects/mr_singhi/mr_singhi_1.jpg'],
@@ -420,23 +437,6 @@ const projectData = {
         imgUrls: [
           '/images/architecture_projects/sunjay_bhai/sunjay_bhai_1.jpg',
           '/images/architecture_projects/sunjay_bhai/sunjay_bhai_2.jpg',
-        ],
-      },
-      {
-        title: 'Mr babulal jain',
-        year: 2023,
-        imgUrls: [
-          '/images/architecture_projects/mr_babulal_jain/mr_babulal_jain_1.jpg',
-          '/images/architecture_projects/mr_babulal_jain/mr_babulal_jain_2.jpg',
-          '/images/architecture_projects/mr_babulal_jain/mr_babulal_jain_3.jpg',
-          '/images/architecture_projects/mr_babulal_jain/mr_babulal_jain_4.jpg',
-        ],
-      },
-      {
-        title: 'Mr Dilip Jain',
-        year: 2023,
-        imgUrls: [
-          '/images/architecture_projects/mr_dilip_jain/mr_dilip_jain_1.jpg',
         ],
       },
       {

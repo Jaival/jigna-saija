@@ -1,6 +1,5 @@
 import { motion } from 'motion/react';
 import { useRef } from 'react';
-import { ArrowRightIcon } from './ui/arrow-right';
 
 export default function DesignProcessComponent() {
   const scrollRef = useRef(null);

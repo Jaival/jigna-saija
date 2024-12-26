@@ -2,9 +2,8 @@ import projectData from '@/data/projects';
 import ImageGallery from './gallery/ImageGallery';
 
 export default function GalleryComponent() {
-
   return (
-    <section className="">
+    <section className="flex">
       {/* Interior Projects*/}
       <div className="max-w-6xl mx-auto ">
         <h1 className="py-2 text-xl font-bold text-left md:text-4xl">
@@ -46,4 +45,3 @@ export default function GalleryComponent() {
     </section>
   );
 }
-

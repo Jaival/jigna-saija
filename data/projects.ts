@@ -1,8 +1,8 @@
-// TODO: Add list of individual project image urls
 const projectData = {
   projects: {
     interiorProjects: [
       {
+        id: 'shekhani-office',
         title: 'Shekhani Office',
         year: 2024,
         imgUrls: [
@@ -17,6 +17,7 @@ const projectData = {
         ],
       },
       {
+        id: 'showroom',
         title: 'Showroom',
         year: 2024,
         imgUrls: [
@@ -34,6 +35,7 @@ const projectData = {
         ],
       },
       {
+        id: 'noorani-residence',
         title: 'Noorani Residence',
         year: 2024,
         imgUrls: [
@@ -64,6 +66,7 @@ const projectData = {
         ],
       },
       {
+        id: 'office-at-navaratna',
         title: 'Office at Navaratna',
         year: 2024,
         imgUrls: [
@@ -134,6 +137,7 @@ const projectData = {
         ],
       },
       {
+        id: 'mr-jain',
         title: 'Mr. Jain',
         year: 2023,
         imgUrls: [
@@ -145,6 +149,7 @@ const projectData = {
         ],
       },
       {
+        id: 'a-small-banquet',
         title: 'A Small Banquet',
         year: 2022,
         imgUrls: [
@@ -158,6 +163,7 @@ const projectData = {
         ],
       },
       {
+        id: 'mr-bhadoria-site',
         title: 'Mr. Bhadoraia Site',
         year: 2021,
         imgUrls: [
@@ -200,6 +206,7 @@ const projectData = {
         ],
       },
       {
+        id: 'miscellaneous-site',
         title: 'Miscellaneous Site',
         year: 2021,
         imgUrls: [
@@ -256,7 +263,7 @@ const projectData = {
         ],
       },
       {
-        //4
+        id: 'mr-sadhwani-site',
         title: 'Mr. Sadhwani Site',
         year: 2018,
         imgUrls: [
@@ -273,6 +280,7 @@ const projectData = {
         ],
       },
       {
+        id: 'varsoda-site',
         title: 'Varsoda Site',
         year: 2012,
         imgUrls: [
@@ -303,6 +311,7 @@ const projectData = {
         ],
       },
       {
+        id: 'guruji-site',
         title: 'Guruji Site',
         year: 2011,
         imgUrls: [
@@ -319,6 +328,7 @@ const projectData = {
         ],
       },
       {
+        id: 'rajivbhai-site',
         title: 'Rajivbhai Site',
         year: 2010,
         imgUrls: [
@@ -363,6 +373,7 @@ const projectData = {
         ],
       },
       {
+        id: 'mr-rathi-site',
         title: 'Mr. Rathi Site',
         year: 2009,
         imgUrls: [
@@ -382,6 +393,7 @@ const projectData = {
         ],
       },
       {
+        id: 'book-stall',
         title: 'Book Stall',
         year: 2008,
         imgUrls: [
@@ -410,7 +422,23 @@ const projectData = {
     ],
     architectureProjects: [
       {
-        title: 'Mr babulal jain',
+        id: 'mr-singhi',
+        title: 'Mr Singhi',
+        year: 2023,
+        imgUrls: ['/images/architecture_projects/mr_singhi/mr_singhi_1.jpg'],
+      },
+      {
+        id: 'sunjay-bhai',
+        title: 'Sunjay Bhai',
+        year: 2023,
+        imgUrls: [
+          '/images/architecture_projects/sunjay_bhai/sunjay_bhai_1.jpg',
+          '/images/architecture_projects/sunjay_bhai/sunjay_bhai_2.jpg',
+        ],
+      },
+      {
+        id: 'mr-babulal-jain',
+        title: 'Mr Babulal jain',
         year: 2024,
         imgUrls: [
           '/images/architecture_projects/mr_babulal_jain/mr_babulal_jain_1.jpg',
@@ -420,6 +448,7 @@ const projectData = {
         ],
       },
       {
+        id: 'mr-dilip-jain',
         title: 'Mr Dilip Jain',
         year: 2024,
         imgUrls: [
@@ -427,19 +456,7 @@ const projectData = {
         ],
       },
       {
-        title: 'Mr Singhi',
-        year: 2023,
-        imgUrls: ['/images/architecture_projects/mr_singhi/mr_singhi_1.jpg'],
-      },
-      {
-        title: 'Sunjay Bhai',
-        year: 2023,
-        imgUrls: [
-          '/images/architecture_projects/sunjay_bhai/sunjay_bhai_1.jpg',
-          '/images/architecture_projects/sunjay_bhai/sunjay_bhai_2.jpg',
-        ],
-      },
-      {
+        id: 'avdheshbhai-bunglow',
         title: 'Avdheshbhai Bunglow',
         year: 2023,
         imgUrls: [
@@ -449,6 +466,7 @@ const projectData = {
         ],
       },
       {
+        id: 'farm-house',
         title: 'Farm House',
         year: 2022,
         imgUrls: [
@@ -457,6 +475,7 @@ const projectData = {
         ],
       },
       {
+        id: 'bungalow-at-bopal',
         title: 'Bungalow at Bopal',
         year: 2022,
         imgUrls: [
@@ -464,8 +483,8 @@ const projectData = {
           '/images/architecture_projects/bungalow_at_bopal/bungalow_at_bopal_2.jpg',
           '/images/architecture_projects/bungalow_at_bopal/bungalow_at_bopal_3.jpg',
           '/images/architecture_projects/bungalow_at_bopal/bungalow_at_bopal_4.jpg',
-          '/images/architecture_projects/bungalow_at_bopal/bungalow_at_bopal_5.jpg',
-          '/images/architecture_projects/bungalow_at_bopal/bungalow_at_bopal_6.jpg',
+          // '/images/architecture_projects/bungalow_at_bopal/bungalow_at_bopal_5.jpg',
+          // '/images/architecture_projects/bungalow_at_bopal/bungalow_at_bopal_6.jpg',
         ],
       },
     ],

@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { Transition } from '@headlessui/react';
 import Image from 'next/image';
@@ -8,30 +8,43 @@ import React, { useState } from 'react';
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   return (
-
     <nav className="w-full">
       <div className="flex justify-between px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 md:items-center">
-        <div className='flex items-center justify-between'>
+        <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center w-48">
-            <Image className={'w-64 flex-no-shrink fill-current'}
-              alt={'Jigna Saija'} width={320} height={320}
-              src={'/logos/jigna_saija_light.png'} priority />
+            <Image
+              className={'w-64 flex-no-shrink fill-current'}
+              alt={'Jigna Saija'}
+              width={320}
+              height={320}
+              src={'/logos/jigna_saija_light.png'}
+              priority
+            />
           </Link>
 
           <div className="absolute hidden md:block right-48">
             <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
               <li>
-                <Link href="/projects" className="block px-3 py-2 text-base font-medium text-white rounded-md hover:text-white-hover">
+                <Link
+                  href="/projects"
+                  className="block px-3 py-2 text-base font-medium text-white rounded-md hover:text-white-hover"
+                >
                   Projects
                 </Link>
               </li>
-              <li>
-                <Link href="/gallery" className="block px-3 py-2 text-base font-medium text-white rounded-md hover:text-white-hover">
+              {/* <li>
+                <Link
+                  href="/gallery"
+                  className="block px-3 py-2 text-base font-medium text-white rounded-md hover:text-white-hover"
+                >
                   Gallery
                 </Link>
-              </li>
+              </li> */}
               <li>
-                <Link href="/contact-me" className="block px-3 py-2 text-base font-medium text-white rounded-md hover:text-white-hover">
+                <Link
+                  href="/contact-me"
+                  className="block px-3 py-2 text-base font-medium text-white rounded-md hover:text-white-hover"
+                >
                   Contact Me
                 </Link>
               </li>
@@ -96,30 +109,37 @@ export default function NavBar() {
       >
         {(ref) => (
           <div className="md:hidden" id="mobile-menu">
-            <div ref={ref as React.RefObject<HTMLDivElement>} className="px-2 py-2 space-y-1 sm:px-3">
+            <div
+              ref={ref as React.RefObject<HTMLDivElement>}
+              className="px-2 py-2 space-y-1 sm:px-3"
+            >
               <ul className="items-center justify-center space-y-2 md:flex md:space-x-6 md:space-y-0">
                 <li>
-                  <Link href="/projects" className="block px-3 py-2 text-base font-medium text-white rounded-md hover:text-white-hover">
+                  <Link
+                    href="/projects"
+                    className="block px-3 py-2 text-base font-medium text-white rounded-md hover:text-white-hover"
+                  >
                     Projects
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link href="/gallery" className="block px-3 py-2 text-base font-medium text-white rounded-md hover:text-white-hover">
                     Gallery
                   </Link>
-                </li>
+                </li> */}
                 <li>
-                  <Link href="/contactMe" className="block px-3 py-2 text-base font-medium text-white rounded-md hover:text-white-hover">
+                  <Link
+                    href="/contactMe"
+                    className="block px-3 py-2 text-base font-medium text-white rounded-md hover:text-white-hover"
+                  >
                     Contact Me
                   </Link>
                 </li>
               </ul>
-
             </div>
           </div>
         )}
       </Transition>
     </nav>
-
   );
 }

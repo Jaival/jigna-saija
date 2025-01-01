@@ -129,7 +129,7 @@ export default function NavBar() {
                 </li> */}
                 <li>
                   <Link
-                    href="/contactMe"
+                    href="/contact-me"
                     className="block px-3 py-2 text-base font-medium text-white rounded-md hover:text-white-hover"
                   >
                     Contact Me

@@ -28,11 +28,11 @@ export default function RootLayout({
         <Providers>
           <main
             className={
-              'h-full px-10 pt-12 md:px-20 bg-white-dark dark:bg-blue-dark background'
+              'flex flex-col min-h-screen px-10 pt-12 md:px-20 bg-white-dark dark:bg-blue-dark background'
             }
           >
             <Navbar />
-            <div className="px-4 py-2">{children}</div>
+            <div className="flex-1 px-4 py-2">{children}</div>
             <Toaster />
             <Footer />
           </main>

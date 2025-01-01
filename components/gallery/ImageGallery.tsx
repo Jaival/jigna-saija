@@ -1,4 +1,5 @@
 'use client';
+import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { useState } from 'react';
 
@@ -37,8 +38,8 @@ export default function ImageGallery({
             {title}
           </h1>
         </div>
-        <div className="flex items-center justify-center">
-          {/* {showCurrent ? (
+        {/* <div className="flex items-center justify-center"> */}
+        {/* {showCurrent ? (
               <button
                 className="p-2 rounded-full bg-button-blue md:p-4"
                 onClick={() => toggleCurrent()}
@@ -83,12 +84,12 @@ export default function ImageGallery({
                 </svg>
               </button>
             )} */}
-        </div>
+        {/* </div> */}
       </div>
       {/* {showCurrent ? ( */}
       <div className="grid max-w-6xl grid-cols-1 gap-8 py-4 mx-auto md:grid-cols-3">
         {imageUrls.map((imageUrl: string, idx: number) => (
-          <div className="relative overflow-hidden rounded-xl" key={idx}>
+          <div className="relative overflow-hidden rounded-xl" key={id}>
             <div className="object-cover h-72">
               <BlurImage image={imageUrl} key={idx} />
             </div>
@@ -113,10 +114,6 @@ export default function ImageGallery({
       {/* ) : null} */}
     </div>
   );
-}
-
-function cn(...classes: string[]) {
-  return classes.filter(Boolean).join(' ');
 }
 
 function BlurImage({ image }: { image: string }) {

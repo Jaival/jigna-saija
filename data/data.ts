@@ -70,14 +70,6 @@ const userData = {
           '/images/interior_projects/mr_sadhwani_site_pic/mr_sadhwani_site_pic_1.jpg',
       },
       {
-        id: 'varsoda-site',
-        title: 'Varsoda Site',
-        year: 2012,
-        link: '/projects/varsoda-site',
-        imgUrl:
-          '/images/interior_projects/varsoda_site_pics/varsoda_site_pic_7.jpg',
-      },
-      {
         id: 'guruji-site',
         title: 'Guruji Site',
         year: 2011,
@@ -120,6 +112,22 @@ const userData = {
     ],
     architectureProjects: [
       {
+        id: 'mr-babulal-jain',
+        title: 'Mr Babulal jain',
+        year: 2025,
+        link: '/projects/mr-babulal-jain',
+        imgUrl:
+          '/images/architecture_projects/mr_babulal_jain/mr_babulal_jain_1.jpg',
+      },
+      {
+        id: 'avdheshbhai-bunglow',
+        title: 'Avdheshbhai Bunglow',
+        year: 2024,
+        link: '/projects/avdheshbhai-bunglow',
+        imgUrl:
+          '/images/architecture_projects/avdhesh_bhai_bunglow/avdhesh_bhai_bunglow_1.jpg',
+      },
+      {
         id: 'mr-singhi',
         title: 'Mr Singhi',
         year: 2023,
@@ -134,14 +142,6 @@ const userData = {
         imgUrl: '/images/architecture_projects/sunjay_bhai/sunjay_bhai_1.jpg',
       },
       {
-        id: 'mr-babulal-jain',
-        title: 'Mr Babulal jain',
-        year: 2023,
-        link: '/projects/mr-babulal-jain',
-        imgUrl:
-          '/images/architecture_projects/mr_babulal_jain/mr_babulal_jain_1.jpg',
-      },
-      {
         id: 'mr-dilip-jain',
         title: 'Mr Dilip Jain',
         year: 2023,
@@ -149,14 +149,7 @@ const userData = {
         imgUrl:
           '/images/architecture_projects/mr_dilip_jain/mr_dilip_jain_1.jpg',
       },
-      {
-        id: 'avdheshbhai-bunglow',
-        title: 'Avdheshbhai Bunglow',
-        year: 2023,
-        link: '/projects/avdheshbhai-bunglow',
-        imgUrl:
-          '/images/architecture_projects/avdhesh_bhai_bunglow/avdhesh_bhai_bunglow_1.jpg',
-      },
+
       {
         id: 'farm-house',
         title: 'Farm House',
@@ -171,6 +164,14 @@ const userData = {
         link: '/projects/bungalow-at-bopal',
         imgUrl:
           '/images/architecture_projects/bungalow_at_bopal/bungalow_at_bopal_1.jpg',
+      },
+      {
+        id: 'varsoda-site',
+        title: 'Varsoda Site',
+        year: 2012,
+        link: '/projects/varsoda-site',
+        imgUrl:
+          '/images/architecture_projects/varsoda_site_pics/varsoda_site_pic_7.jpg',
       },
     ],
   },

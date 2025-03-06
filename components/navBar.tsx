@@ -17,7 +17,7 @@ export default function NavBar() {
               alt={'Jigna Saija'}
               width={320}
               height={320}
-              src={'/logos/JiiJ_Designs_White_L.png'}
+              src={'/logos/JiiJ_Designs.png'}
               priority
             />
           </Link>

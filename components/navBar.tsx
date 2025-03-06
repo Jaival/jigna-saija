@@ -17,7 +17,7 @@ export default function NavBar() {
               alt={'Jigna Saija'}
               width={320}
               height={320}
-              src={'/logos/jigna_saija_light.png'}
+              src={'/logos/JiiJ_Designs_White_L.png'}
               priority
             />
           </Link>
@@ -56,7 +56,7 @@ export default function NavBar() {
           <button
             onClick={() => setIsOpen(!isOpen)}
             type="button"
-            className="inline-flex items-center justify-center p-2 text-white rounded-md focus:outline-none"
+            className="inline-flex items-center justify-center p-2 text-white rounded-md focus:outline-hidden"
             aria-controls="mobile-menu"
             aria-expanded="false"
           >

@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import userData from '@/data/data';
 import { sendContactForm } from '@/lib/sendMailapi';
 import FormValues from '@/lib/types/contactFormType';
@@ -45,7 +45,7 @@ export default function ContactMeComponent() {
     reset,
   } = useForm<FormValues>({});
 
-  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+  const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
     console.log(data);
     const res = await sendContactForm(data);
     console.log(res.message);
@@ -148,7 +148,7 @@ export default function ContactMeComponent() {
           <input
             {...register('name', { required: 'Your name is required.' })}
             type="text"
-            className="px-2 py-2 mx-4 mt-2 font-light bg-white rounded-md text-blue-dark focus:outline-none"
+            className="px-2 py-2 mx-4 mt-2 font-light bg-white rounded-md text-blue-dark focus:outline-hidden"
             name="name"
           />
           {errors?.name && (
@@ -160,7 +160,7 @@ export default function ContactMeComponent() {
           <input
             {...register('email', { required: 'Your email is required.' })}
             type="email"
-            className="px-2 py-2 mx-4 mt-2 font-light bg-white rounded-md text-blue-dark focus:outline-none"
+            className="px-2 py-2 mx-4 mt-2 font-light bg-white rounded-md text-blue-dark focus:outline-hidden"
             name="email"
           />
           {errors?.email && (
@@ -172,7 +172,7 @@ export default function ContactMeComponent() {
           <input
             {...register('subject', { required: 'The subject is required.' })}
             type="text"
-            className="px-2 py-2 mx-4 mt-2 font-light bg-white rounded-md text-blue-dark focus:outline-none"
+            className="px-2 py-2 mx-4 mt-2 font-light bg-white rounded-md text-blue-dark focus:outline-hidden"
             name="subject"
           />
           {errors?.subject && (
@@ -188,7 +188,7 @@ export default function ContactMeComponent() {
             })}
             rows={4}
             typeof="text"
-            className="px-2 py-2 mx-4 mt-2 overflow-hidden font-light bg-white rounded-md resize-none text-blue-dark focus:outline-none"
+            className="px-2 py-2 mx-4 mt-2 overflow-hidden font-light bg-white rounded-md resize-none text-blue-dark focus:outline-hidden"
             name="userMessage"
           ></textarea>
           {errors?.userMessage && (

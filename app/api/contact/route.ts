@@ -1,15 +1,35 @@
 import { mailOptions, transporter } from '@/lib/transporter';
 import FormValues from '@/lib/types/contactFormType';
 import { NextRequest, NextResponse } from 'next/server';
+import { z } from 'zod';
+
+// Define a schema for input validation
+const contactFormSchema = z.object({
+  name: z.string().min(1, 'Name is required'),
+  email: z.string().email('Invalid email address'),
+  subject: z.string().min(1, 'Subject is required'),
+  userMessage: z.string().min(1, 'Message is required'),
+});
 
 const generateEmailContent = (data: FormValues) => {
+  // Sanitize user inputs to prevent XSS
+  const sanitizedMessage = data.userMessage
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+
   return {
-    subject: data.subject,
-    text: data.userMessage,
-    html: `<!DOCTYPE html>
+    subject: `New Contact: ${data.subject}`,
+    text: `Name: ${data.name}\nEmail: ${data.email}\nMessage: ${data.userMessage}`,
+    html: generateEmailHtml(data, sanitizedMessage),
+  };
+};
+
+// Separate HTML template generation for better maintainability
+function generateEmailHtml(data: FormValues, sanitizedMessage: string) {
+  return `<!DOCTYPE html>
 <html lang="en">
 <head>
-<title></title>
+<title>New Contact Form Submission</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,34 +55,58 @@ div[style*='margin: 16px 0;']{margin:0!important}
 <table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td>
 <table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
 <td style="padding:0;font-size:16px;line-height:25px;color:#232323" class="padding message-content">
-<h2>New Enquiry</h2><div class="form-container">${data.userMessage}<p>Revert back on this email ${data.email}</p>
-</div></td></tr></table></td></tr></table></td></tr></table></td></tr></table></body></html>`,
-  };
-};
+<h2>New Contact Form Submission</h2>
+<div class="form-container">
+  <p><strong>Name:</strong> ${data.name}</p>
+  <p><strong>Email:</strong> ${data.email}</p>
+  <p><strong>Subject:</strong> ${data.subject}</p>
+  <p><strong>Message:</strong></p>
+  <p>${sanitizedMessage}</p>
+</div></td></tr></table></td></tr></table></td></tr></table></td></tr></table></body></html>`;
+}
 
 export async function GET() {
-  return NextResponse.json({ message: 'GET Method Called' }, { status: 200 });
+  return NextResponse.json(
+    { message: 'This endpoint only accepts POST requests' },
+    { status: 405 },
+  );
 }
 
 export async function POST(req: NextRequest) {
-  const data = await req.json();
-  if (
-    !data ||
-    !data.name ||
-    !data.email ||
-    !data.subject ||
-    !data.userMessage
-  ) {
-    return NextResponse.json({ error: 'Data sent is broken' }, { status: 404 });
-  }
-
   try {
+    const data = await req.json();
+
+    // Validate input using Zod schema
+    const result = contactFormSchema.safeParse(data);
+
+    if (!result.success) {
+      const errors = result.error.format();
+      return NextResponse.json(
+        {
+          error: 'Validation failed',
+          details: errors,
+        },
+        { status: 400 },
+      );
+    }
+
+    // Send email with validated data
     await transporter.sendMail({
       ...mailOptions,
       ...generateEmailContent(data),
     });
-    return NextResponse.json({ message: 'Sent' }, { status: 200 });
+
+    return NextResponse.json(
+      { message: 'Message sent successfully' },
+      { status: 200 },
+    );
   } catch (error) {
-    return NextResponse.json({ message:error }, { status: 404 });
+    console.error('Contact form error:', error);
+    return NextResponse.json(
+      {
+        message: 'Failed to send message. Please try again later.',
+      },
+      { status: 500 },
+    );
   }
 }

@@ -5,6 +5,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
 
+// Extract navigation links to avoid duplication
+const navLinks = [
+  { href: '/projects', label: 'Projects' },
+  // { href: '/gallery', label: 'Gallery' },
+  { href: '/contact-me', label: 'Contact Me' },
+];
+
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   return (
@@ -13,8 +20,8 @@ export default function NavBar() {
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center w-48">
             <Image
-              className={'w-64 flex-no-shrink fill-current'}
-              alt={'Jigna Saija'}
+              className="w-full h-auto"
+              alt="Jigna Saija"
               width={320}
               height={320}
               src={'/logos/JiiJ_Designs.png'}
@@ -22,32 +29,18 @@ export default function NavBar() {
             />
           </Link>
 
-          <div className="absolute hidden md:block right-48">
-            <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-              <li>
-                <Link
-                  href="/projects"
-                  className="block px-3 py-2 text-base font-medium text-white rounded-md hover:text-white-hover"
-                >
-                  Projects
-                </Link>
-              </li>
-              {/* <li>
-                <Link
-                  href="/gallery"
-                  className="block px-3 py-2 text-base font-medium text-white rounded-md hover:text-white-hover"
-                >
-                  Gallery
-                </Link>
-              </li> */}
-              <li>
-                <Link
-                  href="/contact-me"
-                  className="block px-3 py-2 text-base font-medium text-white rounded-md hover:text-white-hover"
-                >
-                  Contact Me
-                </Link>
-              </li>
+          <div className="absolute hidden md:block md:ml-10 right-48">
+            <ul className="flex items-center space-x-6">
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="block px-3 py-2 text-xl font-medium text-white rounded-md hover:text-white-hover"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
@@ -56,9 +49,9 @@ export default function NavBar() {
           <button
             onClick={() => setIsOpen(!isOpen)}
             type="button"
-            className="inline-flex items-center justify-center p-2 text-white rounded-md focus:outline-hidden"
+            className="inline-flex items-center justify-center p-2 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-white"
             aria-controls="mobile-menu"
-            aria-expanded="false"
+            aria-expanded={isOpen}
           >
             <span className="sr-only">Open main menu</span>
             {!isOpen ? (
@@ -114,27 +107,16 @@ export default function NavBar() {
               className="px-2 py-2 space-y-1 sm:px-3"
             >
               <ul className="items-center justify-center space-y-2 md:flex md:space-x-6 md:space-y-0">
-                <li>
-                  <Link
-                    href="/projects"
-                    className="block px-3 py-2 text-base font-medium text-white rounded-md hover:text-white-hover"
-                  >
-                    Projects
-                  </Link>
-                </li>
-                {/* <li>
-                  <Link href="/gallery" className="block px-3 py-2 text-base font-medium text-white rounded-md hover:text-white-hover">
-                    Gallery
-                  </Link>
-                </li> */}
-                <li>
-                  <Link
-                    href="/contact-me"
-                    className="block px-3 py-2 text-base font-medium text-white rounded-md hover:text-white-hover"
-                  >
-                    Contact Me
-                  </Link>
-                </li>
+                {navLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="block px-3 py-2 text-base font-medium text-white rounded-md hover:text-white-hover"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>

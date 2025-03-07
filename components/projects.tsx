@@ -5,53 +5,61 @@ import Link from 'next/link';
 export default function ProjectsComponent() {
   return (
     <section className="flex flex-col">
-      {/* Interior Projects*/}
-      <div className="max-w-6xl mx-auto">
-        <h1 className="py-2 text-xl font-bold text-left md:text-4xl">
-          Interior Projects
-        </h1>
-      </div>
-      {/* Grid starts here */}
-      <div className="">
-        <div className="grid max-w-6xl grid-cols-1 gap-8 py-2 mx-auto md:grid-cols-2">
-          {userData.projects.interiorProjects.map((proj, idx) => (
-            <ProjectCard
-              key={idx}
-              title={proj.title}
-              year={proj.year}
-              imgUrl={proj.imgUrl}
-              redirectLink={proj.link}
-              number={`${idx + 1}`}
-            />
-          ))}
-        </div>
-      </div>
-      {/* Architecture Projects*/}
-      <div className="max-w-6xl mx-auto">
-        <h1 className="py-10 text-xl font-bold text-left md:text-4xl">
-          Architecture Projects
-        </h1>
-      </div>
-      {/* Grid starts here */}
-      <div className="">
-        <div className="grid max-w-6xl grid-cols-1 gap-8 py-2 mx-auto md:grid-cols-2">
-          {userData.projects.architectureProjects.map((proj, idx) => (
-            <ProjectCard
-              key={idx}
-              title={proj.title}
-              year={proj.year}
-              imgUrl={proj.imgUrl}
-              redirectLink={proj.link}
-              number={`${idx + 1}`}
-            />
-          ))}
-        </div>
-      </div>
+      {/* Interior Projects */}
+      <ProjectSection
+        title="Interior Projects"
+        projects={userData.projects.interiorProjects}
+      />
+
+      {/* Architecture Projects */}
+      <ProjectSection
+        title="Architecture Projects"
+        projects={userData.projects.architectureProjects}
+      />
     </section>
   );
 }
 
-// TODO: Image url redirects to that particular project
+// Component to render a section of projects
+const ProjectSection = ({
+  title,
+  projects,
+}: {
+  title: string;
+  projects: Array<{
+    title: string;
+    year: number;
+    imgUrl: string;
+    link: string;
+  }>;
+}) => {
+  return (
+    <>
+      <div className="max-w-6xl mx-auto">
+        <h1
+          className={`text-xl font-bold text-left md:text-4xl ${title.includes('Architecture') ? 'py-10' : 'py-2'}`}
+        >
+          {title}
+        </h1>
+      </div>
+      <div className="max-w-6xl mx-auto w-full">
+        <div className="grid grid-cols-1 gap-8 py-2 md:grid-cols-2">
+          {projects.map((proj, idx) => (
+            <ProjectCard
+              key={idx}
+              title={proj.title}
+              year={proj.year}
+              imgUrl={proj.imgUrl}
+              redirectLink={proj.link}
+              number={`${idx + 1}`}
+            />
+          ))}
+        </div>
+      </div>
+    </>
+  );
+};
+
 const ProjectCard = ({
   title,
   year,
@@ -68,11 +76,13 @@ const ProjectCard = ({
   return (
     <Link href={redirectLink} className="block w-full shadow-2xl">
       <div className="relative overflow-hidden rounded-xl">
-        <div className="object-cover h-72">
+        <div className="relative h-72 w-full">
           <Image
             src={imgUrl}
             fill={true}
-            alt="portfolio"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            quality={90}
+            alt={`${title} project thumbnail`}
             className="object-cover w-full h-full transition duration-500 ease-in-out transform hover:scale-110"
           />
         </div>

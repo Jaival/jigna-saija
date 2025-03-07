@@ -1,21 +1,32 @@
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useRef } from 'react';
 
 export default function AboutMeComponent() {
-  const experience = {
-    '20': {
+  const experience = [
+    {
+      value: '20',
       description: 'Years of Experience',
     },
-    '15': {
+    {
+      value: '15',
       description: 'Projects Completed',
     },
-  };
+    {
+      value: '15+',
+      description: 'Happy Clients',
+    },
+  ];
+
   const scrollRef = useRef(null);
+
   return (
-    <div className="flex md:justify-center md:items-center">
-      <div className="container mt-14">
-        <div className="my-10 text-left md:text-center">
+    <section
+      id="about"
+      className="flex md:justify-center md:items-center py-16"
+    >
+      <div className="container">
+        <div className="mb-12 text-left md:text-center">
           <motion.h2
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -29,7 +40,7 @@ export default function AboutMeComponent() {
           </motion.h2>
         </div>
 
-        <div className="flex flex-col items-center gap-2 md:flex-row">
+        <div className="flex flex-col items-center gap-6 md:flex-row">
           <motion.div
             initial={{ x: -100, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
@@ -37,23 +48,23 @@ export default function AboutMeComponent() {
               ease: 'anticipate',
               duration: 1,
             }}
-            viewport={{ root: scrollRef }}
-            className="flex flex-col"
+            className="flex flex-col max-w-md"
           >
             <Image
               className="rounded-lg aspect-auto"
-              alt="jigna saija"
+              alt="Jigna Saija - Interior Designer"
               width={3248}
               height={4062.1}
               src={'/images/jignasaija.jpg'}
+              priority
             />
-            <div className="py-2 text-left md:text-center">
-              <q className="font-light md:text-base">
-                I believe in complete design
-              </q>
-              <p className="text-sm font-thin md:text-base md:h-6">
-                {' '}
-                - Jigna Saija{' '}
+            <div className="py-4 text-left md:text-center">
+              <blockquote className="font-light italic md:text-base">
+                I believe in creating spaces that blend beauty with
+                functionality, where design speaks to both the heart and mind.
+              </blockquote>
+              <p className="text-sm font-thin mt-2 md:text-base">
+                - Jigna Saija
               </p>
             </div>
           </motion.div>
@@ -61,7 +72,6 @@ export default function AboutMeComponent() {
           <motion.div
             initial={{ x: 25, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ root: scrollRef }}
             transition={{
               ease: 'anticipate',
               duration: 1,
@@ -79,27 +89,28 @@ export default function AboutMeComponent() {
           </motion.div>
         </div>
 
-        {/* <!-- Experience Cards--> */}
-        <div className="grid grid-flow-col grid-rows-3 gap-4 mt-10 md:grid-rows-1">
-          {Object.entries(experience).map(([key, value]) => (
+        {/* Experience Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-14">
+          {experience.map((item, index) => (
             <motion.div
               initial={{ opacity: 0, scale: 0 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ root: scrollRef }}
               whileHover={{ scale: 1.1 }}
               className="card"
-              key={key}
+              key={index}
+              aria-label={`${item.value} ${item.description}`}
             >
               <h5 className="mb-2 font-bold tracking-tight text-white text-l md:text-3xl">
-                {key}
+                {item.value}
               </h5>
               <p className="text-base font-normal md:text-lg text-white-dark">
-                {value.description}
+                {item.description}
               </p>
             </motion.div>
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 }

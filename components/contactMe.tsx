@@ -1,4 +1,5 @@
 'use client';
+import { LucideLoader2, Mail } from 'lucide-react';
 import userData from '@/data/data';
 import { sendContactForm } from '@/lib/sendMailapi';
 import FormValues from '@/lib/types/contactFormType';
@@ -6,38 +7,11 @@ import { useToast } from '@/lib/use-toast';
 import Image from 'next/image';
 import Link from 'next/link';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useState } from 'react';
 
 export default function ContactMeComponent() {
   const { toast } = useToast();
-
-  // const resolver: Resolver<FormValues> = async (values) => {
-  //   return {
-  //     values: values.name || values.email || values.subject || values.userMessage ? values : {},
-  //     errors: !values
-  //       ? {
-  //         root: {
-  //           message: 'All the fields are required'
-  //         },
-  //         name: {
-  //           type: 'required',
-  //           message: 'Your name is required.',
-  //         },
-  //         email: {
-  //           type: 'required',
-  //           message: 'Your email is required.',
-  //         },
-  //         subject: {
-  //           type: 'required',
-  //           message: 'The subject is required.',
-  //         },
-  //         userMessage: {
-  //           type: 'required',
-  //           message: 'Your message is required.',
-  //         }
-  //       }
-  //       : {},
-  //   };
-  // };
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const {
     register,
     handleSubmit,
@@ -46,64 +20,71 @@ export default function ContactMeComponent() {
   } = useForm<FormValues>({});
 
   const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
-    console.log(data);
-    const res = await sendContactForm(data);
-    console.log(res.message);
-    if (res.success === true) {
+    try {
+      setIsSubmitting(true);
+      const res = await sendContactForm(data);
+
+      if (res.success === true) {
+        toast({
+          description: 'Your message has been sent successfully!',
+          variant: 'default',
+        });
+      } else {
+        toast({
+          description:
+            res.message || 'Failed to send message. Please try again.',
+          variant: 'destructive',
+        });
+      }
+      reset();
+    } catch (error) {
       toast({
-        description: 'Your message has been sent.',
+        description: 'An unexpected error occurred. Please try again later.',
+        variant: 'destructive',
       });
-    } else {
-      toast({
-        description: res.message,
-      });
+    } finally {
+      setIsSubmitting(false);
     }
-    reset();
   };
 
   return (
-    <div className="relative z-10 max-w-4xl p-4 mx-auto mb-20 -mt-4 text-white rounded-md shadow-md bg-aquamarine md:p-10 lg:p-20">
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <div className="order-2 md:ml-4 md:order-1">
-          <header>
-            <h1 className="text-2xl font-semibold">
+    <div className="flex max-w-4xl mx-auto overflow-hidden text-white rounded-lg shadow-lg bg-aquamarine">
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+        <div className="order-2 p-6 md:p-10 md:order-1">
+          <header className="mb-8">
+            <h1 className="text-3xl font-bold">
               Get in touch, let&apos;s talk.
             </h1>
-            <p className="mt-2 text-base font-light">
+            <p className="mt-3 text-lg font-light text-white/90">
               Fill in the details and I&apos;ll get back to you as soon as I
               can.
             </p>
           </header>
-          <div className="flex flex-col justify-between my-10 md:inline-flex">
-            <div className="flex flex-row items-center p-4 space-x-6 border rounded-md border-white-dark">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                className="w-4 h-4 bi bi-envelope-fill "
-                viewBox="0 0 16 16"
-              >
-                <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z" />
-              </svg>
-              <p className="text-sm font-light ">{userData.email}</p>
+          <div className="flex flex-col space-y-6 my-10">
+            <div className="flex items-center space-x-4 p-4 border rounded-lg border-white/20 hover:border-white/40 transition-colors">
+              <Mail className="w-5 h-5" />
+              <a href={`mailto:${userData.email}`} className="text-base hover:underline">
+                {userData.email}
+              </a>
             </div>
 
-            <div className="flex flex-row items-center p-4 space-x-6 rounded-md ">
+            <div className="flex justify-center p-4 bg-white/10 rounded-lg">
               <Image
                 src={'/images/jignasaijaQR.png'}
-                width={200}
-                height={200}
-                alt="qr-code"
+                width={180}
+                height={180}
+                alt="QR code to connect"
+                className="rounded-md"
                 priority
-              ></Image>
+              />
             </div>
           </div>
 
-          <div className="flex flex-row space-x-8 social-icons">
+          <div className="flex flex-row space-x-4">
             <Link
               href={userData.socialLinks.facebook}
-              className="flex items-center justify-center w-10 h-10 rounded-lg cursor-pointer hover:border hover:border-white-dark"
+              className="flex items-center justify-center w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+              aria-label="Facebook"
             >
               <svg
                 className="w-6 h-6"
@@ -121,7 +102,8 @@ export default function ContactMeComponent() {
 
             <Link
               href={userData.socialLinks.instagram}
-              className="flex items-center justify-center w-10 h-10 rounded-lg cursor-pointer hover:border hover:border-white-dark"
+              className="flex items-center justify-center w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+              aria-label="Instagram"
             >
               <svg
                 className="w-6 h-6"
@@ -139,67 +121,117 @@ export default function ContactMeComponent() {
           </div>
         </div>
         <form
-          className="flex flex-col order-1 pl-3 rounded-lg form md:order-2"
+          className="order-1 md:order-2 rounded-lg shadow-sm p-6 md:p-10 bg-white/5"
           onSubmit={handleSubmit(onSubmit)}
+          aria-label="Contact form"
         >
-          <label htmlFor="name" className="mx-4 text-sm">
-            Name
-          </label>
-          <input
-            {...register('name', { required: 'Your name is required.' })}
-            type="text"
-            className="px-2 py-2 mx-4 mt-2 font-light bg-white rounded-md text-blue-dark focus:outline-hidden"
-            name="name"
-          />
-          {errors?.name && (
-            <span className="pt-1 pl-6 text-sm">{errors.name.message}</span>
-          )}
-          <label htmlFor="email" className="mx-4 mt-4 text-sm">
-            Email Id
-          </label>
-          <input
-            {...register('email', { required: 'Your email is required.' })}
-            type="email"
-            className="px-2 py-2 mx-4 mt-2 font-light bg-white rounded-md text-blue-dark focus:outline-hidden"
-            name="email"
-          />
-          {errors?.email && (
-            <span className="pt-1 pl-6 text-sm">{errors.email.message}</span>
-          )}
-          <label htmlFor="subject" className="mx-4 mt-4 text-sm">
-            Subject
-          </label>
-          <input
-            {...register('subject', { required: 'The subject is required.' })}
-            type="text"
-            className="px-2 py-2 mx-4 mt-2 font-light bg-white rounded-md text-blue-dark focus:outline-hidden"
-            name="subject"
-          />
-          {errors?.subject && (
-            <span className="pt-1 pl-6 text-sm">{errors.subject.message}</span>
-          )}
-          <label htmlFor="userMessage" className="mx-4 mt-4 text-sm">
-            Message
-          </label>
+          <div className="mb-5">
+            <label htmlFor="name" className="block mb-2 text-sm font-medium">
+              Name
+            </label>
+            <input
+              {...register('name', { required: 'Your name is required.' })}
+              type="text"
+              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:ring-2 focus:ring-white/30 focus:outline-none text-white placeholder-white/60 transition-colors"
+              name="name"
+              id="name"
+              placeholder="Your name"
+              aria-invalid={errors.name ? 'true' : 'false'}
+              disabled={isSubmitting}
+            />
+            {errors?.name && (
+              <p className="mt-2 text-sm text-red-400" role="alert">
+                {errors.name.message}
+              </p>
+            )}
+          </div>
 
-          <textarea
-            {...register('userMessage', {
-              required: 'Your message is required.',
-            })}
-            rows={4}
-            typeof="text"
-            className="px-2 py-2 mx-4 mt-2 overflow-hidden font-light bg-white rounded-md resize-none text-blue-dark focus:outline-hidden"
-            name="userMessage"
-          ></textarea>
-          {errors?.userMessage && (
-            <span className="pt-1 pl-6 text-sm">
-              {errors.userMessage.message}
-            </span>
-          )}
-          <input
+          <div className="mb-5">
+            <label htmlFor="email" className="block mb-2 text-sm font-medium">
+              Email
+            </label>
+            <input
+              {...register('email', {
+                required: 'Your email is required.',
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: 'Invalid email address',
+                },
+              })}
+              type="email"
+              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:ring-2 focus:ring-white/30 focus:outline-none text-white placeholder-white/60 transition-colors"
+              name="email"
+              id="email"
+              placeholder="your.email@example.com"
+              aria-invalid={errors.email ? 'true' : 'false'}
+              disabled={isSubmitting}
+            />
+            {errors?.email && (
+              <p className="mt-2 text-sm text-red-400" role="alert">
+                {errors.email.message}
+              </p>
+            )}
+          </div>
+
+          <div className="mb-5">
+            <label htmlFor="subject" className="block mb-2 text-sm font-medium">
+              Subject
+            </label>
+            <input
+              {...register('subject', { required: 'The subject is required.' })}
+              type="text"
+              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:ring-2 focus:ring-white/30 focus:outline-none text-white placeholder-white/60 transition-colors"
+              name="subject"
+              id="subject"
+              placeholder="What is this regarding?"
+              aria-invalid={errors.subject ? 'true' : 'false'}
+              disabled={isSubmitting}
+            />
+            {errors?.subject && (
+              <p className="mt-2 text-sm text-red-400" role="alert">
+                {errors.subject.message}
+              </p>
+            )}
+          </div>
+
+          <div className="mb-5">
+            <label htmlFor="userMessage" className="block mb-2 text-sm font-medium">
+              Message
+            </label>
+            <textarea
+              {...register('userMessage', {
+                required: 'Your message is required.',
+              })}
+              rows={5}
+              typeof="text"
+              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:ring-2 focus:ring-white/30 focus:outline-none text-white placeholder-white/60 transition-colors resize-none"
+              name="userMessage"
+              id="userMessage"
+              placeholder="Type your message here..."
+              aria-invalid={errors.userMessage ? 'true' : 'false'}
+              disabled={isSubmitting}
+            ></textarea>
+            {errors?.userMessage && (
+              <p className="mt-2 text-sm text-red-400" role="alert">
+                {errors.userMessage.message}
+              </p>
+            )}
+          </div>
+
+          <button
             type="submit"
-            className="w-1/2 py-2 m-4 mt-8 text-xs font-bold rounded-md bg-button-blue"
-          />
+            disabled={isSubmitting}
+            className="w-full sm:w-auto px-6 py-3 font-medium text-white rounded-lg bg-button-blue hover:bg-opacity-90 focus:ring-4 focus:ring-button-blue/30 focus:outline-none transition-colors disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center"
+          >
+            {isSubmitting ? (
+              <>
+                <LucideLoader2 className="w-4 h-4 mr-2 animate-spin" />
+                Sending...
+              </>
+            ) : (
+              'Send Message'
+            )}
+          </button>
         </form>
       </div>
     </div>

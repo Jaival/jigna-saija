@@ -38,7 +38,9 @@ const ProjectSection = ({
       <div className="w-full mx-auto">
         <h1
           className={`text-2xl font-bold text-left md:text-4xl ${
-            title.includes('Architecture') ? 'pt-8 pb-4 md:py-10' : 'py-4 md:py-2'
+            title.includes('Architecture')
+              ? 'pt-8 pb-4 md:py-10'
+              : 'py-4 md:py-2'
           }`}
         >
           {title}
@@ -86,7 +88,7 @@ const ProjectCard = ({
             quality={90}
             alt={`${title} project thumbnail`}
             className="object-cover w-full h-full transition duration-500 ease-in-out transform hover:scale-110"
-            priority={number === "1"}
+            priority={number === '1'}
           />
         </div>
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-black/30 pointer-events-none"></div>
@@ -97,9 +99,7 @@ const ProjectCard = ({
           <h1 className="text-base font-bold text-white sm:text-xl">
             {number.length === 1 ? '0' + number : number}
           </h1>
-          <h1 className="text-base font-bold text-white sm:text-xl">
-            {year}
-          </h1>
+          <h1 className="text-base font-bold text-white sm:text-xl">{year}</h1>
         </div>
       </div>
     </Link>

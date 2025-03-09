@@ -70,7 +70,7 @@ export default function Hero() {
             {...fadeInAnimation}
             viewport={{ root: scrollRef }}
             className="text-2xl md:text-5xl font-bold"
-                        // className="text-2xl md:text-5xl text-center md:items-start font-bold"
+            // className="text-2xl md:text-5xl text-center md:items-start font-bold"
           >
             Building the future, one project at a time.
           </motion.h1>
@@ -128,9 +128,7 @@ export default function Hero() {
             </motion.h2>
           </div>
 
-          <div
-            className="grid grid-cols-1 gap-6 md:grid-flow-col md:grid-rows-3 lg:grid-rows-2 md:gap-14"
-          >
+          <div className="grid grid-cols-1 gap-6 md:grid-flow-col md:grid-rows-3 lg:grid-rows-2 md:gap-14">
             {Object.entries(WHY_CHOOSE_ME).map(([key, value]) => (
               <motion.div
                 initial={{ opacity: 0, scale: 0 }}

@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   twitter: {
     images: [
       {
-        url: 'https://raw.githubusercontent.com/Jaival/jigna-saija/refs/heads/main/public/images/jignasaija.jpg',
+        url: 'https://raw.githubusercontent.com/Jaival/jigna-saija/refs/heads/preview/public/images/jignasaija_small.jpg',
         width: 480,
         height: 600,
       },

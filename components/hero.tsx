@@ -70,7 +70,7 @@ export default function Hero() {
             {...fadeInAnimation}
             viewport={{ root: scrollRef }}
             className="text-2xl md:text-5xl font-bold"
-            // className="text-2xl md:text-5xl text-center md:items-start font-bold"
+          // className="text-2xl md:text-5xl text-center md:items-start font-bold"
           >
             Building the future, one project at a time.
           </motion.h1>

@@ -9,15 +9,15 @@ const WHY_CHOOSE_ME = {
     description:
       'We hear the customer, we set the customers and their requirements in the heart of our design.',
   },
-  Transparency: {
+  'Transparency': {
     description:
       'We provide complete transparency on all matters. Our BOGs (bill of quality) & bring clarity in each step/material we select and order',
   },
-  Trust: {
+  'Trust': {
     description:
       'We work to build trust. Our work & transparency speaks it all.',
   },
-  Quality: {
+  'Quality': {
     description:
       'The design approach helps us offer well-planned, beautifully detailed long-lasting & high-satisfactory products.',
   },
@@ -59,7 +59,7 @@ export default function Hero() {
   const scrollRef = useRef(null);
 
   return (
-    <div ref={scrollRef} className="mt-5 md:mt-10 px-4 md:px-6">
+    <div ref={scrollRef} className="flex flex-col justify-center items-center mt-5 md:mt-10 px-4 md:px-6">
       <div className="flex flex-col md:flex-row gap-5">
         <motion.div
           {...slideInFromLeftAnimation}
@@ -70,7 +70,7 @@ export default function Hero() {
             {...fadeInAnimation}
             viewport={{ root: scrollRef }}
             className="text-2xl md:text-5xl font-bold"
-          // className="text-2xl md:text-5xl text-center md:items-start font-bold"
+            // className="text-2xl md:text-5xl text-center md:items-start font-bold"
           >
             Building the future, one project at a time.
           </motion.h1>
@@ -116,8 +116,8 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      <div className="flex mt-16 md:mt-24 justify-center items-center">
-        <div className="container mt-8 md:mt-14">
+      <div className="flex flex-col mt-16 md:mt-24 justify-center items-center">
+        <div className="flex flex-col mt-8 md:mt-14">
           <div className="mb-8 md:mb-10 text-center">
             <motion.h2
               initial={{ opacity: 0 }}
@@ -128,7 +128,7 @@ export default function Hero() {
             </motion.h2>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-flow-col md:grid-rows-3 lg:grid-rows-2 md:gap-14">
+          <div className="grid grid-cols-1 gap-6 md:grid-flow-col md:grid-rows-3 lg:grid-rows-2 md:gap-6">
             {Object.entries(WHY_CHOOSE_ME).map(([key, value]) => (
               <motion.div
                 initial={{ opacity: 0, scale: 0 }}

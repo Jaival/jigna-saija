@@ -3,7 +3,7 @@ import Navbar from '@/components/navBar';
 import { Providers } from '@/components/provider';
 import { Toaster } from '@/components/ui/toaster';
 import { Metadata, Viewport } from 'next';
-import { Figtree } from 'next/font/google';
+import { Figtree,Titillium_Web  } from 'next/font/google';
 import React from 'react';
 import './globals.css';
 
@@ -14,6 +14,13 @@ const figtree = Figtree({
   variable: '--font-figtree',
 });
 
+const titillium = Titillium_Web ({
+  weight: ['200', '300', '400', '600', '700', '900'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-titillium-web',
+});
+
 export const metadata: Metadata = {
   title: {
     template: '%s | Jigna Saija',
@@ -21,8 +28,16 @@ export const metadata: Metadata = {
   },
   description: 'I am an architect and interior designer specializing in modern and sustainable design solutions.',
   keywords: ['architect', 'interior designer', 'sustainable design', 'modern architecture'],
-  creator: 'Jigna Saija',
+  creator: 'Jaival Saija',
   openGraph: {
+    images: [
+      {
+        url: '/https://raw.githubusercontent.com/Jaival/jigna-saija/refs/heads/main/public/images/jignasaija.jpg',
+        width: 480,
+        height: 600,
+      },
+    ],
+    url:"https://jignasaija.vercel.app/",
     type: 'website',
     locale: 'en_US',
     title: 'Jigna Saija | Architect & Interior Designer',
@@ -30,6 +45,13 @@ export const metadata: Metadata = {
     siteName: 'Jigna Saija Portfolio',
   },
   twitter: {
+    images: [
+      {
+        url: 'https://raw.githubusercontent.com/Jaival/jigna-saija/refs/heads/main/public/images/jignasaija.jpg',
+        width: 480,
+        height: 600,
+      },
+    ],
     card: 'summary_large_image',
     title: 'Jigna Saija | Architect & Interior Designer',
     description: 'Professional architect and interior designer specializing in modern and sustainable design solutions.',
@@ -38,7 +60,6 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#f8f9fa' },
     { media: '(prefers-color-scheme: dark)', color: '#0f172a' },
   ],
   width: 'device-width',
@@ -51,7 +72,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${figtree.className} ${figtree.variable}`}>
+    <html lang="en" className={`${titillium.className} ${titillium.variable}`}>
       <body className="antialiased">
         <Providers>
           <main

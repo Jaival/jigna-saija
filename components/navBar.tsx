@@ -18,7 +18,7 @@ export default function NavBar() {
     <nav className="w-full">
       <div className="flex justify-between px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 md:items-center">
         <div className="flex items-center justify-between">
-          <Link href="/" className="flex items-center w-48">
+          <Link href="/" className="flex items-center w-32 sm:w-40 md:w-48" >
             <Image
               className="w-full h-auto"
               alt="Jigna Saija"
@@ -49,7 +49,7 @@ export default function NavBar() {
           <button
             onClick={() => setIsOpen(!isOpen)}
             type="button"
-            className="inline-flex items-center justify-center p-2 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-white"
+            className="inline-flex items-center justify-center p-2 text-white rounded-md focus:outline-none hover:bg-white/10 transition-colors"
             aria-controls="mobile-menu"
             aria-expanded={isOpen}
           >
@@ -93,25 +93,26 @@ export default function NavBar() {
 
       <Transition
         show={isOpen}
-        enter="transition ease-out duration-100 transform"
-        enterFrom="opacity-0 scale-95"
-        enterTo="opacity-100 scale-100"
-        leave="transition ease-in duration-75 transform"
-        leaveFrom="opacity-100 scale-100"
-        leaveTo="opacity-0 scale-95"
+        enter="transition ease-out duration-200 transform"
+        enterFrom="opacity-0 -translate-y-4"
+        enterTo="opacity-100 translate-y-0"
+        leave="transition ease-in duration-150 transform"
+        leaveFrom="opacity-100 translate-y-0"
+        leaveTo="opacity-0 -translate-y-4"
       >
         {(ref) => (
           <div className="md:hidden" id="mobile-menu">
             <div
               ref={ref as React.RefObject<HTMLDivElement>}
-              className="px-2 py-2 space-y-1 sm:px-3"
+              className="px-3 py-4 space-y-1 bg-blue-dark/95 backdrop-blur-md shadow-lg"
             >
-              <ul className="items-center justify-center space-y-2 md:flex md:space-x-6 md:space-y-0">
+              <ul className="flex flex-col items-center justify-center space-y-4">
                 {navLinks.map((link) => (
-                  <li key={link.href}>
+                  <li key={link.href} className="w-full">
                     <Link
                       href={link.href}
-                      className="block px-3 py-2 text-base font-medium text-white rounded-md hover:text-white-hover"
+                      // onClick={handleLinkClick}
+                      className="block w-full px-4 py-3 text-lg font-medium text-center text-white rounded-md hover:bg-white/10 active:bg-white/20 transition-colors"
                     >
                       {link.label}
                     </Link>

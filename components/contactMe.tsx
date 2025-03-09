@@ -49,45 +49,48 @@ export default function ContactMeComponent() {
 
   return (
     <div className="flex max-w-4xl mx-auto overflow-hidden text-white rounded-lg shadow-lg bg-aquamarine">
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-        <div className="order-2 p-6 md:p-10 md:order-1">
-          <header className="mb-8">
-            <h1 className="text-3xl font-bold">
+      <div className="grid grid-cols-1 md:grid-cols-2 w-full">
+        <div className="order-2 p-4 sm:p-6 md:p-10 md:order-1">
+          <header className="mb-6 md:mb-8">
+            <h1 className="text-2xl sm:text-3xl font-bold">
               Get in touch, let&apos;s talk.
             </h1>
-            <p className="mt-3 text-lg font-light text-white/90">
+            <p className="mt-2 sm:mt-3 text-base sm:text-lg font-light text-white/90">
               Fill in the details and I&apos;ll get back to you as soon as I
               can.
             </p>
           </header>
-          <div className="flex flex-col space-y-6 my-10">
-            <div className="flex items-center space-x-4 p-4 border rounded-lg border-white/20 hover:border-white/40 transition-colors">
-              <Mail className="w-5 h-5" />
-              <a href={`mailto:${userData.email}`} className="text-base hover:underline">
+          <div className="flex flex-col space-y-4 sm:space-y-6 my-6 sm:my-10">
+            <div className="flex items-center space-x-3 sm:space-x-4 p-3 sm:p-4 border rounded-lg border-white/20 hover:border-white/40 transition-colors">
+              <Mail className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+              <a 
+                href={`mailto:${userData.email}`} 
+                className="text-sm sm:text-base hover:underline break-all"
+              >
                 {userData.email}
               </a>
             </div>
 
-            <div className="flex justify-center p-4 bg-white/10 rounded-lg">
+            <div className="flex justify-center p-3 sm:p-4 bg-white/10 rounded-lg">
               <Image
                 src={'/images/jignasaijaQR.png'}
-                width={180}
-                height={180}
+                width={140}
+                height={140}
                 alt="QR code to connect"
-                className="rounded-md"
+                className="rounded-md sm:w-[180px] sm:h-[180px] w-[140px] h-[140px]"
                 priority
               />
             </div>
           </div>
 
-          <div className="flex flex-row space-x-4">
+          <div className="flex flex-row space-x-4 justify-center sm:justify-start mb-6 md:mb-0">
             <Link
               href={userData.socialLinks.facebook}
-              className="flex items-center justify-center w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+              className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
               aria-label="Facebook"
             >
               <svg
-                className="w-6 h-6"
+                className="w-5 h-5 sm:w-6 sm:h-6"
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 aria-hidden="true"
@@ -102,11 +105,11 @@ export default function ContactMeComponent() {
 
             <Link
               href={userData.socialLinks.instagram}
-              className="flex items-center justify-center w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+              className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
               aria-label="Instagram"
             >
               <svg
-                className="w-6 h-6"
+                className="w-5 h-5 sm:w-6 sm:h-6"
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 aria-hidden="true"
@@ -121,18 +124,18 @@ export default function ContactMeComponent() {
           </div>
         </div>
         <form
-          className="order-1 md:order-2 rounded-lg shadow-sm p-6 md:p-10 bg-white/5"
+          className="order-1 md:order-2 rounded-lg shadow-sm p-4 sm:p-6 md:p-10 bg-white/5"
           onSubmit={handleSubmit(onSubmit)}
           aria-label="Contact form"
         >
-          <div className="mb-5">
-            <label htmlFor="name" className="block mb-2 text-sm font-medium">
+          <div className="mb-4 sm:mb-5">
+            <label htmlFor="name" className="block mb-1 sm:mb-2 text-sm font-medium">
               Name
             </label>
             <input
               {...register('name', { required: 'Your name is required.' })}
               type="text"
-              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:ring-2 focus:ring-white/30 focus:outline-none text-white placeholder-white/60 transition-colors"
+              className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/10 border border-white/20 rounded-lg focus:ring-2 focus:ring-white/30 focus:outline-none text-white placeholder-white/60 transition-colors text-sm sm:text-base"
               name="name"
               id="name"
               placeholder="Your name"
@@ -140,14 +143,14 @@ export default function ContactMeComponent() {
               disabled={isSubmitting}
             />
             {errors?.name && (
-              <p className="mt-2 text-sm text-red-400" role="alert">
+              <p className="mt-1 sm:mt-2 text-xs sm:text-sm text-red-400" role="alert">
                 {errors.name.message}
               </p>
             )}
           </div>
 
-          <div className="mb-5">
-            <label htmlFor="email" className="block mb-2 text-sm font-medium">
+          <div className="mb-4 sm:mb-5">
+            <label htmlFor="email" className="block mb-1 sm:mb-2 text-sm font-medium">
               Email
             </label>
             <input
@@ -159,7 +162,7 @@ export default function ContactMeComponent() {
                 },
               })}
               type="email"
-              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:ring-2 focus:ring-white/30 focus:outline-none text-white placeholder-white/60 transition-colors"
+              className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/10 border border-white/20 rounded-lg focus:ring-2 focus:ring-white/30 focus:outline-none text-white placeholder-white/60 transition-colors text-sm sm:text-base"
               name="email"
               id="email"
               placeholder="your.email@example.com"
@@ -167,20 +170,20 @@ export default function ContactMeComponent() {
               disabled={isSubmitting}
             />
             {errors?.email && (
-              <p className="mt-2 text-sm text-red-400" role="alert">
+              <p className="mt-1 sm:mt-2 text-xs sm:text-sm text-red-400" role="alert">
                 {errors.email.message}
               </p>
             )}
           </div>
 
-          <div className="mb-5">
-            <label htmlFor="subject" className="block mb-2 text-sm font-medium">
+          <div className="mb-4 sm:mb-5">
+            <label htmlFor="subject" className="block mb-1 sm:mb-2 text-sm font-medium">
               Subject
             </label>
             <input
               {...register('subject', { required: 'The subject is required.' })}
               type="text"
-              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:ring-2 focus:ring-white/30 focus:outline-none text-white placeholder-white/60 transition-colors"
+              className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/10 border border-white/20 rounded-lg focus:ring-2 focus:ring-white/30 focus:outline-none text-white placeholder-white/60 transition-colors text-sm sm:text-base"
               name="subject"
               id="subject"
               placeholder="What is this regarding?"
@@ -188,23 +191,23 @@ export default function ContactMeComponent() {
               disabled={isSubmitting}
             />
             {errors?.subject && (
-              <p className="mt-2 text-sm text-red-400" role="alert">
+              <p className="mt-1 sm:mt-2 text-xs sm:text-sm text-red-400" role="alert">
                 {errors.subject.message}
               </p>
             )}
           </div>
 
           <div className="mb-5">
-            <label htmlFor="userMessage" className="block mb-2 text-sm font-medium">
+            <label htmlFor="userMessage" className="block mb-1 sm:mb-2 text-sm font-medium">
               Message
             </label>
             <textarea
               {...register('userMessage', {
                 required: 'Your message is required.',
               })}
-              rows={5}
+              rows={4}
               typeof="text"
-              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:ring-2 focus:ring-white/30 focus:outline-none text-white placeholder-white/60 transition-colors resize-none"
+              className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/10 border border-white/20 rounded-lg focus:ring-2 focus:ring-white/30 focus:outline-none text-white placeholder-white/60 transition-colors resize-none text-sm sm:text-base"
               name="userMessage"
               id="userMessage"
               placeholder="Type your message here..."
@@ -212,7 +215,7 @@ export default function ContactMeComponent() {
               disabled={isSubmitting}
             ></textarea>
             {errors?.userMessage && (
-              <p className="mt-2 text-sm text-red-400" role="alert">
+              <p className="mt-1 sm:mt-2 text-xs sm:text-sm text-red-400" role="alert">
                 {errors.userMessage.message}
               </p>
             )}
@@ -221,7 +224,7 @@ export default function ContactMeComponent() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full sm:w-auto px-6 py-3 font-medium text-white rounded-lg bg-button-blue hover:bg-opacity-90 focus:ring-4 focus:ring-button-blue/30 focus:outline-none transition-colors disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center"
+            className="w-full px-4 sm:px-6 py-2.5 sm:py-3 font-medium text-white rounded-lg bg-button-blue hover:bg-opacity-90 focus:ring-4 focus:ring-button-blue/30 focus:outline-none transition-colors disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center text-sm sm:text-base"
           >
             {isSubmitting ? (
               <>

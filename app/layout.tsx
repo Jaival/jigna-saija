@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   openGraph: {
     images: [
       {
-        url: '/https://raw.githubusercontent.com/Jaival/jigna-saija/refs/heads/main/public/images/jignasaija.jpg',
+        url: 'https://51ebo9nf5p.ufs.sh/f/is6rEBDHOhcsI88qStPgUxWgpaQnNi2mD4vRyJ6ObMZlGH8V',
         width: 480,
         height: 600,
       },
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
   twitter: {
     images: [
       {
-        url: 'https://raw.githubusercontent.com/Jaival/jigna-saija/refs/heads/main/public/images/jignasaija.jpg',
+        url: 'https://51ebo9nf5p.ufs.sh/f/is6rEBDHOhcsI88qStPgUxWgpaQnNi2mD4vRyJ6ObMZlGH8V',
         width: 480,
         height: 600,
       },

@@ -9,7 +9,7 @@ export default function AboutMeComponent() {
       description: 'Years of Experience',
     },
     {
-      value: '15',
+      value: '40+',
       description: 'Projects Completed',
     },
     {

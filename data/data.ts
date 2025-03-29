@@ -71,7 +71,7 @@ const userData = {
       },
       {
         id: 'guruji-site',
-        title: 'Guruji Site',
+        title: 'Mr Divyang Site',
         year: 2011,
         link: '/projects/guruji-site',
         imgUrl:

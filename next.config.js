@@ -1,16 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // eslint:{
-  //   ignoreDuringBuilds: true,
-  // },
-  // swcMinify: true,
+  eslint:{
+    ignoreDuringBuilds: true,
+  },
   images: {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'images.unsplash.com',
+        hostname: 'raw.githubusercontent.com',
       },
+      {
+        protocol: 'https',
+        hostname: '51ebo9nf5p.ufs.sh'
+      }
     ],
   },
 }

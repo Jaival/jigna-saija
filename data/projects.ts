@@ -289,7 +289,7 @@ const projectData = {
     },
     {
       id: 'guruji-site',
-      title: 'Guruji Site',
+      title: 'Mr Divyang Site',
       year: 2011,
       type: 'interiorProjects',
       imgUrls: [

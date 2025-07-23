@@ -1,59 +1,54 @@
-import ImageGallery from '@/components/gallery/ImageGallery';
 import projectData from '@/data/projects';
-import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
+import { ProjectPageClient } from './ProjectPageClient';
 
-export default async function Project({
-  params,
-}: {
+type Props = {
   params: Promise<{ id: string }>;
-}) {
+};
+
+// Generate metadata for better SEO
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
+  const project = projectData.projects.find((proj) => proj.id === id);
 
-  const data = projectData.projects;
-  let imageUrls: any = data.filter((proj) => proj.id === id);
-  // console.log(imageUrls.length);
-  if (imageUrls.length === 0) {
-    imageUrls = null;
+  if (!project) {
+    return {
+      title: 'Project Not Found',
+      description: 'The requested project could not be found.',
+    };
   }
-  // if (project === 'interiorProjects') {
-  //   const data = projectData.projects.interiorProjects;
-  //   imageUrls = data.filter((proj) => proj.id === id);
-  // } else if (project === 'architectureProjects') {
-  //   const data = projectData.projects.architectureProjects;
-  //   imageUrls = data.filter((proj) => proj.id === id);
-  // } else if (project !== 'interiorProjects' && 'architectureProjects') {
-  //   imageUrls = null;
-  // }
 
-  return (
-    <section className="py-32">
-      <div className="block">
-        <div className="grid max-w-6xl grid-cols-1 gap-8 py-2 mx-auto md:grid-cols-1">
-          {!imageUrls ? (
-            <div className="flex flex-col items-center justify-center space-y-4">
-              <h2 className="text-2xl">
-                The project you are trying to open is not available.
-              </h2>
-              <h3 className="text-2xl">
-                Please go back to the{' '}
-                <Link href="/projects" className="text-dogwood-rose">
-                  projects page
-                </Link>
-                .
-              </h3>
-            </div>
-          ) : (
-            imageUrls.map((proj: any, idx: any) => (
-              <ImageGallery
-                key={idx}
-                id={idx}
-                title={proj.title}
-                imageUrls={proj.imgUrls}
-              />
-            ))
-          )}
-        </div>
-      </div>
-    </section>
-  );
+  return {
+    title: `${project.title} | Jigna Saija`,
+    description: `View the ${project.title} project by Jigna Saija - Professional architecture and interior design work from ${project.year}.`,
+    openGraph: {
+      title: `${project.title} | Jigna Saija`,
+      description: `View the ${project.title} project by Jigna Saija`,
+      images: project.imgUrls.slice(0, 3).map((url) => ({
+        url,
+        width: 1200,
+        height: 630,
+        alt: `${project.title} project image`,
+      })),
+    },
+  };
+}
+
+// Generate static paths for better performance
+export async function generateStaticParams() {
+  return projectData.projects.map((project) => ({
+    id: project.id,
+  }));
+}
+
+export default async function ProjectPage({ params }: Props) {
+  const { id } = await params;
+  const project = projectData.projects.find((proj) => proj.id === id);
+
+  if (!project) {
+    notFound();
+  }
+
+  return <ProjectPageClient project={project} />;
 }

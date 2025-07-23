@@ -3,16 +3,16 @@ import Navbar from '@/components/navBar';
 import { Providers } from '@/components/provider';
 import { Toaster } from '@/components/ui/toaster';
 import { Metadata, Viewport } from 'next';
-import { Figtree, Titillium_Web } from 'next/font/google';
+import { Titillium_Web } from 'next/font/google';
 import React from 'react';
 import './globals.css';
 
-const figtree = Figtree({
-  weight: ['300', '400', '500', '600', '700', '800', '900'],
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-figtree',
-});
+// const figtree = Figtree({
+//   weight: ['300', '400', '500', '600', '700', '800', '900'],
+//   subsets: ['latin'],
+//   display: 'swap',
+//   variable: '--font-figtree',
+// });
 
 const titillium = Titillium_Web({
   weight: ['200', '300', '400', '600', '700', '900'],
@@ -22,6 +22,7 @@ const titillium = Titillium_Web({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://jignasaija.vercel.app'),
   title: {
     template: '%s | Jigna Saija',
     default: 'Jigna Saija | Architect & Interior Designer',
@@ -81,11 +82,11 @@ export default function RootLayout({
     <html lang="en" className={`${titillium.className} ${titillium.variable}`}>
       <body className="antialiased">
         <Providers>
+          <Navbar />
           <main
             id="main-content"
-            className="flex flex-col min-h-screen px-4 sm:px-8 md:px-16 lg:px-20 pt-8 md:pt-12 bg-white-dark dark:bg-blue-dark background"
+            className="flex flex-col min-h-screen px-4 sm:px-8 md:px-16 lg:px-20 pt-20 md:pt-28 background"
           >
-            <Navbar />
             <div className="flex-1 py-4 md:py-8">{children}</div>
             <Toaster />
             <Footer />

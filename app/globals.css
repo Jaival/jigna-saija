@@ -6,6 +6,33 @@
 
 @theme {
   --color-transparent: transparent;
+  
+  /* Gray Scale */
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+  --color-gray-950: #030712;
+
+  /* Blue Scale */
+  --color-blue-50: #eff6ff;
+  --color-blue-100: #dbeafe;
+  --color-blue-200: #bfdbfe;
+  --color-blue-300: #93c5fd;
+  --color-blue-400: #60a5fa;
+  /* --color-blue-500: #3b82f6; */
+  --color-blue-600: #2563eb;
+  --color-blue-700: #1d4ed8;
+  --color-blue-800: #1e40af;
+  --color-blue-900: #1e3a8a;
+
+  /* Custom Project Colors */
   --color-aquamarine: #264653;
   --color-button-blue: #1d6793;
   --color-honolulu-blue: #2278aa;
@@ -19,37 +46,46 @@
   --color-white: #f2f5ff;
   --color-white-hover: #94a3b8;
   --color-gold: #fb923c;
-  --color-border: hsl(var(--border));
-  --color-input: hsl(var(--input));
-  --color-ring: hsl(var(--ring));
-  --color-background: hsl(var(--background));
-  --color-foreground: hsl(var(--foreground));
 
-  --color-primary: hsl(var(--primary));
-  --color-primary-foreground: hsl(var(--primary-foreground));
+  /* Pink Scale for Gradients */
+  --color-pink-600: #ec4899;
+  --color-purple-600: #9333ea;
+  --color-blue-500: #3b82f6;
+  --color-teal-400: #2dd4bf;
 
-  --color-secondary: hsl(var(--secondary));
-  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  /* Red Scale for Errors */
+  --color-red-600: #dc2626;
+  --color-red-400: #f87171;
 
-  --color-destructive: hsl(var(--destructive));
-  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  /* Semantic Theme Colors - Light Mode */
+  --color-background: #ffffff;
+  --color-foreground: #0f172a;
+  --color-card: #ffffff;
+  --color-card-foreground: #0f172a;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #0f172a;
+  --color-primary: #0f172a;
+  --color-primary-foreground: #f8fafc;
+  --color-secondary: #f1f5f9;
+  --color-secondary-foreground: #0f172a;
+  --color-muted: #f1f5f9;
+  --color-muted-foreground: #64748b;
+  --color-accent: #f1f5f9;
+  --color-accent-foreground: #0f172a;
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #f8fafc;
+  --color-border: #e2e8f0;
+  --color-input: #e2e8f0;
+  --color-ring: #0f172a;
 
-  --color-muted: hsl(var(--muted));
-  --color-muted-foreground: hsl(var(--muted-foreground));
+  /* Border Radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
 
-  --color-accent: hsl(var(--accent));
-  --color-accent-foreground: hsl(var(--accent-foreground));
-
-  --color-popover: hsl(var(--popover));
-  --color-popover-foreground: hsl(var(--popover-foreground));
-
-  --color-card: hsl(var(--card));
-  --color-card-foreground: hsl(var(--card-foreground));
-
-  --radius-lg: var(--radius);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-sm: calc(var(--radius) - 4px);
-
+  /* Animation Variables */
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
 
@@ -61,6 +97,7 @@
       height: var(--radix-accordion-content-height);
     }
   }
+
   @keyframes accordion-up {
     from {
       height: var(--radix-accordion-content-height);
@@ -71,10 +108,35 @@
   }
 }
 
+@layer theme {
+  /* Dark Mode Theme Overrides */
+  .dark {
+    --color-background: #0f172a;
+    --color-foreground: #f8fafc;
+    --color-card: #0f172a;
+    --color-card-foreground: #f8fafc;
+    --color-popover: #0f172a;
+    --color-popover-foreground: #f8fafc;
+    --color-primary: #f8fafc;
+    --color-primary-foreground: #0f172a;
+    --color-secondary: #1e293b;
+    --color-secondary-foreground: #f8fafc;
+    --color-muted: #1e293b;
+    --color-muted-foreground: #94a3b8;
+    --color-accent: #1e293b;
+    --color-accent-foreground: #f8fafc;
+    --color-destructive: #ef4444;
+    --color-destructive-foreground: #f8fafc;
+    --color-border: #1e293b;
+    --color-input: #1e293b;
+    --color-ring: #94a3b8;
+  }
+}
+
 @utility container {
   margin-inline: auto;
   padding-inline: 2rem;
-  @media (width >= --theme(--breakpoint-sm)) {
+  @media (width >= 640px) {
     max-width: none;
   }
   @media (width >= 1400px) {
@@ -82,26 +144,13 @@
   }
 }
 
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
-@layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
-  }
-}
-
 @utility card {
-  @apply block max-w-sm p-6 text-white rounded-2xl bg-amaranth-purple;
+  display: block;
+  max-width: 24rem;
+  padding: 1.5rem;
+  color: white;
+  border-radius: 1rem;
+  background-color: var(--color-amaranth-purple);
 }
 
 @utility loader {
@@ -114,8 +163,7 @@
     content: '';
     width: 48px;
     height: 5px;
-    /* background: #ffd700; */
-    background: #fb923c;
+    background: var(--color-gold);
     position: absolute;
     top: 60px;
     left: 0;
@@ -127,8 +175,7 @@
     content: '';
     width: 100%;
     height: 100%;
-    /* background: #ffd700; */
-    background: #fb923c;
+    background: var(--color-gold);
     position: absolute;
     top: 0;
     left: 0;
@@ -171,84 +218,69 @@
       transform: scale(1.2, 1);
     }
   }
-}
 
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
+  /* Bento Grid Animations */
+  @keyframes spin-slow {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 5px rgba(236, 72, 153, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 20px rgba(236, 72, 153, 0.6);
+    }
+  }
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+  .animate-spin-slow {
+    animation: spin-slow 3s linear infinite;
+  }
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
   }
 }
 
 @layer base {
-  * {
-    @apply border-border;
+  /* Border color compatibility for Tailwind v4 */
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-border);
   }
+
+  /* Base body styles */
   body {
-    @apply bg-background text-foreground;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
+
+  /* Custom background pattern */
   .background {
-    /*width: 100%;*/
     height: 100%;
     background-size: cover;
-    /* background-image: url("/images/cool-background-1.svg"); */
     background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='100%25' width='100%25'%3E%3Cdefs%3E%3Cpattern id='doodad' width='10' height='10' viewBox='0 0 40 40' patternUnits='userSpaceOnUse' patternTransform='rotate(45)'%3E%3Crect width='100%25' height='100%25' fill='rgba(255, 255, 255,0)'/%3E%3Ccircle cx='37' cy='20' r='1' fill='rgba(38, 70, 83,1)'/%3E%3Ccircle cx='3' cy='20' r='1' fill='rgba(38, 70, 83,1)'/%3E%3Ccircle cx='20' cy='37' r='1' fill='rgba(38, 70, 83,1)'/%3E%3Ccircle cx='20' cy='3' r='1' fill='rgba(38, 70, 83,1)'/%3E%3Ccircle cx='40' cy='0' r='1' fill='rgba(188, 16, 88,1)'/%3E%3Ccircle cx='0' cy='40' r='1' fill='rgba(188, 16, 88,1)'/%3E%3Ccircle cx='40' cy='40' r='1' fill='rgba(188, 16, 88,1)'/%3E%3Ccircle cx='0' cy='0' r='1' fill='rgba(188, 16, 88,1)'/%3E%3C/pattern%3E%3C/defs%3E%3Crect fill='url(%23doodad)' height='200%25' width='200%25'/%3E%3C/svg%3E ")
       no-repeat;
   }

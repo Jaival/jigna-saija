@@ -5,10 +5,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Home, FolderOpen, Mail } from 'lucide-react';
+import { usePathname } from 'next/navigation';
 
 // Extract navigation links to avoid duplication
 const navLinks = [
-  // { href: '/', label: 'Home', icon: Home },
+  { href: '/', label: 'Home', icon: Home },
   { href: '/projects', label: 'Projects', icon: FolderOpen },
   { href: '/contact-me', label: 'Contact Me', icon: Mail },
 ];
@@ -16,6 +17,7 @@ const navLinks = [
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
 
   // Add scroll effect for modern navbar behavior
   useEffect(() => {
@@ -29,9 +31,7 @@ export default function NavBar() {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 py-2 md:py-4 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-lg border-b border-gray-200/20 dark:border-gray-700/20'
-          : 'bg-transparent'
+        isScrolled ? 'glass shadow-lg' : 'bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -54,46 +54,54 @@ export default function NavBar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-1 lg:space-x-2">
+          <nav
+            className="hidden md:flex items-center space-x-1 lg:space-x-2"
+            aria-label="Main navigation"
+          >
             {navLinks.map((link) => {
               const IconComponent = link.icon;
+              const isActive = pathname === link.href;
               return (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm lg:text-base font-medium transition-all duration-200 group ${
-                    isScrolled
-                      ? 'text-gray-700 dark:text-gray-200 hover:bg-blue-50 dark:hover:bg-gray-800 hover:text-blue-600 dark:hover:text-blue-400'
-                      : 'text-white hover:bg-white/10 hover:text-blue-200'
+                  aria-current={isActive ? 'page' : undefined}
+                  className={`flex items-center gap-2 px-4 py-2 min-h-[44px] rounded-full text-sm lg:text-base font-medium transition-all duration-200 group focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+                    isActive
+                      ? 'bg-blue-100 dark:bg-gray-700 text-blue-600 dark:text-blue-400'
+                      : isScrolled
+                        ? 'text-gray-700 dark:text-gray-200 hover:bg-blue-50 dark:hover:bg-gray-800'
+                        : 'text-white hover:bg-white/10'
                   }`}
                 >
-                  <IconComponent className="w-4 h-4 transition-transform duration-200 group-hover:scale-110" />
+                  <IconComponent
+                    className="w-4 h-4 transition-transform duration-200 group-hover:scale-110"
+                    aria-hidden="true"
+                  />
                   <span>{link.label}</span>
                 </Link>
               );
             })}
-          </div>
+          </nav>
 
           {/* Mobile menu button */}
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
               type="button"
-              className={`p-2 rounded-lg transition-all duration-200 ${
+              className={`p-2 min-h-[44px] min-w-[44px] rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
                 isScrolled
                   ? 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800'
                   : 'text-white hover:bg-white/10'
               }`}
               aria-controls="mobile-menu"
               aria-expanded={isOpen}
+              aria-label={isOpen ? 'Close main menu' : 'Open main menu'}
             >
-              <span className="sr-only">
-                {isOpen ? 'Close main menu' : 'Open main menu'}
-              </span>
               {isOpen ? (
-                <X className="w-6 h-6" />
+                <X className="w-6 h-6" aria-hidden="true" />
               ) : (
-                <Menu className="w-6 h-6" />
+                <Menu className="w-6 h-6" aria-hidden="true" />
               )}
             </button>
           </div>
@@ -111,29 +119,42 @@ export default function NavBar() {
         leaveTo="opacity-0 -translate-y-2 scale-95"
       >
         {(ref) => (
-          <div className="md:hidden" id="mobile-menu">
+          <nav
+            className="md:hidden"
+            id="mobile-menu"
+            aria-label="Mobile navigation"
+          >
             <div
               ref={ref as React.RefObject<HTMLDivElement>}
-              className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-t border-gray-200/20 dark:border-gray-700/20 shadow-xl"
+              className="glass border-t shadow-xl"
             >
               <div className="px-4 py-6 space-y-2">
                 {navLinks.map((link) => {
                   const IconComponent = link.icon;
+                  const isActive = pathname === link.href;
                   return (
                     <Link
                       key={link.href}
                       href={link.href}
                       onClick={() => setIsOpen(false)}
-                      className="flex items-center gap-3 w-full px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-200 rounded-xl hover:bg-blue-50 dark:hover:bg-gray-800 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200 group"
+                      aria-current={isActive ? 'page' : undefined}
+                      className={`flex items-center gap-3 w-full px-4 py-3 min-h-[44px] text-base font-medium rounded-xl transition-all duration-200 group focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+                        isActive
+                          ? 'bg-blue-100 dark:bg-gray-700 text-blue-600 dark:text-blue-400'
+                          : 'text-gray-700 dark:text-gray-200 hover:bg-blue-50 dark:hover:bg-gray-800'
+                      }`}
                     >
-                      <IconComponent className="w-5 h-5 transition-transform duration-200 group-hover:scale-110" />
+                      <IconComponent
+                        className="w-5 h-5 transition-transform duration-200 group-hover:scale-110"
+                        aria-hidden="true"
+                      />
                       <span>{link.label}</span>
                     </Link>
                   );
                 })}
               </div>
             </div>
-          </div>
+          </nav>
         )}
       </Transition>
     </nav>

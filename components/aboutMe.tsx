@@ -166,10 +166,7 @@ export default function AboutMeComponent() {
             About Me
           </motion.h2>
           <motion.div
-            className="mt-4 mx-auto w-24 h-1 rounded-full"
-            style={{
-              background: 'linear-gradient(90deg, #1d6793, #a40e4c)',
-            }}
+            className="mt-4 mx-auto w-24 h-1 rounded-full divider-brand"
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
@@ -238,10 +235,12 @@ export default function AboutMeComponent() {
                 <motion.div className="absolute inset-0 bg-gradient-to-t from-black/15 to-transparent z-10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <Image
                   className="rounded-2xl aspect-auto w-full h-auto"
-                  alt="Jigna Saija - Interior Designer"
+                  alt="Jigna Saija - Professional architect and interior designer with over 20 years of experience"
                   width={3248}
                   height={4062.1}
                   src={'/images/jignasaija.jpg'}
+                  placeholder="blur"
+                  blurDataURL="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PGZpbHRlciBpZD0iYiIgZmlsdGVyVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIyMCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InJnYmEoMTU2LCAxNjMsIDE3NSwgMC4yKSIgZmlsdGVyPSJ1cmwoI2IpIi8+PC9zdmc+"
                   priority
                 />
               </motion.div>

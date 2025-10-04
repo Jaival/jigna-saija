@@ -1,23 +1,34 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useDeferredValue, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import userData from '@/data/data';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Search, Filter, Grid, List, Calendar } from 'lucide-react';
+import { Search, Filter, Grid, List, Calendar, Loader2 } from 'lucide-react';
 
 type ViewMode = 'grid' | 'list';
 type SortBy = 'newest' | 'oldest' | 'title';
 
 export default function ProjectsComponent() {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchInput, setSearchInput] = useState('');
+  const deferredSearch = useDeferredValue(searchInput);
   const [selectedCategory, setSelectedCategory] = useState<
     'all' | 'interior' | 'architecture'
   >('all');
   const [viewMode, setViewMode] = useState<ViewMode>('grid');
   const [sortBy, setSortBy] = useState<SortBy>('newest');
   const [showFilters, setShowFilters] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
+
+  // Track if search is pending
+  useEffect(() => {
+    if (searchInput !== deferredSearch) {
+      setIsSearching(true);
+    } else {
+      setIsSearching(false);
+    }
+  }, [searchInput, deferredSearch]);
 
   // Combine all projects with type information
   const allProjects = useMemo(() => {
@@ -32,14 +43,14 @@ export default function ProjectsComponent() {
     return [...interior, ...architecture];
   }, []);
 
-  // Filter and sort projects
+  // Filter and sort projects using deferred search value
   const filteredProjects = useMemo(() => {
     let filtered = allProjects;
 
     // Filter by search term
-    if (searchTerm) {
+    if (deferredSearch) {
       filtered = filtered.filter((project) =>
-        project.title.toLowerCase().includes(searchTerm.toLowerCase()),
+        project.title.toLowerCase().includes(deferredSearch.toLowerCase()),
       );
     }
 
@@ -65,7 +76,7 @@ export default function ProjectsComponent() {
     });
 
     return filtered;
-  }, [allProjects, searchTerm, selectedCategory, sortBy]);
+  }, [allProjects, deferredSearch, selectedCategory, sortBy]);
 
   // Group projects by type for display
   const groupedProjects = useMemo(() => {
@@ -119,13 +130,23 @@ export default function ProjectsComponent() {
           <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between mb-6">
             <div className="flex-1 max-w-md">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                <Search
+                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4"
+                  aria-hidden="true"
+                />
+                {isSearching && (
+                  <Loader2
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-blue-500 w-4 h-4 animate-spin"
+                    aria-hidden="true"
+                  />
+                )}
                 <input
                   type="text"
                   placeholder="Search projects..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all duration-200 shadow-sm"
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value)}
+                  aria-label="Search projects"
+                  className="w-full pl-10 pr-10 py-3 border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 focus:ring-2 focus:ring-pink-500 focus:border-transparent focus:outline-none transition-all duration-200 shadow-sm"
                 />
               </div>
             </div>
@@ -135,39 +156,49 @@ export default function ProjectsComponent() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setShowFilters(!showFilters)}
-                className={`p-3 rounded-xl border transition-all duration-300 ${
+                aria-label={showFilters ? 'Hide filters' : 'Show filters'}
+                aria-expanded={showFilters}
+                className={`p-3 min-h-[44px] min-w-[44px] rounded-xl border transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 ${
                   showFilters
                     ? 'bg-pink-500 text-white border-pink-500 shadow-lg'
                     : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 shadow-sm'
                 }`}
               >
-                <Filter className="w-4 h-4" />
+                <Filter className="w-4 h-4" aria-hidden="true" />
               </motion.button>
 
-              <div className="flex bg-gray-100 dark:bg-gray-800 rounded-xl p-1 shadow-sm">
+              <div
+                className="flex bg-gray-100 dark:bg-gray-800 rounded-xl p-1 shadow-sm"
+                role="group"
+                aria-label="View mode"
+              >
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setViewMode('grid')}
-                  className={`p-2 rounded-lg transition-all duration-200 ${
+                  aria-label="Grid view"
+                  aria-pressed={viewMode === 'grid'}
+                  className={`p-2 min-h-[44px] min-w-[44px] rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 ${
                     viewMode === 'grid'
                       ? 'bg-white dark:bg-gray-700 text-pink-500 shadow-sm'
                       : 'text-gray-600 dark:text-gray-400'
                   }`}
                 >
-                  <Grid className="w-4 h-4" />
+                  <Grid className="w-4 h-4" aria-hidden="true" />
                 </motion.button>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setViewMode('list')}
-                  className={`p-2 rounded-lg transition-all duration-200 ${
+                  aria-label="List view"
+                  aria-pressed={viewMode === 'list'}
+                  className={`p-2 min-h-[44px] min-w-[44px] rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 ${
                     viewMode === 'list'
                       ? 'bg-white dark:bg-gray-700 text-pink-500 shadow-sm'
                       : 'text-gray-600 dark:text-gray-400'
                   }`}
                 >
-                  <List className="w-4 h-4" />
+                  <List className="w-4 h-4" aria-hidden="true" />
                 </motion.button>
               </div>
             </div>
@@ -389,7 +420,7 @@ const ProjectCard = ({
       className="group"
     >
       <Link href={project.link} className="block">
-        <div className="relative overflow-hidden rounded-2xl bg-white dark:bg-gray-800 shadow-lg hover:shadow-2xl transition-all duration-500">
+        <div className="relative overflow-hidden rounded-2xl glass shadow-lg hover:shadow-2xl transition-all duration-500">
           <div className="relative aspect-[4/3] overflow-hidden">
             <Image
               src={project.imgUrl}

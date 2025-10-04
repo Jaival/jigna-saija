@@ -1,5 +1,12 @@
 'use client';
-import { LucideLoader2, Mail, Instagram, Facebook } from 'lucide-react';
+import {
+  LucideLoader2,
+  Mail,
+  Instagram,
+  Facebook,
+  AlertCircle,
+  CheckCircle2,
+} from 'lucide-react';
 import userData from '@/data/data';
 import { submitContactForm } from '@/app/actions/contact';
 import { useToast } from '@/lib/use-toast';
@@ -7,6 +14,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 
 interface ContactFormData {
   name: string;
@@ -18,13 +26,16 @@ interface ContactFormData {
 export default function ContactMeComponent() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
 
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
-  } = useForm<ContactFormData>();
+    formState: { errors, touchedFields },
+  } = useForm<ContactFormData>({
+    mode: 'onBlur', // Validate on blur for better UX
+  });
 
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
@@ -39,12 +50,14 @@ export default function ContactMeComponent() {
       const result = await submitContactForm({}, formData);
 
       if (result.success) {
+        setSubmitSuccess(true);
         toast({
           description:
             result.message || 'Your message has been sent successfully!',
           variant: 'default',
         });
         reset(); // Clear the form
+        setTimeout(() => setSubmitSuccess(false), 5000);
       } else {
         toast({
           description:
@@ -199,25 +212,61 @@ export default function ContactMeComponent() {
                 >
                   Name *
                 </label>
-                <input
-                  type="text"
-                  id="name"
-                  disabled={isSubmitting}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg  bg-white dark:bg-gray-700 text-gray-900 dark:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                  placeholder="Your name"
-                  {...register('name', {
-                    required: 'Name is required',
-                    minLength: {
-                      value: 2,
-                      message: 'Name must be at least 2 characters',
-                    },
-                  })}
-                />
-                {errors.name && (
-                  <p className="mt-1 text-sm text-red-600 dark:text-red-400">
-                    {errors.name.message}
-                  </p>
-                )}
+                <div className="relative">
+                  <input
+                    type="text"
+                    id="name"
+                    disabled={isSubmitting}
+                    aria-invalid={errors.name ? 'true' : 'false'}
+                    aria-describedby={errors.name ? 'name-error' : undefined}
+                    className={`w-full px-4 py-3 pr-10 border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 focus:outline-none focus:ring-2 ${
+                      errors.name
+                        ? 'border-red-500 focus:ring-red-500'
+                        : touchedFields.name
+                          ? 'border-green-500 focus:ring-green-500'
+                          : 'border-gray-300 dark:border-gray-600 focus:ring-blue-500'
+                    }`}
+                    placeholder="Your name"
+                    {...register('name', {
+                      required: 'Name is required',
+                      minLength: {
+                        value: 2,
+                        message: 'Name must be at least 2 characters',
+                      },
+                    })}
+                  />
+                  {errors.name && (
+                    <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                      <AlertCircle
+                        className="h-5 w-5 text-red-500"
+                        aria-hidden="true"
+                      />
+                    </div>
+                  )}
+                  {touchedFields.name && !errors.name && (
+                    <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                      <CheckCircle2
+                        className="h-5 w-5 text-green-500"
+                        aria-hidden="true"
+                      />
+                    </div>
+                  )}
+                </div>
+                <AnimatePresence>
+                  {errors.name && (
+                    <motion.p
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      id="name-error"
+                      className="mt-2 text-sm text-red-600 dark:text-red-400 flex items-center gap-1"
+                      role="alert"
+                    >
+                      <AlertCircle className="w-4 h-4" />
+                      {errors.name.message}
+                    </motion.p>
+                  )}
+                </AnimatePresence>
               </div>
 
               {/* Email Field */}
@@ -228,25 +277,61 @@ export default function ContactMeComponent() {
                 >
                   Email *
                 </label>
-                <input
-                  type="email"
-                  id="email"
-                  disabled={isSubmitting}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg   bg-white dark:bg-gray-700 text-gray-900 dark:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                  placeholder="your@email.com"
-                  {...register('email', {
-                    required: 'Email is required',
-                    pattern: {
-                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                      message: 'Invalid email address',
-                    },
-                  })}
-                />
-                {errors.email && (
-                  <p className="mt-1 text-sm text-red-600 dark:text-red-400">
-                    {errors.email.message}
-                  </p>
-                )}
+                <div className="relative">
+                  <input
+                    type="email"
+                    id="email"
+                    disabled={isSubmitting}
+                    aria-invalid={errors.email ? 'true' : 'false'}
+                    aria-describedby={errors.email ? 'email-error' : undefined}
+                    className={`w-full px-4 py-3 pr-10 border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 focus:outline-none focus:ring-2 ${
+                      errors.email
+                        ? 'border-red-500 focus:ring-red-500'
+                        : touchedFields.email
+                          ? 'border-green-500 focus:ring-green-500'
+                          : 'border-gray-300 dark:border-gray-600 focus:ring-blue-500'
+                    }`}
+                    placeholder="your@email.com"
+                    {...register('email', {
+                      required: 'Email is required',
+                      pattern: {
+                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                        message: 'Invalid email address',
+                      },
+                    })}
+                  />
+                  {errors.email && (
+                    <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                      <AlertCircle
+                        className="h-5 w-5 text-red-500"
+                        aria-hidden="true"
+                      />
+                    </div>
+                  )}
+                  {touchedFields.email && !errors.email && (
+                    <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                      <CheckCircle2
+                        className="h-5 w-5 text-green-500"
+                        aria-hidden="true"
+                      />
+                    </div>
+                  )}
+                </div>
+                <AnimatePresence>
+                  {errors.email && (
+                    <motion.p
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      id="email-error"
+                      className="mt-2 text-sm text-red-600 dark:text-red-400 flex items-center gap-1"
+                      role="alert"
+                    >
+                      <AlertCircle className="w-4 h-4" />
+                      {errors.email.message}
+                    </motion.p>
+                  )}
+                </AnimatePresence>
               </div>
 
               {/* Subject Field */}
@@ -257,25 +342,63 @@ export default function ContactMeComponent() {
                 >
                   Subject *
                 </label>
-                <input
-                  type="text"
-                  id="subject"
-                  disabled={isSubmitting}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg   bg-white dark:bg-gray-700 text-gray-900 dark:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                  placeholder="Project inquiry"
-                  {...register('subject', {
-                    required: 'Subject is required',
-                    minLength: {
-                      value: 3,
-                      message: 'Subject must be at least 3 characters',
-                    },
-                  })}
-                />
-                {errors.subject && (
-                  <p className="mt-1 text-sm text-red-600 dark:text-red-400">
-                    {errors.subject.message}
-                  </p>
-                )}
+                <div className="relative">
+                  <input
+                    type="text"
+                    id="subject"
+                    disabled={isSubmitting}
+                    aria-invalid={errors.subject ? 'true' : 'false'}
+                    aria-describedby={
+                      errors.subject ? 'subject-error' : undefined
+                    }
+                    className={`w-full px-4 py-3 pr-10 border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 focus:outline-none focus:ring-2 ${
+                      errors.subject
+                        ? 'border-red-500 focus:ring-red-500'
+                        : touchedFields.subject
+                          ? 'border-green-500 focus:ring-green-500'
+                          : 'border-gray-300 dark:border-gray-600 focus:ring-blue-500'
+                    }`}
+                    placeholder="Project inquiry"
+                    {...register('subject', {
+                      required: 'Subject is required',
+                      minLength: {
+                        value: 3,
+                        message: 'Subject must be at least 3 characters',
+                      },
+                    })}
+                  />
+                  {errors.subject && (
+                    <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                      <AlertCircle
+                        className="h-5 w-5 text-red-500"
+                        aria-hidden="true"
+                      />
+                    </div>
+                  )}
+                  {touchedFields.subject && !errors.subject && (
+                    <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                      <CheckCircle2
+                        className="h-5 w-5 text-green-500"
+                        aria-hidden="true"
+                      />
+                    </div>
+                  )}
+                </div>
+                <AnimatePresence>
+                  {errors.subject && (
+                    <motion.p
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      id="subject-error"
+                      className="mt-2 text-sm text-red-600 dark:text-red-400 flex items-center gap-1"
+                      role="alert"
+                    >
+                      <AlertCircle className="w-4 h-4" />
+                      {errors.subject.message}
+                    </motion.p>
+                  )}
+                </AnimatePresence>
               </div>
 
               {/* Message Field */}
@@ -290,7 +413,17 @@ export default function ContactMeComponent() {
                   id="userMessage"
                   rows={5}
                   disabled={isSubmitting}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg  bg-white dark:bg-gray-700 text-gray-900 dark:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors resize-none"
+                  aria-invalid={errors.userMessage ? 'true' : 'false'}
+                  aria-describedby={
+                    errors.userMessage ? 'message-error' : undefined
+                  }
+                  className={`w-full px-4 py-3 border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 resize-none focus:outline-none focus:ring-2 ${
+                    errors.userMessage
+                      ? 'border-red-500 focus:ring-red-500'
+                      : touchedFields.userMessage
+                        ? 'border-green-500 focus:ring-green-500'
+                        : 'border-gray-300 dark:border-gray-600 focus:ring-blue-500'
+                  }`}
                   placeholder="Tell me about your project..."
                   {...register('userMessage', {
                     required: 'Message is required',
@@ -300,35 +433,72 @@ export default function ContactMeComponent() {
                     },
                   })}
                 />
-                {errors.userMessage && (
-                  <p className="mt-1 text-sm text-red-600 dark:text-red-400">
-                    {errors.userMessage.message}
-                  </p>
-                )}
+                <AnimatePresence>
+                  {errors.userMessage && (
+                    <motion.p
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      id="message-error"
+                      className="mt-2 text-sm text-red-600 dark:text-red-400 flex items-center gap-1"
+                      role="alert"
+                    >
+                      <AlertCircle className="w-4 h-4" />
+                      {errors.userMessage.message}
+                    </motion.p>
+                  )}
+                </AnimatePresence>
               </div>
 
               {/* Submit Button */}
-              <button
+              <motion.button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full text-white font-semibold py-3 px-6 rounded-lg hover:shadow-lg transform hover:scale-[1.02] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center space-x-2"
+                whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+                whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
+                className="w-full text-white font-semibold py-3 px-6 rounded-lg hover:shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 style={{
                   background:
                     'linear-gradient(135deg, #1d6793 0%, #a40e4c 100%)',
                 }}
               >
-                {isSubmitting ? (
-                  <>
-                    <LucideLoader2 className="w-5 h-5 animate-spin" />
-                    <span>Sending...</span>
-                  </>
-                ) : (
-                  <>
-                    <Mail className="w-5 h-5" />
-                    <span>Send Message</span>
-                  </>
-                )}
-              </button>
+                <AnimatePresence mode="wait">
+                  {isSubmitting ? (
+                    <motion.div
+                      key="loading"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="flex items-center space-x-2"
+                    >
+                      <LucideLoader2 className="w-5 h-5 animate-spin" />
+                      <span>Sending...</span>
+                    </motion.div>
+                  ) : submitSuccess ? (
+                    <motion.div
+                      key="success"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="flex items-center space-x-2"
+                    >
+                      <CheckCircle2 className="w-5 h-5" />
+                      <span>Message Sent!</span>
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="default"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="flex items-center space-x-2"
+                    >
+                      <Mail className="w-5 h-5" />
+                      <span>Send Message</span>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.button>
             </form>
           </div>
         </div>

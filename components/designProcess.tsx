@@ -71,7 +71,7 @@ const ProcessCard = ({
         rotateY: 1,
         boxShadow: '0 15px 30px rgba(164, 14, 76, 0.3)',
       }}
-      className={`relative group mb-4 ${height} rounded-2xl border-2 card p-6 md:p-8 overflow-hidden`}
+      className={`relative group mb-4 ${height} rounded-2xl card p-6 md:p-8 overflow-hidden`}
       style={{ perspective: 1000 }}
     >
       {/* Animated background pattern with modern colors */}
@@ -317,10 +317,7 @@ export default function DesignProcessComponent() {
           </motion.h2>
 
           <motion.div
-            className="mx-auto w-24 h-1 rounded-full mb-6"
-            style={{
-              background: 'linear-gradient(90deg, #1d6793, #a40e4c)',
-            }}
+            className="mx-auto w-24 h-1 rounded-full mb-6 divider-brand"
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}

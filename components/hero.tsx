@@ -137,14 +137,7 @@ export default function Hero() {
         >
           <motion.h1
             variants={itemVariants}
-            className="text-3xl md:text-6xl font-bold leading-tight"
-            style={{
-              background:
-                'linear-gradient(135deg, #1d6793 0%, #a40e4c 50%, #fb923c 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}
+            className="text-3xl md:text-6xl font-bold leading-tight text-gradient-brand"
             whileHover={{
               scale: 1.01,
             }}
@@ -184,11 +177,7 @@ export default function Hero() {
             >
               <Link
                 href="/projects"
-                className="relative block px-8 py-4 font-bold text-lg text-center text-white rounded-xl transition-all duration-300 w-full md:w-auto"
-                style={{
-                  background:
-                    'linear-gradient(135deg, #1d6793 0%, #2278aa 100%)',
-                }}
+                className="relative block px-8 py-4 font-bold text-lg text-center text-white rounded-xl transition-all duration-300 w-full md:w-auto bg-gradient-brand"
               >
                 <motion.span
                   className="relative z-10"
@@ -226,12 +215,14 @@ export default function Hero() {
             />
             <Image
               className="rounded-2xl w-full shadow-2xl"
-              alt="Modern architectural design showcase"
+              alt="Modern architectural design project showcasing innovative residential design with clean lines and contemporary aesthetics"
               priority={true}
               width={1100}
               height={1100}
               sizes="(max-width: 768px) 100vw, 1100px"
               style={{ objectFit: 'cover' }}
+              placeholder="blur"
+              blurDataURL="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PGZpbHRlciBpZD0iYiIgZmlsdGVyVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIyMCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InJnYmEoNTksIDEzMCwgMjQ2LCAwLjEpIiBmaWx0ZXI9InVybCgjYikiLz48L3N2Zz4="
               src={
                 '/images/architecture_projects/project_pic_1/project_pic_2.jpg'
               }
@@ -278,10 +269,7 @@ export default function Hero() {
             Why Choose Me?
           </motion.h2>
           <motion.div
-            className="mt-4 mx-auto w-24 h-1 rounded-full"
-            style={{
-              background: 'linear-gradient(90deg, #1d6793, #a40e4c)',
-            }}
+            className="mt-4 mx-auto w-24 h-1 rounded-full divider-brand"
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
@@ -290,7 +278,7 @@ export default function Hero() {
         </motion.div>
 
         <motion.div
-          className="grid grid-cols-1 gap-6 md:grid-flow-col md:grid-rows-3 lg:grid-rows-2 md:gap-8 w-full"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full justify-items-center"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -300,54 +288,139 @@ export default function Hero() {
             <motion.div
               variants={cardVariants}
               whileHover={{
-                scale: 1.02,
-                y: -5,
-                boxShadow: '0 20px 40px rgba(164, 14, 76, 0.25)',
+                scale: 1.01,
+                y: -4,
+                rotateY: 1,
+                boxShadow: '0 15px 30px rgba(164, 14, 76, 0.3)',
               }}
-              className="relative group card p-6 md:p-8 overflow-hidden"
+              className="flex group card p-6 md:p-8 overflow-hidden max-w-96 rounded-2xl"
               key={key}
               custom={index}
+              style={{ perspective: 1000 }}
             >
-              {/* Enhanced background gradient with modern colors */}
+              {/* Animated background pattern with modern colors */}
               <motion.div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                className="absolute inset-0 opacity-0 group-hover:opacity-12 transition-opacity duration-500"
                 style={{
-                  background:
-                    'linear-gradient(135deg, rgba(29, 103, 147, 0.12), rgba(164, 14, 76, 0.12))',
+                  background: `
+                    radial-gradient(circle at 30% 30%, rgba(29, 103, 147, 0.08) 0%, transparent 60%),
+                    radial-gradient(circle at 70% 70%, rgba(164, 14, 76, 0.06) 0%, transparent 60%)
+                  `,
                 }}
-                initial={{ scale: 0 }}
-                whileHover={{ scale: 1 }}
-                transition={{ duration: 0.3 }}
+                animate={{
+                  backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'],
+                }}
+                transition={{
+                  duration: 12,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }}
               />
 
               {/* Card number indicator */}
               <motion.div
-                className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold text-white"
-                style={{ backgroundColor: 'rgba(246, 246, 241, 0.25)' }}
-                initial={{ rotate: -90, opacity: 0 }}
-                whileInView={{ rotate: 0, opacity: 1 }}
-                transition={{ delay: index * 0.05 + 0.3 }}
+                className="absolute top-4 right-4 flex items-center justify-center"
+                initial={{ scale: 0, rotate: -90 }}
+                whileInView={{ scale: 1, rotate: 0 }}
+                transition={{
+                  delay: index * 0.05 + 0.3,
+                  type: 'spring',
+                  stiffness: 180,
+                }}
               >
-                {index + 1}
+                <motion.div
+                  className="relative w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-sm"
+                  style={{
+                    background:
+                      'linear-gradient(135deg, rgba(246, 246, 241, 0.25), rgba(246, 246, 241, 0.15))',
+                    border: '1px solid rgba(246, 246, 241, 0.3)',
+                  }}
+                  whileHover={{ scale: 1.05, rotate: 90 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <motion.span
+                    className="font-bold text-white text-sm"
+                    animate={{
+                      textShadow: [
+                        '0 0 0px rgba(255,255,255,0)',
+                        '0 0 6px rgba(255,255,255,0.3)',
+                        '0 0 0px rgba(255,255,255,0)',
+                      ],
+                    }}
+                    transition={{ duration: 4, repeat: Infinity }}
+                  >
+                    {index + 1}
+                  </motion.span>
+
+                  {/* Animated ring around step number */}
+                  <motion.div
+                    className="absolute inset-0 rounded-full"
+                    style={{ border: '2px solid rgba(246, 246, 241, 0.3)' }}
+                    animate={{ rotate: 360 }}
+                    transition={{
+                      duration: 15,
+                      repeat: Infinity,
+                      ease: 'linear',
+                    }}
+                  />
+                </motion.div>
               </motion.div>
 
-              <motion.h3
-                className="mb-3 font-bold tracking-tight text-white text-xl md:text-2xl relative z-10"
-                initial={{ x: -10, opacity: 0 }}
-                whileInView={{ x: 0, opacity: 1 }}
-                transition={{ delay: index * 0.05 + 0.2 }}
-              >
-                {key}
-              </motion.h3>
-              <motion.p
-                className="text-base md:text-lg relative z-10 leading-relaxed"
-                style={{ color: '#f6f6f1' }}
-                initial={{ x: -10, opacity: 0 }}
-                whileInView={{ x: 0, opacity: 1 }}
-                transition={{ delay: index * 0.05 + 0.25 }}
-              >
-                {value.description}
-              </motion.p>
+              {/* Card content */}
+              <motion.div className="relative z-10">
+                <motion.h3
+                  className="pt-1 pb-4 mb-3 font-bold tracking-tight text-white relative z-10 text-xl md:text-2xl"
+                  initial={{ x: -15, opacity: 0 }}
+                  whileInView={{ x: 0, opacity: 1 }}
+                  transition={{ delay: 0.15 }}
+                >
+                  {key}
+
+                  {/* Animated underline with modern color */}
+                  <motion.div
+                    className="absolute bottom-0 left-0 h-0.5 rounded-full"
+                    style={{
+                      background:
+                        'linear-gradient(90deg, rgba(246, 246, 241, 0.8), transparent)',
+                    }}
+                    initial={{ width: 0 }}
+                    whileInView={{ width: '60%' }}
+                    transition={{ delay: 0.3, duration: 0.6 }}
+                  />
+                </motion.h3>
+
+                <motion.p
+                  className="relative z-10 leading-relaxed text-base md:text-lg"
+                  style={{ color: '#f6f6f1' }}
+                  initial={{ y: 15, opacity: 0 }}
+                  whileInView={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  {value.description}
+                </motion.p>
+              </motion.div>
+
+              {/* Decorative corner elements with modern colors */}
+              <motion.div
+                className="absolute bottom-4 left-4 w-8 h-8 opacity-0 group-hover:opacity-100"
+                style={{
+                  borderLeft: '2px solid rgba(29, 103, 147, 0.4)',
+                  borderBottom: '2px solid rgba(29, 103, 147, 0.4)',
+                }}
+                initial={{ scale: 0 }}
+                whileHover={{ scale: 1 }}
+                transition={{ delay: 0.1 }}
+              />
+              <motion.div
+                className="absolute top-4 left-4 w-6 h-6 opacity-0 group-hover:opacity-100"
+                style={{
+                  borderTop: '2px solid rgba(164, 14, 76, 0.4)',
+                  borderLeft: '2px solid rgba(164, 14, 76, 0.4)',
+                }}
+                initial={{ scale: 0 }}
+                whileHover={{ scale: 1 }}
+                transition={{ delay: 0.15 }}
+              />
             </motion.div>
           ))}
         </motion.div>

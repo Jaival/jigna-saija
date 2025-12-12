@@ -4,6 +4,7 @@ import { motion } from 'motion/react';
 import ImageGallery from '@/components/gallery/ImageGallery';
 import Link from 'next/link';
 import { ArrowLeft, Calendar, MapPin } from 'lucide-react';
+import Breadcrumbs from '@/components/ui/breadcrumbs';
 
 interface ProjectPageClientProps {
   project: {
@@ -36,38 +37,20 @@ export const ProjectPageClient = ({ project }: ProjectPageClientProps) => {
       className="min-h-screen"
     >
       <div className="container mx-auto px-4 py-8">
-        {/* Clean Navigation Header */}
-        {/* <motion.nav
+        {/* Breadcrumb Navigation */}
+        <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
           className="mb-8"
-          aria-label="Breadcrumb"
         >
-          <ol className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
-            <li>
-              <Link
-                href="/"
-                className="hover:text-pink-600 dark:hover:text-blue-400 transition-colors"
-              >
-                Home
-              </Link>
-            </li>
-            <li className="mx-2">/</li>
-            <li>
-              <Link
-                href="/projects"
-                className="hover:text-pink-600 dark:hover:text-blue-400 transition-colors"
-              >
-                Projects
-              </Link>
-            </li>
-            <li className="mx-2">/</li>
-            <li className="text-gray-900 dark:text-white font-medium">
-              {project.title}
-            </li>
-          </ol>
-        </motion.nav> */}
+          <Breadcrumbs
+            items={[
+              { label: 'Projects', href: '/projects' },
+              { label: project.title },
+            ]}
+          />
+        </motion.div>
 
         {/* Modern Project Header */}
         <motion.header

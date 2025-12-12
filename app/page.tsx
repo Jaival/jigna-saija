@@ -16,8 +16,7 @@ const FloatingElements = () => (
   <div className="fixed inset-0 pointer-events-none overflow-hidden">
     {/* Floating geometric shapes using modern color palette */}
     <motion.div
-      className="absolute top-20 left-10 w-6 h-6 rounded-full opacity-15"
-      style={{ background: 'linear-gradient(135deg, #1d6793, #2278aa)' }}
+      className="absolute top-20 left-10 w-6 h-6 rounded-full opacity-15 bg-gradient-brand"
       animate={{
         y: [0, -20, 0],
         rotate: [0, 180, 360],
@@ -29,8 +28,7 @@ const FloatingElements = () => (
       }}
     />
     <motion.div
-      className="absolute top-1/3 right-20 w-4 h-4 rounded-square opacity-15"
-      style={{ background: 'linear-gradient(135deg, #a40e4c, #bc1058)' }}
+      className="absolute top-1/3 right-20 w-4 h-4 rounded-square opacity-15 bg-gradient-brand"
       animate={{
         y: [0, 15, 0],
         rotate: [0, -180, -360],
@@ -44,7 +42,7 @@ const FloatingElements = () => (
     />
     <motion.div
       className="absolute bottom-1/4 left-1/4 w-8 h-8 border-2 rounded-full opacity-10"
-      style={{ borderColor: '#fb923c' }}
+      style={{ borderColor: 'var(--color-gold)' }}
       animate={{
         scale: [1, 1.2, 1],
         rotate: [0, 90, 180, 270, 360],
@@ -91,11 +89,9 @@ export default function Home() {
       <div
         className="fixed inset-0 pointer-events-none opacity-25"
         style={{
-          background: `
-            radial-gradient(circle at 20% 50%, rgba(29, 103, 147, 0.04) 0%, transparent 60%),
-            radial-gradient(circle at 80% 20%, rgba(164, 14, 76, 0.03) 0%, transparent 60%),
-            radial-gradient(circle at 40% 80%, rgba(251, 146, 60, 0.02) 0%, transparent 60%)
-          `,
+          background: `radial-gradient(circle at 20% 50%, rgba(29, 103, 147, 0.04) 0%, transparent 60%),
+          radial-gradient(circle at 80% 20%, rgba(164, 14, 76, 0.03) 0%, transparent 60%),
+          radial-gradient(circle at 40% 80%, rgba(251, 146, 60, 0.02) 0%, transparent 60%)`,
         }}
       />
 
@@ -111,10 +107,7 @@ export default function Home() {
 
         {/* Section divider with modern gradient colors */}
         <motion.div
-          className="my-12 md:my-16 mx-auto w-24 h-1 rounded-full"
-          style={{
-            background: 'linear-gradient(90deg, #1d6793, #a40e4c, #fb923c)',
-          }}
+          className="my-12 md:my-16 mx-auto w-24 h-1 rounded-full divider-brand"
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true }}
@@ -128,10 +121,7 @@ export default function Home() {
 
         {/* Section divider */}
         <motion.div
-          className="my-12 md:my-16 mx-auto w-24 h-1 rounded-full"
-          style={{
-            background: 'linear-gradient(90deg, #2278aa, #1d6793, #264653)',
-          }}
+          className="my-12 md:my-16 mx-auto w-24 h-1 rounded-full divider-brand"
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true }}

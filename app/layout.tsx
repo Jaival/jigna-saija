@@ -2,6 +2,7 @@ import Footer from '@/components/footer';
 import Navbar from '@/components/navBar';
 import { Providers } from '@/components/provider';
 import { Toaster } from '@/components/ui/toaster';
+import BackToTop from '@/components/BackToTop';
 import { Metadata, Viewport } from 'next';
 import { Titillium_Web } from 'next/font/google';
 import React from 'react';
@@ -82,15 +83,24 @@ export default function RootLayout({
     <html lang="en" className={`${titillium.className} ${titillium.variable}`}>
       <body className="antialiased">
         <Providers>
+          {/* Skip to main content link for accessibility */}
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-4 focus:left-4 focus:px-6 focus:py-3 focus:bg-blue-600 focus:text-white focus:rounded-lg focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          >
+            Skip to main content
+          </a>
           <Navbar />
           <main
             id="main-content"
             className="flex flex-col min-h-screen px-4 sm:px-8 md:px-16 lg:px-20 pt-20 md:pt-28 background"
+            role="main"
           >
             <div className="flex-1 py-4 md:py-8">{children}</div>
             <Toaster />
             <Footer />
           </main>
+          <BackToTop />
         </Providers>
       </body>
     </html>

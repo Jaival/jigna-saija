@@ -3,6 +3,7 @@ import Navbar from '@/components/navBar';
 import { Providers } from '@/components/provider';
 import { Toaster } from '@/components/ui/toaster';
 import BackToTop from '@/components/BackToTop';
+import { Analytics } from '@vercel/analytics/next';
 import { Metadata, Viewport } from 'next';
 import { Titillium_Web } from 'next/font/google';
 import React from 'react';
@@ -102,6 +103,7 @@ export default function RootLayout({
           </main>
           <BackToTop />
         </Providers>
+        <Analytics />
       </body>
     </html>
   );

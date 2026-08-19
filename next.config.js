@@ -25,10 +25,6 @@ const nextConfig = {
     },
   },
   
-  eslint: {
-    ignoreDuringBuilds: false, // Enable ESLint in builds for better code quality
-  },
-  
   // Image optimization
   images: {
     formats: ['image/webp', 'image/avif'],

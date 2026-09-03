@@ -39,13 +39,6 @@ export const metadata: Metadata = {
   ],
   creator: 'Jaival Saija',
   openGraph: {
-    images: [
-      {
-        url: 'https://51ebo9nf5p.ufs.sh/f/is6rEBDHOhcsI88qStPgUxWgpaQnNi2mD4vRyJ6ObMZlGH8V',
-        width: 480,
-        height: 600,
-      },
-    ],
     url: 'https://jignasaija.vercel.app/',
     type: 'website',
     locale: 'en_US',
@@ -55,13 +48,6 @@ export const metadata: Metadata = {
     siteName: 'Jigna Saija Portfolio',
   },
   twitter: {
-    images: [
-      {
-        url: 'https://51ebo9nf5p.ufs.sh/f/is6rEBDHOhcsI88qStPgUxWgpaQnNi2mD4vRyJ6ObMZlGH8V',
-        width: 480,
-        height: 600,
-      },
-    ],
     card: 'summary_large_image',
     title: 'Jigna Saija | Architect & Interior Designer',
     description:

@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { motion } from 'motion/react';
+import { spring, useHasHover, STAGGER, duration } from '@/lib/motion';
 import { AlertTriangle, RefreshCw, Home } from 'lucide-react';
 import Link from 'next/link';
 
@@ -12,6 +13,7 @@ export default function Error({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  const hasHover = useHasHover();
   useEffect(() => {
     // Log the error to an error reporting service
     console.error('Error caught by boundary:', error);
@@ -22,13 +24,13 @@ export default function Error({
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: duration.enter }}
         className="text-center max-w-md"
       >
         <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
+          initial={{ scale: 0.96, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ ...spring, delay: STAGGER * 2 }}
           className="mb-6 inline-flex items-center justify-center w-20 h-20 rounded-full bg-red-100 dark:bg-red-900/20"
         >
           <AlertTriangle className="w-10 h-10 text-red-600 dark:text-red-400" />
@@ -37,7 +39,7 @@ export default function Error({
         <motion.h1
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
+          transition={{ delay: STAGGER * 3 }}
           className="text-3xl font-bold text-gray-900 dark:text-white mb-4"
         >
           Oops! Something went wrong
@@ -46,7 +48,7 @@ export default function Error({
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
+          transition={{ delay: STAGGER * 4 }}
           className="text-gray-600 dark:text-gray-400 mb-8"
         >
           We encountered an unexpected error. Please try again or return to the
@@ -56,14 +58,14 @@ export default function Error({
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
+          transition={{ delay: STAGGER * 5 }}
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
           <motion.button
             onClick={reset}
-            whileHover={{ scale: 1.05 }}
+            whileHover={hasHover ? { scale: 1.05 } : undefined}
             whileTap={{ scale: 0.95 }}
-            className="flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            className="flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-lg transition-colors duration-150"
           >
             <RefreshCw className="w-5 h-5" />
             Try Again
@@ -71,9 +73,9 @@ export default function Error({
 
           <Link href="/">
             <motion.button
-              whileHover={{ scale: 1.05 }}
+              whileHover={hasHover ? { scale: 1.05 } : undefined}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center justify-center gap-2 px-6 py-3 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-white font-semibold rounded-lg shadow-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+              className="flex items-center justify-center gap-2 px-6 py-3 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-white font-semibold rounded-lg shadow-lg transition-colors duration-150"
             >
               <Home className="w-5 h-5" />
               Go Home
@@ -85,7 +87,7 @@ export default function Error({
           <motion.details
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
+            transition={{ delay: STAGGER * 6 }}
             className="mt-8 text-left"
           >
             <summary className="cursor-pointer text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200">

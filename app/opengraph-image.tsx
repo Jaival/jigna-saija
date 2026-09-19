@@ -233,6 +233,8 @@ export default async function Image() {
               background: `linear-gradient(135deg, ${BUTTON_BLUE}, ${AMARANTH_PURPLE}, ${GOLD})`,
             }}
           >
+            {/* eslint-disable-next-line @next/next/no-img-element -- ImageResponse renders
+                plain HTML; next/image is not supported inside it. */}
             <img
               src={portraitSrc}
               alt=""
@@ -247,6 +249,8 @@ export default async function Image() {
         </div>
 
         {/* Logo watermark */}
+        {/* eslint-disable-next-line @next/next/no-img-element -- ImageResponse renders
+            plain HTML; next/image is not supported inside it. */}
         <img
           src={logoSrc}
           alt=""

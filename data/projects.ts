@@ -173,6 +173,7 @@ const projectData = {
       year: 2021,
       type: 'interiorProjects',
       imgUrls: [
+        '/images/interior_projects/mr_bhadoria_site/mr_bhadoria_site_pic_22.jpg',
         '/images/interior_projects/mr_bhadoria_site/mr_bhadoria_site_pic_1.jpg',
         '/images/interior_projects/mr_bhadoria_site/mr_bhadoria_site_pic_10.jpg',
         '/images/interior_projects/mr_bhadoria_site/mr_bhadoria_site_pic_11.jpg',
@@ -187,7 +188,6 @@ const projectData = {
         '/images/interior_projects/mr_bhadoria_site/mr_bhadoria_site_pic_2.jpg',
         '/images/interior_projects/mr_bhadoria_site/mr_bhadoria_site_pic_20.jpg',
         '/images/interior_projects/mr_bhadoria_site/mr_bhadoria_site_pic_21.jpg',
-        '/images/interior_projects/mr_bhadoria_site/mr_bhadoria_site_pic_22.jpg',
         '/images/interior_projects/mr_bhadoria_site/mr_bhadoria_site_pic_23.jpg',
         '/images/interior_projects/mr_bhadoria_site/mr_bhadoria_site_pic_24.jpg',
         '/images/interior_projects/mr_bhadoria_site/mr_bhadoria_site_pic_25.jpg',
@@ -311,6 +311,7 @@ const projectData = {
       year: 2010,
       type: 'interiorProjects',
       imgUrls: [
+        '/images/interior_projects/rajivbhai_site_pics/rajivbhai_site_pic_28.jpg',
         '/images/interior_projects/rajivbhai_site_pics/rajivbhai_site_pic_1.jpg',
         '/images/interior_projects/rajivbhai_site_pics/rajivbhai_site_pic_10.jpg',
         '/images/interior_projects/rajivbhai_site_pics/rajivbhai_site_pic_11.jpg',
@@ -331,7 +332,6 @@ const projectData = {
         '/images/interior_projects/rajivbhai_site_pics/rajivbhai_site_pic_25.jpg',
         '/images/interior_projects/rajivbhai_site_pics/rajivbhai_site_pic_26.jpg',
         '/images/interior_projects/rajivbhai_site_pics/rajivbhai_site_pic_27.jpg',
-        '/images/interior_projects/rajivbhai_site_pics/rajivbhai_site_pic_28.jpg',
         '/images/interior_projects/rajivbhai_site_pics/rajivbhai_site_pic_29.jpg',
         '/images/interior_projects/rajivbhai_site_pics/rajivbhai_site_pic_3.jpg',
         '/images/interior_projects/rajivbhai_site_pics/rajivbhai_site_pic_30.jpg',
@@ -357,6 +357,7 @@ const projectData = {
       year: 2009,
       type: 'interiorProjects',
       imgUrls: [
+        '/images/interior_projects/mr_rathi_site_pic/mr_rathi_site_pic_7.jpg',
         '/images/interior_projects/mr_rathi_site_pic/mr_rathi_site_pic_1.jpg',
         '/images/interior_projects/mr_rathi_site_pic/mr_rathi_site_pic_10.jpg',
         '/images/interior_projects/mr_rathi_site_pic/mr_rathi_site_pic_11.jpg',
@@ -367,7 +368,6 @@ const projectData = {
         '/images/interior_projects/mr_rathi_site_pic/mr_rathi_site_pic_4.jpg',
         '/images/interior_projects/mr_rathi_site_pic/mr_rathi_site_pic_5.jpg',
         '/images/interior_projects/mr_rathi_site_pic/mr_rathi_site_pic_6.jpg',
-        '/images/interior_projects/mr_rathi_site_pic/mr_rathi_site_pic_7.jpg',
         '/images/interior_projects/mr_rathi_site_pic/mr_rathi_site_pic_8.jpg',
         '/images/interior_projects/mr_rathi_site_pic/mr_rathi_site_pic_9.jpg',
       ],
@@ -480,6 +480,7 @@ const projectData = {
       year: 2012,
       type: 'architectureProjects',
       imgUrls: [
+        '/images/architecture_projects/varsoda_site_pics/varsoda_site_pic_7.jpg',
         // '/images/architecture_projects/varsoda_site_pics/varsoda_site_pic_1.jpg',
         '/images/architecture_projects/varsoda_site_pics/varsoda_site_pic_10.jpg',
         '/images/architecture_projects/varsoda_site_pics/varsoda_site_pic_11.jpg',
@@ -501,7 +502,6 @@ const projectData = {
         '/images/architecture_projects/varsoda_site_pics/varsoda_site_pic_4.jpg',
         // '/images/architecture_projects/varsoda_site_pics/varsoda_site_pic_5.jpg',
         '/images/architecture_projects/varsoda_site_pics/varsoda_site_pic_6.jpg',
-        '/images/architecture_projects/varsoda_site_pics/varsoda_site_pic_7.jpg',
         '/images/architecture_projects/varsoda_site_pics/varsoda_site_pic_8.jpg',
         '/images/architecture_projects/varsoda_site_pics/varsoda_site_pic_9.jpg',
       ],

@@ -1,4 +1,5 @@
 import projectData from '@/data/projects';
+import { PageTransition } from '@/components/PageTransition';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { ProjectPageClient } from './ProjectPageClient';
@@ -50,5 +51,9 @@ export default async function ProjectPage({ params }: Props) {
     notFound();
   }
 
-  return <ProjectPageClient project={project} />;
+  return (
+    <PageTransition>
+      <ProjectPageClient project={project} />
+    </PageTransition>
+  );
 }

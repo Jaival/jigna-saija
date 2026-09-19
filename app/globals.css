@@ -1,5 +1,10 @@
 @import 'tailwindcss';
 
+/* The v3 upgrade docs quote class names in prose, and automatic source
+   detection turns those quotes into real (sometimes invalid) utilities. */
+@source not "../plans";
+@source not "../V3_UPGRADE_PLAN.md";
+
 @plugin 'tailwindcss-animate';
 
 @custom-variant dark (&:is(.dark *));
@@ -47,11 +52,8 @@
   --color-white-hover: #94a3b8;
   --color-gold: #fb923c;
 
-  /* Pink Scale for Gradients */
-  --color-pink-600: #ec4899;
-  --color-purple-600: #9333ea;
+  /* Blue 500 (status dots, spinner) */
   --color-blue-500: #3b82f6;
-  --color-teal-400: #2dd4bf;
 
   /* Red Scale for Errors */
   --color-red-600: #dc2626;
@@ -106,6 +108,24 @@
       height: 0;
     }
   }
+}
+
+/* Motion tokens. `static` because hand-written CSS and inline styles reference
+   these by name; without it Tailwind emits only the ones a utility happens to
+   use and the rest resolve to nothing at runtime. */
+@theme static {
+  /* Easing. Overriding --ease-out and --ease-in-out is deliberate — it upgrades
+     every existing Tailwind ease-out / ease-in-out utility to the strong curve. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+  /* Duration scale. UI motion stays at or under 300ms. See V3_UPGRADE_PLAN.md §5. */
+  --duration-press: 160ms;
+  --duration-tooltip: 180ms;
+  --duration-dropdown: 220ms;
+  --duration-modal: 320ms;
+  --duration-enter: 280ms;
 }
 
 @layer theme {
@@ -163,6 +183,41 @@
     , color-mix(in oklab, var(--color-card) 92%, transparent);
   border: 1px solid color-mix(in oklab, var(--color-border) 40%, transparent);
   backdrop-filter: blur(10px) saturate(120%);
+}
+
+@utility nav-surface {
+  background: transparent;
+  backdrop-filter: blur(0px) saturate(100%);
+  transition:
+    backdrop-filter 220ms var(--ease-out),
+    background-color 220ms var(--ease-out);
+
+  /* Reduced motion: the bar still turns opaque, just without the blur ramp. */
+  @media (prefers-reduced-motion: reduce) {
+    transition: background-color 220ms var(--ease-out);
+  }
+
+  &[data-scrolled] {
+    background-color: color-mix(in oklab, var(--color-background) 72%, transparent);
+    backdrop-filter: blur(16px) saturate(180%);
+
+    /* Scroll edge: a short fade where content passes under the chrome,
+       instead of a drop shadow that reads as a floating card. */
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 100% 0 auto 0;
+      height: 24px;
+      pointer-events: none;
+      background: linear-gradient(
+        to bottom,
+        color-mix(in oklab, var(--color-background) 72%, transparent),
+        transparent
+      );
+      backdrop-filter: blur(4px);
+      mask-image: linear-gradient(to bottom, black, transparent);
+    }
+  }
 }
 
 /* Brand gradient tokens */
@@ -275,10 +330,10 @@
 
   @keyframes pulse-glow {
     0%, 100% {
-      box-shadow: 0 0 5px rgba(236, 72, 153, 0.3);
+      box-shadow: 0 0 5px color-mix(in oklab, var(--color-amaranth-purple) 40%, transparent);
     }
     50% {
-      box-shadow: 0 0 20px rgba(236, 72, 153, 0.6);
+      box-shadow: 0 0 20px color-mix(in oklab, var(--color-amaranth-purple) 40%, transparent);
     }
   }
 
@@ -312,6 +367,91 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
+  /* Tracking is size-specific. Large text reads loose as it grows; small text
+     needs a little air. Body sits at 0. */
+  h1, .text-display {
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    font-optical-sizing: auto;
+  }
+
+  h2 {
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+  }
+
+  h3 {
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+  }
+
+  .text-caption,
+  small {
+    letter-spacing: 0.01em;
+  }
+
+  /* Mobile platform baseline. Each line removes one "this is a website" tell.
+     See plans/013-mobile-platform-baseline.md for the why behind each. */
+  html {
+    /* Kill the grey flash the browser paints over tapped elements. Every
+       tappable element gets its own :active state below to replace it. */
+    -webkit-tap-highlight-color: transparent;
+    /* No font inflation when the phone rotates to landscape. */
+    -webkit-text-size-adjust: 100%;
+  }
+
+  html,
+  body {
+    /* Stop Android pull-to-refresh and the whole-page iOS rubber band.
+       Required before the lightbox drag-to-dismiss in plan 007 can work. */
+    overscroll-behavior: none;
+  }
+
+  /* Controls are controls: instant click, no text selection, no long-press
+     callout. Never apply these to body copy — users copy addresses and
+     error messages, and that is content. */
+  button,
+  a,
+  [role='button'],
+  summary {
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+  }
+
+  /* Press feedback. The browser's tap highlight is gone, so every tappable
+     element must respond on press, not on release. 160ms, ease-out. */
+  button:active:not([data-no-press]),
+  a:active:not([data-no-press]),
+  [role='button']:active:not([data-no-press]) {
+    transform: scale(0.97);
+  }
+
+  button:not([data-no-press]),
+  a:not([data-no-press]),
+  [role='button']:not([data-no-press]) {
+    transition: transform var(--duration-press) var(--ease-out);
+  }
+
+  /* Reduced motion keeps the press feedback — it is direct manipulation,
+     not decoration — but drops the scale in favour of opacity. */
+  @media (prefers-reduced-motion: reduce) {
+    button:active,
+    a:active,
+    [role='button']:active {
+      transform: none;
+      opacity: 0.7;
+    }
+  }
+
+  /* Inner scrollers keep their own bounce but must not move the page behind
+     them. `none` on the root, `contain` on children. */
+  .lightbox-scroll {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
   /* Custom background pattern */
   .background {
     height: 100%;
@@ -320,21 +460,27 @@
       no-repeat;
   }
 
-  /* Enhanced focus indicators for accessibility */
-  *:focus-visible {
-    outline: 2px solid var(--color-blue-500);
+  /* Focus. One indicator for every control, keyboard only: :focus-visible
+     never fires on a mouse click, so nothing lights up when a button is
+     pressed. A thin brand outline held just off the element, and outlines
+     follow border-radius, so it traces pills and cards cleanly. Components
+     set no focus styles of their own; the contact form only recolours the
+     outline for its error and success states. */
+  :root {
+    --focus-ring: var(--color-button-blue);
+  }
+  .dark {
+    --focus-ring: var(--color-light-periwinkle);
+  }
+  :focus-visible {
+    outline: 2px solid var(--focus-ring);
     outline-offset: 2px;
   }
-
-  /* Better keyboard navigation */
-  a:focus-visible,
-  button:focus-visible,
+  /* Fields already have a border to hug; a wide gap would float the ring. */
   input:focus-visible,
   textarea:focus-visible,
   select:focus-visible {
-    outline: 2px solid var(--color-blue-500);
-    outline-offset: 2px;
-    transition: outline 0.2s ease-in-out;
+    outline-offset: 1px;
   }
 
   /* Skip link specific styling */
@@ -367,15 +513,112 @@
     scroll-behavior: smooth;
   }
 
-  /* Reduce motion for users who prefer it */
+  /* Reduced motion: drop movement, keep opacity and colour feedback. */
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
     *::after {
+      /* Stop looping/keyframed motion outright. */
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }
+
+    /* Transitions survive, but only for properties that do not move anything. */
+    *,
+    *::before,
+    *::after {
+      transition-property: opacity, color, background-color, border-color,
+        box-shadow, fill, stroke !important;
+      transition-duration: 150ms !important;
+    }
+
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+/* ── View transitions ───────────────────────────────────────────────────────
+   Outside any @layer so these rules are not ranked below the defaults.
+   Movement only where the navigation has a direction. Travel is a percentage
+   of the page's own width, so it scales from phone to desktop. */
+@keyframes vt-slide-in-right {
+  from { transform: translateX(6%); opacity: 0; }
+  to   { transform: translateX(0);  opacity: 1; }
+}
+@keyframes vt-slide-out-left {
+  from { transform: translateX(0);   opacity: 1; }
+  to   { transform: translateX(-3%); opacity: 0; }
+}
+@keyframes vt-slide-in-left {
+  from { transform: translateX(-6%); opacity: 0; }
+  to   { transform: translateX(0);   opacity: 1; }
+}
+@keyframes vt-slide-out-right {
+  from { transform: translateX(0);  opacity: 1; }
+  to   { transform: translateX(3%); opacity: 0; }
+}
+@keyframes vt-fade-in  { from { opacity: 0; } }
+@keyframes vt-fade-out { to   { opacity: 0; } }
+
+::view-transition-new(.nav-forward) {
+  animation: vt-slide-in-right var(--duration-enter) var(--ease-out) both;
+}
+::view-transition-old(.nav-forward) {
+  animation: vt-slide-out-left var(--duration-enter) var(--ease-out) both;
+}
+::view-transition-new(.nav-back) {
+  animation: vt-slide-in-left var(--duration-enter) var(--ease-out) both;
+}
+::view-transition-old(.nav-back) {
+  animation: vt-slide-out-right var(--duration-enter) var(--ease-out) both;
+}
+
+/* The project image morph. Both snapshots fill the moving box and crop rather
+   than stretch, because the card (4:3) and its target differ in aspect. */
+::view-transition-group(.morph) {
+  animation-duration: var(--duration-modal);
+  animation-timing-function: var(--ease-out);
+}
+::view-transition-old(.morph),
+::view-transition-new(.morph) {
+  height: 100%;
+  object-fit: cover;
+  animation-duration: var(--duration-modal);
+}
+
+/* The navbar holds completely still and stays above the sliding page. The old
+   snapshot is hidden so two copies of the bar never overlap. */
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+::view-transition-old(site-header) {
+  display: none;
+}
+::view-transition-new(site-header) {
+  animation: none;
+}
+
+/* The overlay would otherwise swallow clicks for the length of a transition. */
+::view-transition {
+  pointer-events: none;
+}
+
+/* Reduced motion: a cross-fade, with no travel and no morph. */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-new(.nav-forward),
+  ::view-transition-new(.nav-back),
+  ::view-transition-new(.morph) {
+    animation: vt-fade-in var(--duration-enter) var(--ease-out) both;
+  }
+  ::view-transition-old(.nav-forward),
+  ::view-transition-old(.nav-back),
+  ::view-transition-old(.morph) {
+    animation: vt-fade-out var(--duration-enter) var(--ease-out) both;
+  }
+  ::view-transition-group(.morph) {
+    animation: none;
   }
 }

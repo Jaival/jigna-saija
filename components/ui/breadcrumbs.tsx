@@ -7,6 +7,8 @@ import { motion } from 'motion/react';
 interface BreadcrumbItem {
   label: string;
   href?: string;
+  // Direction for the page slide, e.g. NAV_BACK when the link goes up a level.
+  transitionTypes?: string[];
 }
 
 interface BreadcrumbsProps {
@@ -21,7 +23,7 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
         <li>
           <Link
             href="/"
-            className="flex items-center text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors duration-200 focus:outline-none focus:underline"
+            className="flex items-center text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors duration-150"
             aria-label="Home"
           >
             <Home className="w-4 h-4" aria-hidden="true" />
@@ -40,7 +42,8 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
               {item.href && !isLast ? (
                 <Link
                   href={item.href}
-                  className="text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors duration-200 focus:outline-none focus:underline"
+                  transitionTypes={item.transitionTypes}
+                  className="text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors duration-150"
                 >
                   {item.label}
                 </Link>

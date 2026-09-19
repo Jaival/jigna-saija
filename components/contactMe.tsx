@@ -15,6 +15,7 @@ import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { useHasHover } from '@/lib/motion';
 
 interface ContactFormData {
   name: string;
@@ -24,6 +25,7 @@ interface ContactFormData {
 }
 
 export default function ContactMeComponent() {
+  const hasHover = useHasHover();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -94,10 +96,10 @@ export default function ContactMeComponent() {
 
             <div className="space-y-6">
               {/* Email Contact Card */}
-              <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-4 shadow-lg hover:shadow-xl transition-all duration-300 group">
+              <div className="bg-card text-card-foreground border border-border rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow duration-150 ease-out group">
                 <div className="flex items-center space-x-4">
                   <div
-                    className="flex items-center justify-center w-12 h-12 rounded-lg flex-shrink-0 group-hover:scale-110 transition-transform duration-300"
+                    className="flex items-center justify-center w-12 h-12 rounded-lg flex-shrink-0 group-hover:scale-110 transition-transform duration-150"
                     style={{ backgroundColor: 'rgba(29, 103, 147, 0.1)' }}
                   >
                     <Mail className="w-6 h-6" style={{ color: '#1d6793' }} />
@@ -127,7 +129,7 @@ export default function ContactMeComponent() {
                     href={userData.socialLinks.instagram}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-4 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-300 group"
+                    className="p-4 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-[transform,box-shadow] duration-150 ease-out group"
                     style={{
                       background:
                         'linear-gradient(135deg, #a40e4c 0%, #bc1058 50%, #fb923c 100%)',
@@ -151,7 +153,7 @@ export default function ContactMeComponent() {
                     href={userData.socialLinks.facebook}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-4 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-300 group"
+                    className="p-4 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-[transform,box-shadow] duration-150 ease-out group"
                     style={{
                       background:
                         'linear-gradient(135deg, #1d6793 0%, #2278aa 100%)',
@@ -174,7 +176,7 @@ export default function ContactMeComponent() {
             </div>
 
             {/* QR Code Image */}
-            <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
+            <div className="bg-card text-card-foreground border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-150 ease-out">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 text-center">
                 Scan to Connect
               </h3>
@@ -219,12 +221,12 @@ export default function ContactMeComponent() {
                     disabled={isSubmitting}
                     aria-invalid={errors.name ? 'true' : 'false'}
                     aria-describedby={errors.name ? 'name-error' : undefined}
-                    className={`w-full px-4 py-3 pr-10 border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 focus:outline-none focus:ring-2 ${
+                    className={`w-full px-4 py-3 pr-10 border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-150 ease-out ${
                       errors.name
-                        ? 'border-red-500 focus:ring-red-500'
+                        ? 'border-red-500 focus-visible:outline-red-500'
                         : touchedFields.name
-                          ? 'border-green-500 focus:ring-green-500'
-                          : 'border-gray-300 dark:border-gray-600 focus:ring-blue-500'
+                          ? 'border-green-500 focus-visible:outline-green-500'
+                          : 'border-gray-300 dark:border-gray-600'
                     }`}
                     placeholder="Your name"
                     {...register('name', {
@@ -284,12 +286,12 @@ export default function ContactMeComponent() {
                     disabled={isSubmitting}
                     aria-invalid={errors.email ? 'true' : 'false'}
                     aria-describedby={errors.email ? 'email-error' : undefined}
-                    className={`w-full px-4 py-3 pr-10 border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 focus:outline-none focus:ring-2 ${
+                    className={`w-full px-4 py-3 pr-10 border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-150 ease-out ${
                       errors.email
-                        ? 'border-red-500 focus:ring-red-500'
+                        ? 'border-red-500 focus-visible:outline-red-500'
                         : touchedFields.email
-                          ? 'border-green-500 focus:ring-green-500'
-                          : 'border-gray-300 dark:border-gray-600 focus:ring-blue-500'
+                          ? 'border-green-500 focus-visible:outline-green-500'
+                          : 'border-gray-300 dark:border-gray-600'
                     }`}
                     placeholder="your@email.com"
                     {...register('email', {
@@ -351,12 +353,12 @@ export default function ContactMeComponent() {
                     aria-describedby={
                       errors.subject ? 'subject-error' : undefined
                     }
-                    className={`w-full px-4 py-3 pr-10 border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 focus:outline-none focus:ring-2 ${
+                    className={`w-full px-4 py-3 pr-10 border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-150 ease-out ${
                       errors.subject
-                        ? 'border-red-500 focus:ring-red-500'
+                        ? 'border-red-500 focus-visible:outline-red-500'
                         : touchedFields.subject
-                          ? 'border-green-500 focus:ring-green-500'
-                          : 'border-gray-300 dark:border-gray-600 focus:ring-blue-500'
+                          ? 'border-green-500 focus-visible:outline-green-500'
+                          : 'border-gray-300 dark:border-gray-600'
                     }`}
                     placeholder="Project inquiry"
                     {...register('subject', {
@@ -417,12 +419,12 @@ export default function ContactMeComponent() {
                   aria-describedby={
                     errors.userMessage ? 'message-error' : undefined
                   }
-                  className={`w-full px-4 py-3 border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 resize-none focus:outline-none focus:ring-2 ${
+                  className={`w-full px-4 py-3 border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-150 ease-out resize-none ${
                     errors.userMessage
-                      ? 'border-red-500 focus:ring-red-500'
+                      ? 'border-red-500 focus-visible:outline-red-500'
                       : touchedFields.userMessage
-                        ? 'border-green-500 focus:ring-green-500'
-                        : 'border-gray-300 dark:border-gray-600 focus:ring-blue-500'
+                        ? 'border-green-500 focus-visible:outline-green-500'
+                        : 'border-gray-300 dark:border-gray-600'
                   }`}
                   placeholder="Tell me about your project..."
                   {...register('userMessage', {
@@ -454,9 +456,9 @@ export default function ContactMeComponent() {
               <motion.button
                 type="submit"
                 disabled={isSubmitting}
-                whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+                whileHover={hasHover ? { scale: isSubmitting ? 1 : 1.02 } : undefined}
                 whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
-                className="w-full text-white font-semibold py-3 px-6 rounded-lg hover:shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                className="w-full text-white font-semibold py-3 px-6 rounded-lg hover:shadow-lg transition-[box-shadow,opacity] duration-150 ease-out disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
                 style={{
                   background:
                     'linear-gradient(135deg, #1d6793 0%, #a40e4c 100%)',

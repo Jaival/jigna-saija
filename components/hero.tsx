@@ -1,5 +1,6 @@
 'use client';
-import { motion, useScroll, useTransform } from 'motion/react';
+import { motion, useScroll, useTransform, type Variants } from 'motion/react';
+import { spring, STAGGER, useHasHover, enterVariants, duration } from '@/lib/motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRef } from 'react';
@@ -29,83 +30,43 @@ const WHY_CHOOSE_ME = {
 };
 
 // Enhanced animation configurations with smoother timing
-const containerVariants = {
-  hidden: { opacity: 0 },
+const containerVariants: Variants = {
+  hidden: { opacity: 1 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.05,
-      delayChildren: 0.1,
-    },
+    transition: { staggerChildren: STAGGER },
   },
 };
 
-const itemVariants = {
-  hidden: { y: 30, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      type: 'spring' as const,
-      damping: 25,
-      stiffness: 120,
-    },
-  },
-};
+const itemVariants: Variants = enterVariants;
 
-const cardVariants = {
-  hidden: { scale: 0, opacity: 0 },
-  visible: {
-    scale: 1,
-    opacity: 1,
-    transition: {
-      type: 'spring' as const,
-      damping: 20,
-      stiffness: 150,
-    },
-  },
+const cardVariants: Variants = {
+  hidden: { scale: 0.96, opacity: 0 },
+  visible: { scale: 1, opacity: 1, transition: spring },
 };
 
 // Floating background elements with modern colors
 const FloatingBgElements = () => (
   <div className="absolute inset-0 overflow-hidden pointer-events-none">
-    <motion.div
+    <div
       className="absolute top-1/4 left-10 w-32 h-32 rounded-full blur-xl opacity-15"
       style={{
         background:
           'radial-gradient(circle, rgba(29, 103, 147, 0.12), rgba(34, 120, 170, 0.06))',
       }}
-      animate={{
-        scale: [1, 1.2, 1],
-        opacity: [0.15, 0.25, 0.15],
-      }}
-      transition={{
-        duration: 10,
-        repeat: Infinity,
-        ease: 'easeInOut',
-      }}
     />
-    <motion.div
+    <div
       className="absolute bottom-1/3 right-20 w-24 h-24 rounded-full blur-xl opacity-12"
       style={{
         background:
           'radial-gradient(circle, rgba(164, 14, 76, 0.12), rgba(251, 146, 60, 0.06))',
-      }}
-      animate={{
-        scale: [1, 1.3, 1],
-        opacity: [0.12, 0.22, 0.12],
-      }}
-      transition={{
-        duration: 12,
-        repeat: Infinity,
-        ease: 'easeInOut',
-        delay: 4,
       }}
     />
   </div>
 );
 
 export default function Hero() {
+  const hasHover = useHasHover();
   const scrollRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: scrollRef,
@@ -137,10 +98,10 @@ export default function Hero() {
         >
           <motion.h1
             variants={itemVariants}
-            className="text-3xl md:text-6xl font-bold leading-tight text-gradient-brand"
-            whileHover={{
+            className="text-3xl md:text-6xl font-bold leading-[1.05] tracking-[-0.02em] text-foreground"
+            whileHover={hasHover ? {
               scale: 1.01,
-            }}
+            } : undefined}
             transition={{
               type: 'spring',
               stiffness: 300,
@@ -157,7 +118,7 @@ export default function Hero() {
             Turning your{' '}
             <motion.span
               className="font-semibold text-blue-600"
-              whileHover={{ scale: 1.02 }}
+              whileHover={hasHover ? { scale: 1.02 } : undefined}
               transition={{ type: 'spring', stiffness: 400 }}
             >
               big ideas
@@ -167,31 +128,31 @@ export default function Hero() {
 
           <motion.div variants={itemVariants} className="mt-4 md:mt-6">
             <motion.div
-              whileHover={{
+              whileHover={hasHover ? {
                 scale: 1.02,
                 boxShadow: '0 20px 40px rgba(29, 103, 147, 0.3)',
-              }}
+              } : undefined}
               whileTap={{ scale: 0.98 }}
               transition={{ type: 'spring', stiffness: 400, damping: 15 }}
               className="relative overflow-hidden rounded-xl"
             >
               <Link
                 href="/projects"
-                className="relative block px-8 py-4 font-bold text-lg text-center text-white rounded-xl transition-all duration-300 w-full md:w-auto bg-gradient-brand"
+                className="relative block px-8 py-4 font-bold text-lg text-center text-white rounded-xl w-full md:w-auto bg-gradient-brand"
               >
                 <motion.span
                   className="relative z-10"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ delay: 0.8 }}
+                  transition={{ delay: STAGGER * 8 }}
                 >
                   See Projects
                 </motion.span>
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent"
                   initial={{ x: '-100%' }}
-                  whileHover={{ x: '100%' }}
-                  transition={{ duration: 0.6 }}
+                  whileHover={hasHover ? { x: '100%' } : undefined}
+                  transition={{ duration: duration.enter }}
                 />
               </Link>
             </motion.div>
@@ -205,7 +166,7 @@ export default function Hero() {
         >
           <motion.div
             className="relative overflow-hidden rounded-2xl"
-            whileHover={{ scale: 1.01 }}
+            whileHover={hasHover ? { scale: 1.01 } : undefined}
             transition={{ duration: 0.3 }}
           >
             <motion.div
@@ -233,10 +194,10 @@ export default function Hero() {
           <motion.div
             className="absolute -bottom-6 -right-6 bg-white/95 backdrop-blur-sm rounded-full p-4 shadow-xl"
             style={{ border: '2px solid #f6f6f1' }}
-            initial={{ scale: 0, rotate: -180 }}
-            animate={{ scale: 1, rotate: 0 }}
-            transition={{ delay: 1.2, type: 'spring', stiffness: 200 }}
-            whileHover={{ scale: 1.05, rotate: 2 }}
+            initial={{ scale: 0.96, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ ...spring, delay: STAGGER * 2 }}
+            whileHover={hasHover ? { scale: 1.03 } : undefined}
           >
             <div className="text-center">
               <div className="text-2xl font-bold text-blue-600">20+</div>
@@ -252,18 +213,18 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, margin: '-50px' }}
-        transition={{ duration: 0.8, delay: 0.2 }}
+        transition={{ duration: duration.enter, delay: STAGGER * 2 }}
       >
         <motion.div
           className="mb-12 md:mb-16 text-center"
           initial={{ y: 30, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: duration.enter }}
         >
           <motion.h2
             className="text-3xl font-bold md:text-5xl text-gray-300"
-            whileHover={{ scale: 1.01 }}
+            whileHover={hasHover ? { scale: 1.01 } : undefined}
             transition={{ type: 'spring', stiffness: 300 }}
           >
             Why Choose Me?
@@ -273,7 +234,7 @@ export default function Hero() {
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            transition={{ duration: duration.enter, delay: STAGGER * 3 }}
           />
         </motion.div>
 
@@ -287,46 +248,35 @@ export default function Hero() {
           {Object.entries(WHY_CHOOSE_ME).map(([key, value], index) => (
             <motion.div
               variants={cardVariants}
-              whileHover={{
+              whileHover={hasHover ? {
                 scale: 1.01,
                 y: -4,
                 rotateY: 1,
                 boxShadow: '0 15px 30px rgba(164, 14, 76, 0.3)',
-              }}
+              } : undefined}
               className="flex group card p-6 md:p-8 overflow-hidden max-w-96 rounded-2xl"
               key={key}
               custom={index}
               style={{ perspective: 1000 }}
             >
               {/* Animated background pattern with modern colors */}
-              <motion.div
-                className="absolute inset-0 opacity-0 group-hover:opacity-12 transition-opacity duration-500"
+              <div
+                className="absolute inset-0 opacity-0 group-hover:opacity-12 transition-opacity duration-150"
                 style={{
                   background: `
                     radial-gradient(circle at 30% 30%, rgba(29, 103, 147, 0.08) 0%, transparent 60%),
                     radial-gradient(circle at 70% 70%, rgba(164, 14, 76, 0.06) 0%, transparent 60%)
                   `,
                 }}
-                animate={{
-                  backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'],
-                }}
-                transition={{
-                  duration: 12,
-                  repeat: Infinity,
-                  ease: 'easeInOut',
-                }}
               />
 
               {/* Card number indicator */}
               <motion.div
                 className="absolute top-4 right-4 flex items-center justify-center"
-                initial={{ scale: 0, rotate: -90 }}
-                whileInView={{ scale: 1, rotate: 0 }}
-                transition={{
-                  delay: index * 0.05 + 0.3,
-                  type: 'spring',
-                  stiffness: 180,
-                }}
+                initial={{ scale: 0.96, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ ...spring, delay: index * STAGGER }}
               >
                 <motion.div
                   className="relative w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-sm"
@@ -335,33 +285,17 @@ export default function Hero() {
                       'linear-gradient(135deg, rgba(246, 246, 241, 0.25), rgba(246, 246, 241, 0.15))',
                     border: '1px solid rgba(246, 246, 241, 0.3)',
                   }}
-                  whileHover={{ scale: 1.05, rotate: 90 }}
+                  whileHover={hasHover ? { scale: 1.05, rotate: 90 } : undefined}
                   transition={{ duration: 0.3 }}
                 >
-                  <motion.span
-                    className="font-bold text-white text-sm"
-                    animate={{
-                      textShadow: [
-                        '0 0 0px rgba(255,255,255,0)',
-                        '0 0 6px rgba(255,255,255,0.3)',
-                        '0 0 0px rgba(255,255,255,0)',
-                      ],
-                    }}
-                    transition={{ duration: 4, repeat: Infinity }}
-                  >
+                  <span className="font-bold text-white text-sm">
                     {index + 1}
-                  </motion.span>
+                  </span>
 
                   {/* Animated ring around step number */}
-                  <motion.div
+                  <div
                     className="absolute inset-0 rounded-full"
                     style={{ border: '2px solid rgba(246, 246, 241, 0.3)' }}
-                    animate={{ rotate: 360 }}
-                    transition={{
-                      duration: 15,
-                      repeat: Infinity,
-                      ease: 'linear',
-                    }}
                   />
                 </motion.div>
               </motion.div>
@@ -372,7 +306,7 @@ export default function Hero() {
                   className="pt-1 pb-4 mb-3 font-bold tracking-tight text-white relative z-10 text-xl md:text-2xl"
                   initial={{ x: -15, opacity: 0 }}
                   whileInView={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 0.15 }}
+                  transition={{ delay: STAGGER }}
                 >
                   {key}
 
@@ -385,7 +319,7 @@ export default function Hero() {
                     }}
                     initial={{ width: 0 }}
                     whileInView={{ width: '60%' }}
-                    transition={{ delay: 0.3, duration: 0.6 }}
+                    transition={{ delay: STAGGER * 3, duration: duration.enter }}
                   />
                 </motion.h3>
 
@@ -394,7 +328,7 @@ export default function Hero() {
                   style={{ color: '#f6f6f1' }}
                   initial={{ y: 15, opacity: 0 }}
                   whileInView={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.2 }}
+                  transition={{ delay: STAGGER * 2 }}
                 >
                   {value.description}
                 </motion.p>
@@ -407,9 +341,9 @@ export default function Hero() {
                   borderLeft: '2px solid rgba(29, 103, 147, 0.4)',
                   borderBottom: '2px solid rgba(29, 103, 147, 0.4)',
                 }}
-                initial={{ scale: 0 }}
-                whileHover={{ scale: 1 }}
-                transition={{ delay: 0.1 }}
+                initial={{ scale: 0.96 }}
+                whileHover={hasHover ? { scale: 1 } : undefined}
+                transition={{ delay: STAGGER }}
               />
               <motion.div
                 className="absolute top-4 left-4 w-6 h-6 opacity-0 group-hover:opacity-100"
@@ -417,9 +351,9 @@ export default function Hero() {
                   borderTop: '2px solid rgba(164, 14, 76, 0.4)',
                   borderLeft: '2px solid rgba(164, 14, 76, 0.4)',
                 }}
-                initial={{ scale: 0 }}
-                whileHover={{ scale: 1 }}
-                transition={{ delay: 0.15 }}
+                initial={{ scale: 0.96 }}
+                whileHover={hasHover ? { scale: 1 } : undefined}
+                transition={{ delay: STAGGER }}
               />
             </motion.div>
           ))}

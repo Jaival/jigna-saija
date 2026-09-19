@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion, useAnimation } from 'motion/react';
 import { useEffect, useState } from 'react';
+import { STAGGER } from '@/lib/motion';
 
 const circles = [
   { cx: 19, cy: 5 }, // Top right
@@ -25,14 +26,14 @@ const GripIcon = () => {
       await controls.start((i) => ({
         opacity: 0.3,
         transition: {
-          delay: i * 0.1,
+          delay: i * STAGGER,
           duration: 0.2,
         },
       }));
       await controls.start((i) => ({
         opacity: 1,
         transition: {
-          delay: i * 0.1,
+          delay: i * STAGGER,
           duration: 0.2,
         },
       }));
@@ -45,7 +46,7 @@ const GripIcon = () => {
 
   return (
     <motion.div
-      className="cursor-pointer select-none p-2 hover:bg-accent rounded-md transition-colors duration-200 flex items-center justify-center"
+      className="cursor-pointer select-none p-2 hover:bg-accent rounded-md transition-colors duration-150 flex items-center justify-center"
       // onMouseEnter={() => setIsHovered(true)}
       // onMouseLeave={() => setIsHovered(false)}
     >

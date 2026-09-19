@@ -36,7 +36,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/"
-                  className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 focus:outline-none focus:underline"
+                  className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-150"
                 >
                   Home
                 </Link>
@@ -44,7 +44,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/projects"
-                  className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 focus:outline-none focus:underline"
+                  className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-150"
                 >
                   Projects
                 </Link>
@@ -52,7 +52,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/contact-me"
-                  className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 focus:outline-none focus:underline"
+                  className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-150"
                 >
                   Contact Me
                 </Link>
@@ -81,7 +81,7 @@ export default function Footer() {
             <div className="space-y-3">
               <a
                 href={`mailto:${userData.email}`}
-                className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 group focus:outline-none focus:underline"
+                className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-150 group"
               >
                 <Mail className="w-4 h-4 group-hover:scale-110 transition-transform" />
                 <span className="break-all">{userData.email}</span>
@@ -93,7 +93,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Visit our Instagram page"
-                  className="p-2 rounded-lg bg-gradient-to-br from-purple-600 to-pink-600 text-white hover:shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2"
+                  className="p-2 rounded-lg bg-amaranth-purple text-white hover:shadow-lg transition-shadow duration-150 ease-out"
                 >
                   <Instagram className="w-5 h-5" />
                 </a>
@@ -102,7 +102,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Visit our Facebook page"
-                  className="p-2 rounded-lg bg-blue-600 text-white hover:shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                  className="p-2 rounded-lg bg-blue-600 text-white hover:shadow-lg transition-shadow duration-150 ease-out"
                 >
                   <Facebook className="w-5 h-5" />
                 </a>
@@ -124,7 +124,7 @@ export default function Footer() {
               href="https://github.com/jaival"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors focus:outline-none focus:underline"
+              className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
             >
               Jaival Saija
             </a>

@@ -4,8 +4,8 @@ import {
   useInView,
   useMotionValue,
   useSpring,
-  MotionValue,
-} from 'motion/react';
+  MotionValue, type Variants } from 'motion/react';
+import { spring, enterTransition, STAGGER, useHasHover, enterVariants, duration } from '@/lib/motion';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
@@ -39,45 +39,27 @@ function AnimatedNumber({ motionValue }: { motionValue: MotionValue<number> }) {
 }
 
 // Enhanced animation configurations with smoother timing
-const containerVariants = {
-  hidden: { opacity: 0 },
+const containerVariants: Variants = {
+  hidden: { opacity: 1 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.05,
-      delayChildren: 0.05,
-    },
+    transition: { staggerChildren: STAGGER },
   },
 };
 
-const itemVariants = {
-  hidden: { y: 30, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      type: 'spring' as const,
-      damping: 25,
-      stiffness: 100,
-    },
-  },
-};
+const itemVariants: Variants = enterVariants;
 
-const imageVariants = {
-  hidden: { scale: 0.95, opacity: 0 },
+const imageVariants: Variants = {
+  hidden: { scale: 0.96, opacity: 0 },
   visible: {
     scale: 1,
     opacity: 1,
-    transition: {
-      type: 'spring' as const,
-      damping: 20,
-      stiffness: 120,
-      delay: 0.1,
-    },
+    transition: { ...spring, delay: STAGGER },
   },
 };
 
 export default function AboutMeComponent() {
+  const hasHover = useHasHover();
   const experience = [
     {
       value: 20,
@@ -115,36 +97,18 @@ export default function AboutMeComponent() {
     >
       {/* Background decorative elements with modern colors */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
+        <div
           className="absolute top-1/4 -left-20 w-40 h-40 rounded-full blur-3xl opacity-8"
           style={{
             background:
               'radial-gradient(circle, rgba(29, 103, 147, 0.08), rgba(52, 211, 153, 0.04))',
           }}
-          animate={{
-            scale: [1, 1.2, 1],
-            rotate: [0, 180, 360],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: 'linear',
-          }}
         />
-        <motion.div
+        <div
           className="absolute bottom-1/4 -right-20 w-60 h-60 rounded-full blur-3xl opacity-6"
           style={{
             background:
               'radial-gradient(circle, rgba(164, 14, 76, 0.06), rgba(251, 146, 60, 0.03))',
-          }}
-          animate={{
-            scale: [1, 1.1, 1],
-            rotate: [360, 180, 0],
-          }}
-          transition={{
-            duration: 30,
-            repeat: Infinity,
-            ease: 'linear',
           }}
         />
       </div>
@@ -156,11 +120,11 @@ export default function AboutMeComponent() {
           initial={{ y: 30, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: duration.enter }}
         >
           <motion.h2
             className="text-3xl font-bold md:text-5xl text-gray-300"
-            whileHover={{ scale: 1.01 }}
+            whileHover={hasHover ? { scale: 1.01 } : undefined}
             transition={{ type: 'spring', stiffness: 300 }}
           >
             About Me
@@ -170,7 +134,7 @@ export default function AboutMeComponent() {
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            transition={{ duration: duration.enter, delay: STAGGER * 3 }}
           />
         </motion.div>
 
@@ -189,50 +153,31 @@ export default function AboutMeComponent() {
           >
             <div className="relative group">
               {/* Floating decorative elements around image with modern colors */}
-              <motion.div
+              <div
                 className="absolute -top-6 -left-6 w-12 h-12 rounded-full opacity-15"
                 style={{
                   background: 'linear-gradient(135deg, #1d6793, #34d399)',
                 }}
-                animate={{
-                  y: [0, -10, 0],
-                  rotate: [0, 180, 360],
-                }}
-                transition={{
-                  duration: 8,
-                  repeat: Infinity,
-                  ease: 'easeInOut',
-                }}
               />
-              <motion.div
+              <div
                 className="absolute -bottom-4 -right-4 w-8 h-8 rounded-square opacity-20"
                 style={{
                   background: 'linear-gradient(135deg, #a40e4c, #fb923c)',
-                }}
-                animate={{
-                  scale: [1, 1.2, 1],
-                  rotate: [0, -90, -180],
-                }}
-                transition={{
-                  duration: 10,
-                  repeat: Infinity,
-                  ease: 'easeInOut',
-                  delay: 3,
                 }}
               />
 
               {/* Main image with enhanced hover effects */}
               <motion.div
                 className="relative overflow-hidden rounded-2xl shadow-2xl"
-                whileHover={{
+                whileHover={hasHover ? {
                   scale: 1.01,
                   rotateY: 2,
                   rotateX: 2,
-                }}
+                } : undefined}
                 transition={{ duration: 0.3 }}
                 style={{ perspective: 1000 }}
               >
-                <motion.div className="absolute inset-0 bg-gradient-to-t from-black/15 to-transparent z-10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <motion.div className="absolute inset-0 bg-gradient-to-t from-black/15 to-transparent z-10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-150" />
                 <Image
                   className="rounded-2xl aspect-auto w-full h-auto"
                   alt="Jigna Saija - Professional architect and interior designer with over 20 years of experience"
@@ -259,13 +204,13 @@ export default function AboutMeComponent() {
                 }}
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
-                transition={{ delay: 0.3 }}
+                transition={{ delay: STAGGER * 3 }}
               />
               <motion.blockquote
                 className="font-light italic text-base md:text-lg relative z-10 leading-relaxed text-gray-500"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
-                transition={{ delay: 0.4 }}
+                transition={{ delay: STAGGER * 4 }}
               >
                 I believe in creating spaces that blend beauty with
                 functionality, where design speaks to both the heart and mind.
@@ -274,7 +219,7 @@ export default function AboutMeComponent() {
                 className="text-sm font-medium mt-3 md:text-base relative z-10 text-blue-600"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
+                transition={{ delay: STAGGER * 5 }}
               >
                 - Jigna Saija
               </motion.p>
@@ -287,18 +232,18 @@ export default function AboutMeComponent() {
             className="flex flex-col w-full lg:ml-12"
           >
             <motion.p
-              className="text-lg leading-relaxed tracking-wide md:text-xl lg:text-2xl mb-8 text-gray-400"
+              className="text-lg leading-relaxed md:text-xl lg:text-2xl mb-8 text-gray-400"
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
+              transition={{ delay: STAGGER * 2, duration: duration.enter }}
             >
               With more than{' '}
               <motion.span
                 className="font-semibold px-2 py-1 rounded-md text-blue-600 bg-blue-50"
-                whileHover={{
+                whileHover={hasHover ? {
                   scale: 1.02,
                   backgroundColor: '#dbeafe',
-                }}
+                } : undefined}
                 transition={{ type: 'spring', stiffness: 400 }}
               >
                 fifteen years
@@ -315,12 +260,12 @@ export default function AboutMeComponent() {
               className="text-base leading-relaxed md:text-lg mb-8 text-gray-400"
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
+              transition={{ delay: STAGGER * 3, duration: duration.enter }}
             >
               My approach combines{' '}
               <motion.span
-                className="font-medium text-purple-600"
-                whileHover={{ scale: 1.02 }}
+                className="font-medium text-amaranth-purple dark:text-gold"
+                whileHover={hasHover ? { scale: 1.02 } : undefined}
               >
                 innovative design thinking
               </motion.span>{' '}
@@ -346,60 +291,49 @@ export default function AboutMeComponent() {
               <motion.div
                 ref={ref}
                 variants={itemVariants}
-                whileHover={{
+                whileHover={hasHover ? {
                   scale: 1.02,
                   y: -5,
                   boxShadow: '0 20px 40px rgba(164, 14, 76, 0.25)',
-                }}
+                } : undefined}
                 className="relative group card p-6 md:p-8 overflow-hidden"
                 key={index}
                 custom={index}
               >
                 {/* Enhanced background gradient with modern colors */}
                 <motion.div
-                  className="absolute inset-0 opacity-8 group-hover:opacity-15 transition-opacity duration-300"
+                  className="absolute inset-0 opacity-8 group-hover:opacity-15 transition-opacity duration-150"
                   style={{
                     background: item.color,
                   }}
-                  initial={{ scale: 0, rotate: 45 }}
-                  whileInView={{ scale: 1, rotate: 0 }}
-                  transition={{ delay: index * 0.05 + 0.3, duration: 0.6 }}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ ...enterTransition, delay: index * STAGGER }}
                 />
 
                 {/* Floating icon */}
                 <motion.div
                   className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center"
                   style={{ backgroundColor: 'rgba(246, 246, 241, 0.25)' }}
-                  initial={{ scale: 0, rotate: -90 }}
-                  whileInView={{ scale: 1, rotate: 0 }}
-                  transition={{
-                    delay: index * 0.03 + 0.4,
-                    type: 'spring',
-                    stiffness: 200,
-                  }}
+                  initial={{ scale: 0.96, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ ...spring, delay: index * STAGGER }}
                 >
-                  <motion.div
+                  <div
                     className="w-3 h-3 rounded-full"
                     style={{ backgroundColor: '#f6f6f1' }}
-                    animate={{ scale: [1, 1.1, 1] }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      delay: index * 0.2,
-                    }}
                   />
                 </motion.div>
 
                 {/* Animated counter */}
                 <motion.h5
                   className="mb-2 md:mb-3 font-bold tracking-tight text-white text-3xl md:text-4xl relative z-10"
-                  initial={{ scale: 0 }}
-                  whileInView={{ scale: 1 }}
-                  transition={{
-                    delay: index * 0.05 + 0.4,
-                    type: 'spring',
-                    stiffness: 150,
-                  }}
+                  initial={{ scale: 0.96, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ ...spring, delay: index * STAGGER }}
                 >
                   <motion.span>
                     <AnimatedNumber motionValue={value} />
@@ -412,7 +346,7 @@ export default function AboutMeComponent() {
                   style={{ color: '#f6f6f1' }}
                   initial={{ opacity: 0, y: 8 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.05 + 0.5 }}
+                  transition={{ delay: index * STAGGER }}
                 >
                   {item.description}
                 </motion.p>

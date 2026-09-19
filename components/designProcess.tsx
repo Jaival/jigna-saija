@@ -1,49 +1,25 @@
 'use client';
-import { motion } from 'motion/react';
+import { motion, type Variants } from 'motion/react';
+import { spring, useHasHover, STAGGER, duration } from '@/lib/motion';
 import { useRef } from 'react';
 
 // Enhanced animation configurations with smoother timing
-const containerVariants = {
-  hidden: { opacity: 0 },
+const containerVariants: Variants = {
+  hidden: { opacity: 1 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.05,
-      delayChildren: 0.05,
-    },
+    transition: { staggerChildren: STAGGER },
   },
 };
 
-const cardVariants = {
-  hidden: {
-    opacity: 0,
-    scale: 0.95,
-    rotateY: -8,
-  },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    rotateY: 0,
-    transition: {
-      type: 'spring' as const,
-      damping: 25,
-      stiffness: 120,
-      duration: 0.5,
-    },
-  },
+const cardVariants: Variants = {
+  hidden: { opacity: 0, scale: 0.96, y: 12 },
+  visible: { opacity: 1, scale: 1, y: 0, transition: spring },
 };
 
-const stepIndicatorVariants = {
-  hidden: { scale: 0, rotate: -90 },
-  visible: {
-    scale: 1,
-    rotate: 0,
-    transition: {
-      type: 'spring' as const,
-      damping: 20,
-      stiffness: 180,
-    },
-  },
+const stepIndicatorVariants: Variants = {
+  hidden: { scale: 0.96, opacity: 0 },
+  visible: { scale: 1, opacity: 1, transition: spring },
 };
 
 // Enhanced ProcessCard component
@@ -60,36 +36,29 @@ const ProcessCard = ({
   height?: string;
   isLarge?: boolean;
 }) => {
+  const hasHover = useHasHover();
   const scrollRef = useRef(null);
 
   return (
     <motion.div
       variants={cardVariants}
-      whileHover={{
+      whileHover={hasHover ? {
         scale: 1.01,
         y: -4,
         rotateY: 1,
         boxShadow: '0 15px 30px rgba(164, 14, 76, 0.3)',
-      }}
+      } : undefined}
       className={`relative group mb-4 ${height} rounded-2xl card p-6 md:p-8 overflow-hidden`}
       style={{ perspective: 1000 }}
     >
       {/* Animated background pattern with modern colors */}
-      <motion.div
-        className="absolute inset-0 opacity-0 group-hover:opacity-12 transition-opacity duration-500"
+      <div
+        className="absolute inset-0 opacity-0 group-hover:opacity-12 transition-opacity duration-150"
         style={{
           background: `
             radial-gradient(circle at 30% 30%, rgba(29, 103, 147, 0.08) 0%, transparent 60%),
             radial-gradient(circle at 70% 70%, rgba(164, 14, 76, 0.06) 0%, transparent 60%)
           `,
-        }}
-        animate={{
-          backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'],
-        }}
-        transition={{
-          duration: 12,
-          repeat: Infinity,
-          ease: 'easeInOut',
         }}
       />
 
@@ -105,29 +74,17 @@ const ProcessCard = ({
               'linear-gradient(135deg, rgba(246, 246, 241, 0.25), rgba(246, 246, 241, 0.15))',
             border: '1px solid rgba(246, 246, 241, 0.3)',
           }}
-          whileHover={{ scale: 1.05, rotate: 90 }}
+          whileHover={hasHover ? { scale: 1.05, rotate: 90 } : undefined}
           transition={{ duration: 0.3 }}
         >
-          <motion.span
-            className={`font-bold text-white ${isLarge ? 'text-lg' : 'text-sm'}`}
-            animate={{
-              textShadow: [
-                '0 0 0px rgba(255,255,255,0)',
-                '0 0 6px rgba(255,255,255,0.3)',
-                '0 0 0px rgba(255,255,255,0)',
-              ],
-            }}
-            transition={{ duration: 4, repeat: Infinity }}
-          >
+          <span className={`font-bold text-white ${isLarge ? 'text-lg' : 'text-sm'}`}>
             {step}
-          </motion.span>
+          </span>
 
           {/* Animated ring around step number */}
-          <motion.div
+          <div
             className="absolute inset-0 rounded-full"
             style={{ border: '2px solid rgba(246, 246, 241, 0.3)' }}
-            animate={{ rotate: 360 }}
-            transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
           />
         </motion.div>
       </motion.div>
@@ -138,7 +95,7 @@ const ProcessCard = ({
           className={`pt-1 pb-4 mb-3 font-bold tracking-tight text-white relative z-10 ${isLarge ? 'text-2xl md:text-4xl' : 'text-xl md:text-2xl'}`}
           initial={{ x: -15, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
-          transition={{ delay: 0.15 }}
+          transition={{ delay: STAGGER }}
         >
           {title}
 
@@ -151,7 +108,7 @@ const ProcessCard = ({
             }}
             initial={{ width: 0 }}
             whileInView={{ width: '60%' }}
-            transition={{ delay: 0.3, duration: 0.6 }}
+            transition={{ delay: STAGGER * 3, duration: duration.enter }}
           />
         </motion.h3>
 
@@ -160,7 +117,7 @@ const ProcessCard = ({
           style={{ color: '#f6f6f1' }}
           initial={{ y: 15, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.2 }}
+          transition={{ delay: STAGGER * 2 }}
         >
           {description}
         </motion.p>
@@ -173,9 +130,9 @@ const ProcessCard = ({
           borderLeft: '2px solid rgba(29, 103, 147, 0.4)',
           borderBottom: '2px solid rgba(29, 103, 147, 0.4)',
         }}
-        initial={{ scale: 0 }}
-        whileHover={{ scale: 1 }}
-        transition={{ delay: 0.1 }}
+        initial={{ scale: 0.96 }}
+        whileHover={hasHover ? { scale: 1 } : undefined}
+        transition={{ delay: STAGGER }}
       />
       <motion.div
         className="absolute top-4 left-4 w-6 h-6 opacity-0 group-hover:opacity-100"
@@ -183,9 +140,9 @@ const ProcessCard = ({
           borderTop: '2px solid rgba(164, 14, 76, 0.4)',
           borderLeft: '2px solid rgba(164, 14, 76, 0.4)',
         }}
-        initial={{ scale: 0 }}
-        whileHover={{ scale: 1 }}
-        transition={{ delay: 0.15 }}
+        initial={{ scale: 0.96 }}
+        whileHover={hasHover ? { scale: 1 } : undefined}
+        transition={{ delay: STAGGER }}
       />
     </motion.div>
   );
@@ -195,32 +152,29 @@ const ProcessCard = ({
 const ConnectingLine = ({ delay = 0 }: { delay?: number }) => (
   <motion.div
     className="hidden md:flex items-center justify-center my-4"
-    initial={{ opacity: 0, scale: 0 }}
+    initial={{ opacity: 0, scale: 0.96 }}
     whileInView={{ opacity: 1, scale: 1 }}
-    transition={{ delay: delay * 0.1, duration: 0.6 }}
+    transition={{ delay: delay * STAGGER, duration: duration.enter }}
   >
-    <motion.div
-      className="flex items-center space-x-2"
-      animate={{ x: [0, 3, 0] }}
-      transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-    >
-      <motion.div
+    <div className="flex items-center space-x-2">
+      <div
         className="w-2 h-2 rounded-full"
         style={{ background: 'linear-gradient(135deg, #a40e4c, #bc1058)' }}
       />
-      <motion.div
+      <div
         className="w-8 h-0.5"
         style={{ background: 'linear-gradient(90deg, #a40e4c, #1d6793)' }}
       />
-      <motion.div
+      <div
         className="w-2 h-2 rounded-full"
         style={{ background: 'linear-gradient(135deg, #1d6793, #2278aa)' }}
       />
-    </motion.div>
+    </div>
   </motion.div>
 );
 
 export default function DesignProcessComponent() {
+  const hasHover = useHasHover();
   // Enhanced process steps data
   const processSteps = [
     {
@@ -264,36 +218,18 @@ export default function DesignProcessComponent() {
     >
       {/* Background decorative elements with modern colors */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
+        <div
           className="absolute top-1/4 -left-32 w-64 h-64 rounded-full blur-3xl opacity-6"
           style={{
             background:
               'radial-gradient(circle, rgba(29, 103, 147, 0.06), rgba(52, 211, 153, 0.03))',
           }}
-          animate={{
-            scale: [1, 1.2, 1],
-            x: [0, 30, 0],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
         />
-        <motion.div
+        <div
           className="absolute bottom-1/4 -right-32 w-96 h-96 rounded-full blur-3xl opacity-4"
           style={{
             background:
               'radial-gradient(circle, rgba(164, 14, 76, 0.04), rgba(251, 146, 60, 0.02))',
-          }}
-          animate={{
-            scale: [1, 1.1, 1],
-            x: [0, -20, 0],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: 'easeInOut',
           }}
         />
       </div>
@@ -305,12 +241,12 @@ export default function DesignProcessComponent() {
           initial={{ y: 30, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: duration.enter }}
         >
           <motion.h2
             id="design-process-title"
             className="font-bold text-3xl md:text-5xl mb-4 text-gray-300"
-            whileHover={{ scale: 1.01 }}
+            whileHover={hasHover ? { scale: 1.01 } : undefined}
             transition={{ type: 'spring', stiffness: 300 }}
           >
             Our Design Process
@@ -321,14 +257,14 @@ export default function DesignProcessComponent() {
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            transition={{ duration: duration.enter, delay: STAGGER * 3 }}
           />
 
           <motion.p
             className="text-lg md:text-xl max-w-3xl mx-auto leading-relaxed text-gray-500"
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
+            transition={{ delay: STAGGER * 4, duration: duration.enter }}
           >
             A systematic approach to transforming your vision into reality,
             ensuring every detail is carefully planned and executed.
@@ -394,7 +330,7 @@ export default function DesignProcessComponent() {
           className="flex justify-center mt-12 md:mt-16"
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
+          transition={{ delay: STAGGER * 3, duration: duration.enter }}
         >
           <motion.div
             className="flex items-center space-x-4 px-6 py-3 rounded-full backdrop-blur-sm"
@@ -403,27 +339,23 @@ export default function DesignProcessComponent() {
                 'linear-gradient(135deg, rgba(29, 103, 147, 0.08), rgba(164, 14, 76, 0.08))',
               border: '1px solid rgba(246, 246, 241, 0.2)',
             }}
-            whileHover={{ scale: 1.02 }}
+            whileHover={hasHover ? { scale: 1.02 } : undefined}
             transition={{ type: 'spring', stiffness: 300 }}
           >
-            <motion.div
+            <div
               className="w-3 h-3 rounded-full"
               style={{
                 background: 'linear-gradient(135deg, #1d6793, #2278aa)',
               }}
-              animate={{ scale: [1, 1.15, 1] }}
-              transition={{ duration: 2.5, repeat: Infinity }}
             />
             <span className="text-sm font-medium text-gray-400">
               From Concept to Completion
             </span>
-            <motion.div
+            <div
               className="w-3 h-3 rounded-full"
               style={{
                 background: 'linear-gradient(135deg, #a40e4c, #fb923c)',
               }}
-              animate={{ scale: [1, 1.15, 1] }}
-              transition={{ duration: 2.5, repeat: Infinity, delay: 1.2 }}
             />
           </motion.div>
         </motion.div>

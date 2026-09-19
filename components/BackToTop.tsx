@@ -2,9 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { useHasHover } from '@/lib/motion';
 import { ArrowUp } from 'lucide-react';
 
 export default function BackToTop() {
+  const hasHover = useHasHover();
   const [isVisible, setIsVisible] = useState(false);
 
   // Show button when page is scrolled down
@@ -36,10 +38,10 @@ export default function BackToTop() {
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.5 }}
-          whileHover={{ scale: 1.1 }}
+          whileHover={hasHover ? { scale: 1.1 } : undefined}
           whileTap={{ scale: 0.9 }}
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 z-50 p-3 rounded-full shadow-lg bg-gradient-brand text-white hover:shadow-xl transition-shadow duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          className="fixed right-8 z-50 p-3 rounded-full shadow-lg bg-gradient-brand text-white hover:shadow-xl transition-shadow duration-150 ease-out bottom-[calc(2rem+env(safe-area-inset-bottom,0px))]"
           aria-label="Scroll to top"
           title="Back to top"
         >

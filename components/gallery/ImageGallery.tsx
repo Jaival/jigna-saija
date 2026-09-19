@@ -2,9 +2,19 @@
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import React, { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, type Variants } from 'motion/react';
+import {
+  useHasHover,
+  STAGGER,
+  duration,
+  ease,
+  spring,
+  enterTransition,
+} from '@/lib/motion';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
+import { ProjectImageTransition } from '@/components/ProjectImageTransition';
+import { CARD_IMAGE_QUALITY, CARD_IMAGE_SIZES } from '@/lib/viewTransitions';
 import {
   ChevronLeft,
   ChevronRight,
@@ -18,6 +28,8 @@ type ImageGalleryProps = {
   id: number;
   title: string;
   imageUrls: string[];
+  // Names the first thumbnail as the target of the project card morph.
+  transitionId?: string;
 };
 
 // Preload next/previous images for better UX
@@ -30,7 +42,9 @@ export default function ImageGallery({
   id,
   title,
   imageUrls,
+  transitionId,
 }: ImageGalleryProps) {
+  const hasHover = useHasHover();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState<number | null>(
     null,
@@ -157,15 +171,11 @@ export default function ImageGallery({
   };
 
   // Enhanced container variants with fast, snappy timing
-  const containerVariants = {
-    hidden: { opacity: 0 },
+  const containerVariants: Variants = {
+    hidden: { opacity: 1 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: layoutMode === 'masonry' ? 0.02 : 0.03,
-        delayChildren: 0.02,
-        duration: 0.15,
-      },
+      transition: { staggerChildren: STAGGER },
     },
   };
 
@@ -197,7 +207,7 @@ export default function ImageGallery({
       <motion.div
         initial={{ opacity: 0, y: -15 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: duration.enter }}
         className="flex items-center justify-between mb-8"
       >
         <div className="text-gray-600 dark:text-gray-400 text-base font-medium">
@@ -207,12 +217,12 @@ export default function ImageGallery({
         {/* Layout Toggle */}
         <div className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 rounded-xl p-1.5">
           <motion.button
-            whileHover={{ scale: 1.05 }}
+            whileHover={hasHover ? { scale: 1.05 } : undefined}
             whileTap={{ scale: 0.95 }}
             onClick={() => setLayoutMode('grid')}
-            className={`p-2.5 rounded-lg transition-all duration-200 ${
+            className={`p-2.5 rounded-lg transition-[color,background-color,box-shadow] duration-150 ease-out ${
               layoutMode === 'grid'
-                ? 'bg-white dark:bg-gray-700 text-pink-500 shadow-sm'
+                ? 'bg-white dark:bg-gray-700 text-button-blue dark:text-light-periwinkle shadow-sm'
                 : 'text-gray-600 dark:text-gray-400'
             }`}
             title="Grid Layout"
@@ -220,12 +230,12 @@ export default function ImageGallery({
             <Grid3X3 className="w-4 h-4" />
           </motion.button>
           <motion.button
-            whileHover={{ scale: 1.05 }}
+            whileHover={hasHover ? { scale: 1.05 } : undefined}
             whileTap={{ scale: 0.95 }}
             onClick={() => setLayoutMode('masonry')}
-            className={`p-2.5 rounded-lg transition-all duration-200 ${
+            className={`p-2.5 rounded-lg transition-[color,background-color,box-shadow] duration-150 ease-out ${
               layoutMode === 'masonry'
-                ? 'bg-white dark:bg-gray-700 text-pink-500 shadow-sm'
+                ? 'bg-white dark:bg-gray-700 text-button-blue dark:text-light-periwinkle shadow-sm'
                 : 'text-gray-600 dark:text-gray-400'
             }`}
             title="Bento Layout"
@@ -251,11 +261,18 @@ export default function ImageGallery({
           <motion.div
             key={`${id}-${index}-${layoutMode}`}
             variants={itemVariants}
-            whileHover={{
-              scale: 1.04,
-              y: -4,
-              zIndex: 10,
-            }}
+            // The card morph lands on the first tile. It has to be in place when
+            // the transition ends, not partway through its own entrance.
+            initial={index === 0 && transitionId ? false : undefined}
+            whileHover={
+              hasHover
+                ? {
+                  scale: 1.04,
+                  y: -4,
+                  zIndex: 10,
+                }
+                : undefined
+            }
             transition={{
               duration: 0.1,
               ease: 'easeOut',
@@ -278,33 +295,41 @@ export default function ImageGallery({
               }
             }}
           >
-            <ProfessionalImage
-              image={image}
-              title={title}
-              index={index}
-              priority={index < 6}
-              onClick={(e) => {
-                e.stopPropagation();
-                handleImageClick(index, e);
-              }}
-              onLoad={() => handleImageLoad(index)}
-              layoutMode={layoutMode}
-            />
+            {/* The shared element. The lightbox image carries the same
+                layoutId, so Motion morphs this rect into the full-screen one
+                and back again instead of cross-fading two unrelated copies. */}
+            <MorphTarget id={index === 0 ? transitionId : undefined}>
+              <motion.div
+                layoutId={`gallery-${id}-${layoutMode}-${index}`}
+                className="w-full h-full"
+              >
+                <ProfessionalImage
+                  image={image}
+                  title={title}
+                  index={index}
+                  priority={index < 6}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleImageClick(index, e);
+                  }}
+                  onLoad={() => handleImageLoad(index)}
+                  layoutMode={layoutMode}
+                  isMorphTarget={index === 0 && !!transitionId}
+                />
+              </motion.div>
+            </MorphTarget>
 
             {/* Modern Overlay with Instant Response */}
             <motion.div
               initial={{ opacity: 0 }}
               whileHover={{ opacity: 1 }}
-              transition={{ duration: 0.05 }}
+              transition={{ duration: duration.press, ease: ease.out }}
               className="absolute inset-0 bg-black/30 flex items-center justify-center"
             >
               <motion.div
                 initial={{ scale: 0.8, opacity: 0 }}
-                whileHover={{ scale: 1, opacity: 1 }}
-                transition={{
-                  duration: 0.05,
-                  ease: 'easeOut',
-                }}
+                whileHover={hasHover ? { scale: 1, opacity: 1 } : undefined}
+                transition={{ duration: duration.press, ease: ease.out }}
                 className="bg-white/20 backdrop-blur-sm rounded-2xl p-4 border border-white/30"
               >
                 <ZoomIn className="w-6 h-6 text-white" />
@@ -334,112 +359,142 @@ export default function ImageGallery({
               <motion.div
                 initial={{ opacity: 0 }}
                 whileHover={{ opacity: 0.6 }}
-                transition={{ duration: 0.05 }}
-                className="absolute bottom-4 left-4 w-2 h-2 bg-gradient-to-r from-pink-400 to-purple-400 rounded-full shadow-lg"
+                transition={{ duration: duration.press, ease: ease.out }}
+                className="absolute bottom-4 left-4 w-2 h-2 bg-gradient-brand rounded-full shadow-lg"
               />
             )}
           </motion.div>
         ))}
       </motion.div>
 
-      {/* Premium Modal/Dialog with Enhanced Animations */}
-      <AnimatePresence>
-        {isModalOpen && (
-          <Dialog open={isModalOpen} onOpenChange={handleOpenChange}>
-            <DialogContent className="fixed inset-0 w-screen h-screen max-w-none max-h-none min-w-full min-h-full p-6 bg-black/95 border-0 overflow-hidden m-0 translate-x-0 translate-y-0">
-              <DialogTitle className="sr-only">
-                {title} - Image{' '}
-                {currentImageIndex !== null ? currentImageIndex + 1 : 1} of{' '}
-                {imageUrls.length}
-              </DialogTitle>
+      {/* Lightbox. The Dialog stays mounted and Radix owns the backdrop fade
+          in both directions. The content unmounts the instant
+          currentImageIndex goes null, which is what hands the shared layoutId
+          back to the thumbnail so it can morph home. */}
+      <Dialog open={isModalOpen} onOpenChange={handleOpenChange}>
+        <DialogContent
+          // Radix puts a zoom-in-95 / zoom-out-95 transform on this element for
+          // 200ms. Motion measures the lightbox image against that transform
+          // and the shared-element morph lands in the wrong place, so the two
+          // scale variables are pinned to 1 here. The fade is kept.
+          style={
+            {
+              '--tw-enter-scale': 1,
+              '--tw-exit-scale': 1,
+            } as React.CSSProperties
+          }
+          className="fixed inset-0 w-screen h-dvh max-w-none max-h-none min-w-full min-h-dvh p-6 bg-black/95 border-0 overflow-hidden m-0 translate-x-0 translate-y-0"
+        >
+          <DialogTitle className="sr-only">
+            {title} - Image{' '}
+            {currentImageIndex !== null ? currentImageIndex + 1 : 1} of{' '}
+            {imageUrls.length}
+          </DialogTitle>
 
-              {currentImageIndex !== null && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.4 }}
-                  className="relative w-full h-full flex items-center justify-center"
-                >
-                  {/* Premium Navigation buttons */}
-                  {imageUrls.length > 1 && (
-                    <>
-                      <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.3 }}
-                      >
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="absolute left-4 top-1/2 -translate-y-1/2 z-50 bg-black/50 hover:bg-black/70 text-white border border-white/20 backdrop-blur-sm rounded-full transition-all duration-200"
-                          onClick={goToPreviousImage}
-                          aria-label="Previous image"
-                        >
-                          <ChevronLeft className="w-6 h-6" />
-                        </Button>
-                      </motion.div>
-
-                      <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.3 }}
-                      >
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="absolute right-4 top-1/2 -translate-y-1/2 z-50 bg-black/50 hover:bg-black/70 text-white border border-white/20 backdrop-blur-sm rounded-full transition-all duration-200"
-                          onClick={goToNextImage}
-                          aria-label="Next image"
-                        >
-                          <ChevronRight className="w-6 h-6" />
-                        </Button>
-                      </motion.div>
-                    </>
-                  )}
-
-                  {/* Premium Image counter */}
-                  {imageUrls.length > 1 && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 30 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.4, duration: 0.5 }}
-                      className="absolute bottom-6 left-1/2 -translate-x-1/2 z-50 bg-black/60 text-white px-6 py-3 rounded-2xl text-sm font-medium backdrop-blur-md border border-white/20 shadow-lg"
-                    >
-                      {currentImageIndex + 1} / {imageUrls.length}
-                    </motion.div>
-                  )}
-
-                  {/* Main image with premium animation */}
+          {currentImageIndex !== null && (
+            <div className="relative w-full h-full flex items-center justify-center">
+              {/* Premium Navigation buttons */}
+              {imageUrls.length > 1 && (
+                <>
                   <motion.div
-                    initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    transition={{
-                      duration: 0.6,
-                      type: 'spring',
-                      stiffness: 100,
-                      damping: 20,
-                    }}
-                    className="relative w-full h-full max-w-[calc(100vw-3rem)] max-h-[calc(100vh-3rem)]"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={enterTransition}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 z-50"
                   >
-                    <Image
-                      src={imageUrls[currentImageIndex]!}
-                      alt={`${title} - Image ${currentImageIndex + 1}`}
-                      fill
-                      className="object-contain rounded-2xl"
-                      sizes="100vw"
-                      quality={95}
-                      priority
-                    />
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="bg-black/50 hover:bg-black/70 text-white border border-white/20 backdrop-blur-sm rounded-full transition-colors duration-150 ease-out"
+                      onClick={goToPreviousImage}
+                      aria-label="Previous image"
+                    >
+                      <ChevronLeft className="w-6 h-6" />
+                    </Button>
                   </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={enterTransition}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 z-50"
+                  >
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="bg-black/50 hover:bg-black/70 text-white border border-white/20 backdrop-blur-sm rounded-full transition-colors duration-150 ease-out"
+                      onClick={goToNextImage}
+                      aria-label="Next image"
+                    >
+                      <ChevronRight className="w-6 h-6" />
+                    </Button>
+                  </motion.div>
+                </>
+              )}
+
+              {/* Premium Image counter */}
+              {imageUrls.length > 1 && (
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={enterTransition}
+                  className="absolute left-1/2 -translate-x-1/2 z-50 bg-black/60 text-white px-6 py-3 rounded-2xl text-sm font-medium backdrop-blur-md border border-white/20 shadow-lg bottom-[calc(1.5rem+env(safe-area-inset-bottom,0px))]"
+                >
+                  {currentImageIndex + 1} / {imageUrls.length}
                 </motion.div>
               )}
-            </DialogContent>
-          </Dialog>
-        )}
-      </AnimatePresence>
+
+              {/* Main image: the other half of the shared element. */}
+              <motion.div
+                layoutId={`gallery-${id}-${layoutMode}-${currentImageIndex}`}
+                drag="y"
+                dragConstraints={{ top: 0, bottom: 0 }}
+                dragElastic={0.6}
+                onDragEnd={(_event, info) => {
+                  // Velocity-based dismissal: how fast the finger was moving
+                  // matters more than how far it travelled. 0.11 px/ms is the
+                  // threshold that separates a deliberate flick from a slow
+                  // drag the user is reconsidering.
+                  const speed = Math.abs(info.velocity.y) / 1000;
+                  const distance = Math.abs(info.offset.y);
+                  if (speed > 0.11 || distance > 150) {
+                    handleOpenChange(false);
+                  }
+                }}
+                transition={spring}
+                className="relative w-full h-full max-w-[calc(100vw-3rem)] max-h-[calc(100dvh-3rem)] touch-none"
+              >
+                <Image
+                  src={imageUrls[currentImageIndex]!}
+                  alt={`${title} - Image ${currentImageIndex + 1}`}
+                  fill
+                  className="object-contain rounded-2xl"
+                  sizes="100vw"
+                  quality={95}
+                  priority
+                />
+              </motion.div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
+}
+
+// The project card on /projects morphs into this thumbnail when the detail page
+// uses the gallery morph target. The view transition only runs during route
+// navigation and Motion's layoutId only runs when the lightbox opens, so the
+// two never animate this element at the same time.
+function MorphTarget({
+  id,
+  children,
+}: {
+  id: string | undefined;
+  children: React.ReactNode;
+}) {
+  if (!id) return <>{children}</>;
+  return <ProjectImageTransition id={id}>{children}</ProjectImageTransition>;
 }
 
 type ProfessionalImageProps = {
@@ -450,6 +505,9 @@ type ProfessionalImageProps = {
   onClick?: (e: React.MouseEvent) => void;
   onLoad?: () => void;
   layoutMode: 'masonry' | 'grid';
+  // The card morph lands here. It must be painted when the page commits, so it
+  // skips its own fade and requests the card's exact file, already cached.
+  isMorphTarget?: boolean;
 };
 
 function ProfessionalImage({
@@ -460,7 +518,9 @@ function ProfessionalImage({
   onClick,
   onLoad,
   layoutMode,
+  isMorphTarget = false,
 }: ProfessionalImageProps) {
+  const hasHover = useHasHover();
   const [isLoading, setLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
   const [naturalDimensions, setNaturalDimensions] = useState<{
@@ -498,7 +558,7 @@ function ProfessionalImage({
         </motion.div>
       ) : (
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={isMorphTarget ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
           className={
@@ -513,17 +573,19 @@ function ProfessionalImage({
             fill
             className={cn(
               'transition-transform duration-150 ease-out rounded-2xl sm:rounded-3xl object-cover',
-              isLoading
+              isLoading && !isMorphTarget
                 ? 'scale-105 blur-sm grayscale opacity-70'
                 : 'scale-100 blur-0 grayscale-0 group-hover:scale-105',
             )}
             sizes={
-              layoutMode === 'grid'
-                ? '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
-                : '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw'
+              isMorphTarget
+                ? CARD_IMAGE_SIZES
+                : layoutMode === 'grid'
+                  ? '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
+                  : '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw'
             }
             priority={priority}
-            quality={95}
+            quality={CARD_IMAGE_QUALITY}
             onLoad={handleLoad}
             onError={() => {
               setLoading(false);
@@ -533,7 +595,7 @@ function ProfessionalImage({
 
           {/* Enhanced Loading overlay for masonry */}
           <AnimatePresence>
-            {isLoading && (
+            {isLoading && !isMorphTarget && (
               <motion.div
                 initial={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -543,11 +605,11 @@ function ProfessionalImage({
                 <motion.div
                   animate={{ rotate: 360 }}
                   transition={{
-                    duration: 0.8,
+                    duration: duration.enter,
                     repeat: Infinity,
                     ease: 'linear',
                   }}
-                  className="w-8 h-8 border-3 border-pink-500 border-t-transparent rounded-full"
+                  className="w-8 h-8 border-3 border-button-blue border-t-transparent rounded-full"
                 />
               </motion.div>
             )}

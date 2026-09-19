@@ -27,6 +27,10 @@ const nextConfig = {
   
   // Image optimization
   images: {
+    // Every `quality` a next/image uses must be listed (required since Next 16).
+    // 75: small thumbnails (the default). 90: cards and gallery tiles.
+    // 95: the full-screen lightbox only.
+    qualities: [75, 90, 95],
     formats: ['image/webp', 'image/avif'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],

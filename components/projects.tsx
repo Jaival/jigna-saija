@@ -1,16 +1,36 @@
 'use client';
 
-import { useState, useMemo, useDeferredValue, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { useState, useMemo, useDeferredValue } from 'react';
+import {
+  motion,
+  AnimatePresence,
+  LayoutGroup,
+  type Variants,
+} from 'motion/react';
+import {
+  useHasHover,
+  STAGGER,
+  enterVariants,
+  enterTransition,
+  duration,
+  spring,
+} from '@/lib/motion';
 import userData from '@/data/data';
 import Image from 'next/image';
 import Link from 'next/link';
+import { ProjectImageTransition } from '@/components/ProjectImageTransition';
+import {
+  CARD_IMAGE_QUALITY,
+  CARD_IMAGE_SIZES,
+  NAV_FORWARD,
+} from '@/lib/viewTransitions';
 import { Search, Filter, Grid, List, Calendar, Loader2 } from 'lucide-react';
 
 type ViewMode = 'grid' | 'list';
 type SortBy = 'newest' | 'oldest' | 'title';
 
 export default function ProjectsComponent() {
+  const hasHover = useHasHover();
   const [searchInput, setSearchInput] = useState('');
   const deferredSearch = useDeferredValue(searchInput);
   const [selectedCategory, setSelectedCategory] = useState<
@@ -19,16 +39,8 @@ export default function ProjectsComponent() {
   const [viewMode, setViewMode] = useState<ViewMode>('grid');
   const [sortBy, setSortBy] = useState<SortBy>('newest');
   const [showFilters, setShowFilters] = useState(false);
-  const [isSearching, setIsSearching] = useState(false);
-
-  // Track if search is pending
-  useEffect(() => {
-    if (searchInput !== deferredSearch) {
-      setIsSearching(true);
-    } else {
-      setIsSearching(false);
-    }
-  }, [searchInput, deferredSearch]);
+  // A search is pending while the deferred value still lags the input.
+  const isSearching = searchInput !== deferredSearch;
 
   // Combine all projects with type information
   const allProjects = useMemo(() => {
@@ -45,7 +57,9 @@ export default function ProjectsComponent() {
 
   // Filter and sort projects using deferred search value
   const filteredProjects = useMemo(() => {
-    let filtered = allProjects;
+    // Copy before sorting: sort() works in place, and sorting allProjects itself
+    // would hand back the same array, so the "All" view never re-rendered.
+    let filtered = [...allProjects];
 
     // Filter by search term
     if (deferredSearch) {
@@ -92,38 +106,33 @@ export default function ProjectsComponent() {
     };
   }, [filteredProjects, selectedCategory]);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
+  // Search results change on every keystroke. Rearranging the grid that often
+  // is worse than snapping, so layout animation is off while a term is active.
+  // Motion decides whether to animate from the previous render's `layout`
+  // prop, so the gate reads the urgent input too: it switches off one render
+  // before the deferred results change the cards.
+  const hasSearchTerm = searchInput.length > 0 || deferredSearch.length > 0;
+  const animateLayout = !hasSearchTerm;
+
+  const containerVariants: Variants = {
+    hidden: { opacity: 1 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
+      transition: { staggerChildren: STAGGER },
     },
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.3 },
-    },
-  };
+  const itemVariants: Variants = enterVariants;
 
   return (
-    <motion.section
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.6 }}
-      className="flex flex-col px-4 sm:px-6 md:px-8"
-    >
+    // No page-level fade: the view transition brings the page in, and a second
+    // fade on top of it would double-expose the arrival.
+    <section className="flex flex-col px-4 sm:px-6 md:px-8">
       {/* Modern Search Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.1 }}
+        transition={{ duration: duration.enter, delay: STAGGER }}
         className="mb-12"
       >
         <div className="max-w-7xl mx-auto">
@@ -146,21 +155,21 @@ export default function ProjectsComponent() {
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
                   aria-label="Search projects"
-                  className="w-full pl-10 pr-10 py-3 border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 focus:ring-2 focus:ring-pink-500 focus:border-transparent focus:outline-none transition-all duration-200 shadow-sm"
+                  className="w-full pl-10 pr-10 py-3 border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 transition-colors duration-150 ease-out shadow-sm"
                 />
               </div>
             </div>
 
             <div className="flex items-center gap-3">
               <motion.button
-                whileHover={{ scale: 1.05 }}
+                whileHover={hasHover ? { scale: 1.05 } : undefined}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setShowFilters(!showFilters)}
                 aria-label={showFilters ? 'Hide filters' : 'Show filters'}
                 aria-expanded={showFilters}
-                className={`p-3 min-h-[44px] min-w-[44px] rounded-xl border transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 ${
+                className={`p-3 min-h-[44px] min-w-[44px] rounded-xl border transition-[color,background-color,border-color,box-shadow] duration-150 ease-out ${
                   showFilters
-                    ? 'bg-pink-500 text-white border-pink-500 shadow-lg'
+                    ? 'bg-button-blue text-white border-button-blue shadow-lg'
                     : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 shadow-sm'
                 }`}
               >
@@ -173,28 +182,28 @@ export default function ProjectsComponent() {
                 aria-label="View mode"
               >
                 <motion.button
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={hasHover ? { scale: 1.05 } : undefined}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setViewMode('grid')}
                   aria-label="Grid view"
                   aria-pressed={viewMode === 'grid'}
-                  className={`p-2 min-h-[44px] min-w-[44px] rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 ${
+                  className={`p-2 min-h-[44px] min-w-[44px] rounded-lg transition-[color,background-color,box-shadow] duration-150 ease-out ${
                     viewMode === 'grid'
-                      ? 'bg-white dark:bg-gray-700 text-pink-500 shadow-sm'
+                      ? 'bg-white dark:bg-gray-700 text-button-blue dark:text-light-periwinkle shadow-sm'
                       : 'text-gray-600 dark:text-gray-400'
                   }`}
                 >
                   <Grid className="w-4 h-4" aria-hidden="true" />
                 </motion.button>
                 <motion.button
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={hasHover ? { scale: 1.05 } : undefined}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setViewMode('list')}
                   aria-label="List view"
                   aria-pressed={viewMode === 'list'}
-                  className={`p-2 min-h-[44px] min-w-[44px] rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 ${
+                  className={`p-2 min-h-[44px] min-w-[44px] rounded-lg transition-[color,background-color,box-shadow] duration-150 ease-out ${
                     viewMode === 'list'
-                      ? 'bg-white dark:bg-gray-700 text-pink-500 shadow-sm'
+                      ? 'bg-white dark:bg-gray-700 text-button-blue dark:text-light-periwinkle shadow-sm'
                       : 'text-gray-600 dark:text-gray-400'
                   }`}
                 >
@@ -224,7 +233,7 @@ export default function ProjectsComponent() {
                       onChange={(e) =>
                         setSelectedCategory(e.target.value as any)
                       }
-                      className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-pink-500 focus:border-transparent shadow-sm"
+                      className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm shadow-sm"
                     >
                       <option value="all">All Projects</option>
                       <option value="interior">Interior Design</option>
@@ -239,7 +248,7 @@ export default function ProjectsComponent() {
                     <select
                       value={sortBy}
                       onChange={(e) => setSortBy(e.target.value as SortBy)}
-                      className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-pink-500 focus:border-transparent shadow-sm"
+                      className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm shadow-sm"
                     >
                       <option value="newest">Newest First</option>
                       <option value="oldest">Oldest First</option>
@@ -263,51 +272,64 @@ export default function ProjectsComponent() {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
+        style={{ position: 'relative' }}
         className="max-w-7xl mx-auto w-full"
       >
-        {Object.entries(groupedProjects).map(([category, projects]) => {
-          if (projects.length === 0) return null;
+        <LayoutGroup>
+          <AnimatePresence mode="popLayout">
+            {Object.entries(groupedProjects).map(([category, projects]) => {
+              if (projects.length === 0) return null;
 
-          const categoryTitle =
-            category === 'interior'
-              ? 'Interior Projects'
-              : 'Architecture Projects';
+              const categoryTitle =
+                category === 'interior'
+                  ? 'Interior Projects'
+                  : 'Architecture Projects';
 
-          return (
-            <motion.div
-              key={category}
-              variants={itemVariants}
-              className="mb-16"
-            >
-              {selectedCategory === 'all' && (
-                <motion.h2
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6 }}
-                  className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-8 flex items-center gap-3"
+              return (
+                <motion.div
+                  key={category}
+                  // position, not size: the heading inside must not be stretched
+                  // while the section's height changes under a filter.
+                  layout={animateLayout ? 'position' : false}
+                  variants={itemVariants}
+                  exit={{
+                    opacity: 0,
+                    transition: { duration: duration.press },
+                  }}
+                  className="mb-16"
                 >
-                  <span>{categoryTitle}</span>
-                  <span className="text-lg text-gray-500 dark:text-gray-400 font-normal">
-                    ({projects.length})
-                  </span>
-                </motion.h2>
-              )}
+                  {selectedCategory === 'all' && (
+                    <motion.h2
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: duration.enter }}
+                      className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-8 flex items-center gap-3"
+                    >
+                      <span>{categoryTitle}</span>
+                      <span className="text-lg text-gray-500 dark:text-gray-400 font-normal">
+                        ({projects.length})
+                      </span>
+                    </motion.h2>
+                  )}
 
-              <ProjectGrid
-                projects={projects}
-                viewMode={viewMode}
-                category={category}
-              />
-            </motion.div>
-          );
-        })}
+                  <ProjectGrid
+                    projects={projects}
+                    viewMode={viewMode}
+                    category={category}
+                    animateLayout={animateLayout}
+                  />
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
+        </LayoutGroup>
 
         {/* Empty State */}
         {filteredProjects.length === 0 && (
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: duration.enter }}
             className="text-center py-16"
           >
             <div className="text-6xl mb-4">🔍</div>
@@ -320,7 +342,7 @@ export default function ProjectsComponent() {
           </motion.div>
         )}
       </motion.div>
-    </motion.section>
+    </section>
   );
 }
 
@@ -329,6 +351,7 @@ const ProjectGrid = ({
   projects,
   viewMode,
   category,
+  animateLayout,
 }: {
   projects: Array<{
     id: string;
@@ -340,60 +363,69 @@ const ProjectGrid = ({
   }>;
   viewMode: ViewMode;
   category: string;
+  animateLayout: boolean;
 }) => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
+  const containerVariants: Variants = {
+    hidden: { opacity: 1 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.1,
-      },
+      transition: { staggerChildren: STAGGER },
     },
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20, scale: 0.95 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.3,
-        ease: 'easeOut' as const,
-      },
-    },
-  };
+  // Each card is the same object across sort, filter and grid/list changes, so
+  // it travels to its new rect instead of being recreated. popLayout takes
+  // exiting cards out of flow at once (which needs a non-static parent), so the
+  // survivors start moving into the gap immediately.
+  const renderCards = (Item: typeof ProjectCard) => (
+    <AnimatePresence mode="popLayout">
+      {projects.map((project, idx) => (
+        <motion.div
+          key={project.id}
+          // Position only. Grid and list items have different aspect ratios, and
+          // a size animation squashes the image and text mid-morph; the size
+          // snaps while the card travels.
+          layout={animateLayout ? 'position' : false}
+          layoutId={animateLayout ? `project-card-${project.id}` : undefined}
+          variants={enterVariants}
+          exit={{
+            opacity: 0,
+            scale: 0.96,
+            transition: { duration: duration.press },
+          }}
+          transition={spring}
+        >
+          <Item project={project} index={idx} />
+        </motion.div>
+      ))}
+    </AnimatePresence>
+  );
 
   if (viewMode === 'list') {
     return (
       <motion.div
+        layout={animateLayout}
         variants={containerVariants}
         initial="hidden"
         animate="visible"
+        style={{ position: 'relative' }}
         className="space-y-4"
       >
-        {projects.map((project, idx) => (
-          <motion.div key={project.id} variants={itemVariants}>
-            <ProjectListItem project={project} index={idx} />
-          </motion.div>
-        ))}
+        {renderCards(ProjectListItem)}
       </motion.div>
     );
   }
 
   return (
     <motion.div
+      layout={animateLayout}
       variants={containerVariants}
       initial="hidden"
       animate="visible"
+      style={{ position: 'relative' }}
       className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
     >
-      {projects.map((project, idx) => (
-        <motion.div key={project.id} variants={itemVariants}>
-          <ProjectCard project={project} index={idx} />
-        </motion.div>
-      ))}
+      {renderCards(ProjectCard)}
     </motion.div>
   );
 };
@@ -413,33 +445,40 @@ const ProjectCard = ({
   };
   index: number;
 }) => {
+  const hasHover = useHasHover();
   return (
     <motion.div
-      whileHover={{ y: -8 }}
+      whileHover={hasHover ? { y: -8 } : undefined}
       transition={{ duration: 0.3 }}
       className="group"
     >
-      <Link href={project.link} className="block">
-        <div className="relative overflow-hidden rounded-2xl glass shadow-lg hover:shadow-2xl transition-all duration-500">
+      <Link href={project.link} transitionTypes={NAV_FORWARD} className="block">
+        <div className="relative overflow-hidden rounded-2xl glass shadow-lg hover:shadow-2xl transition-shadow duration-150 ease-out">
           <div className="relative aspect-[4/3] overflow-hidden">
-            <Image
-              src={project.imgUrl}
-              fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              quality={90}
-              alt={`${project.title} project thumbnail`}
-              className="object-cover transition-all duration-700 group-hover:scale-110"
-              priority={index < 3}
-            />
+            {/* Named wrapper, not the img: the hover scale must stay clipped
+                inside the snapshot the morph starts from. */}
+            <ProjectImageTransition id={project.id}>
+              <div className="absolute inset-0 overflow-hidden">
+                <Image
+                  src={project.imgUrl}
+                  fill
+                  sizes={CARD_IMAGE_SIZES}
+                  quality={CARD_IMAGE_QUALITY}
+                  alt={`${project.title} project thumbnail`}
+                  className="object-cover transition-transform duration-150 ease-out group-hover:scale-110"
+                  priority={index < 3}
+                />
+              </div>
+            </ProjectImageTransition>
 
             {/* Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-150" />
 
             {/* Category Badge */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.3 + index * 0.1 }}
+              transition={{ delay: STAGGER * 3 + index * STAGGER }}
               className="absolute top-4 left-4"
             >
               <span
@@ -457,7 +496,7 @@ const ProjectCard = ({
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.4 + index * 0.1 }}
+              transition={{ delay: STAGGER * 4 + index * STAGGER }}
               className="absolute top-4 right-4"
             >
               <span className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white text-sm font-bold border border-white/30">
@@ -469,7 +508,7 @@ const ProjectCard = ({
           {/* Card Content */}
           <div className="p-6">
             <div className="flex items-start justify-between mb-3">
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors duration-200 line-clamp-2">
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-button-blue dark:group-hover:text-light-periwinkle transition-colors duration-150 line-clamp-2">
                 {project.title}
               </h3>
             </div>
@@ -481,8 +520,8 @@ const ProjectCard = ({
               </div>
 
               <motion.div
-                whileHover={{ x: 4 }}
-                className="text-pink-600 dark:text-pink-400 group-hover:text-pink-700 dark:group-hover:text-pink-300 transition-colors duration-200"
+                whileHover={hasHover ? { x: 4 } : undefined}
+                className="text-button-blue dark:text-honolulu-blue group-hover:text-honolulu-blue dark:group-hover:text-light-periwinkle transition-colors duration-150"
               >
                 <svg
                   className="w-5 h-5"
@@ -521,28 +560,33 @@ const ProjectListItem = ({
   };
   index: number;
 }) => {
+  const hasHover = useHasHover();
   return (
     <motion.div
-      whileHover={{ x: 8 }}
+      whileHover={hasHover ? { x: 8 } : undefined}
       transition={{ duration: 0.2 }}
       className="group"
     >
-      <Link href={project.link} className="block">
-        <div className="flex items-center gap-6 p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700">
+      <Link href={project.link} transitionTypes={NAV_FORWARD} className="block">
+        <div className="flex items-center gap-6 p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-150 ease-out border border-gray-100 dark:border-gray-700">
           <div className="relative w-24 h-24 rounded-xl overflow-hidden flex-shrink-0">
-            <Image
-              src={project.imgUrl}
-              fill
-              sizes="96px"
-              quality={80}
-              alt={`${project.title} thumbnail`}
-              className="object-cover transition-transform duration-300 group-hover:scale-110"
-            />
+            <ProjectImageTransition id={project.id}>
+              <div className="absolute inset-0 overflow-hidden">
+                <Image
+                  src={project.imgUrl}
+                  fill
+                  sizes="96px"
+                  quality={75}
+                  alt={`${project.title} thumbnail`}
+                  className="object-cover transition-transform duration-150 group-hover:scale-110"
+                />
+              </div>
+            </ProjectImageTransition>
           </div>
 
           <div className="flex-1 min-w-0">
             <div className="flex items-start justify-between mb-2">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors duration-200 truncate">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-button-blue dark:group-hover:text-light-periwinkle transition-colors duration-150 truncate">
                 {project.title}
               </h3>
               <span
@@ -563,8 +607,8 @@ const ProjectListItem = ({
               </div>
 
               <motion.div
-                whileHover={{ x: 4 }}
-                className="text-gray-400 group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors duration-200"
+                whileHover={hasHover ? { x: 4 } : undefined}
+                className="text-gray-400 group-hover:text-button-blue dark:group-hover:text-light-periwinkle transition-colors duration-150"
               >
                 <svg
                   className="w-5 h-5"

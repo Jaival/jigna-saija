@@ -26,13 +26,13 @@ export default function NotFound() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
             href="/"
-            className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-pink-600 to-purple-600 dark:from-blue-500 dark:to-teal-400 text-white font-semibold rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-200"
+            className="inline-flex items-center px-6 py-3 bg-button-blue hover:bg-honolulu-blue text-white font-semibold rounded-lg hover:shadow-lg transform hover:scale-105 transition-[transform,box-shadow,background-color] duration-150 ease-out"
           >
             Go Home
           </Link>
           <Link
             href="/projects"
-            className="inline-flex items-center px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-semibold rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200"
+            className="inline-flex items-center px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-semibold rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-150"
           >
             View Projects
           </Link>

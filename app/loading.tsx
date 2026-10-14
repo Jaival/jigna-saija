@@ -13,14 +13,14 @@ export default function Loading() {
       >
         {/* Outer ring */}
         <motion.div
-          className="absolute inset-0 border-4 border-blue-200 dark:border-blue-900 rounded-full"
+          className="absolute inset-0 border-4 border-accent rounded-full"
           animate={{ rotate: 360 }}
           transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
         />
 
         {/* Inner ring */}
         <motion.div
-          className="absolute inset-2 border-4 border-t-blue-600 border-r-transparent border-b-transparent border-l-transparent dark:border-t-blue-400 rounded-full"
+          className="absolute inset-2 border-4 border-t-primary border-r-transparent border-b-transparent border-l-transparent rounded-full"
           animate={{ rotate: 360 }}
           transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
         />
@@ -39,7 +39,7 @@ export default function Loading() {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="mt-6 text-gray-600 dark:text-gray-400 font-medium"
+        className="mt-6 text-muted-foreground font-medium"
       >
         Loading...
       </motion.p>

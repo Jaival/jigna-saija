@@ -23,7 +23,7 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
         <li>
           <Link
             href="/"
-            className="flex items-center text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors duration-150"
+            className="flex items-center text-muted-foreground hover:text-primary transition-colors duration-150"
             aria-label="Home"
           >
             <Home className="w-4 h-4" aria-hidden="true" />
@@ -36,20 +36,20 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
           return (
             <li key={index} className="flex items-center space-x-2">
               <ChevronRight
-                className="w-4 h-4 text-gray-400 dark:text-gray-600"
+                className="w-4 h-4 text-muted-foreground/60"
                 aria-hidden="true"
               />
               {item.href && !isLast ? (
                 <Link
                   href={item.href}
                   transitionTypes={item.transitionTypes}
-                  className="text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors duration-150"
+                  className="text-muted-foreground hover:text-primary transition-colors duration-150"
                 >
                   {item.label}
                 </Link>
               ) : (
                 <span
-                  className="text-gray-900 dark:text-white font-medium"
+                  className="text-foreground font-medium"
                   aria-current={isLast ? 'page' : undefined}
                 >
                   {item.label}

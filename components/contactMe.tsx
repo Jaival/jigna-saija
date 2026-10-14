@@ -84,11 +84,11 @@ export default function ContactMeComponent() {
           {/* Contact Information */}
           <div className="space-y-6 md:space-y-8">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl lg:text-5xl">
+              <h1 className="text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl">
                 Let&apos;s Create Something
-                <span style={{ color: '#a40e4c' }}> Beautiful</span>
+                <span style={{ color: 'var(--color-clay)' }}> Beautiful</span>
               </h1>
-              <p className="mt-4 text-base text-gray-600 dark:text-gray-300 md:text-lg">
+              <p className="mt-4 text-base text-muted-foreground md:text-lg">
                 Ready to transform your space? Get in touch and let&apos;s
                 discuss your next project.
               </p>
@@ -100,17 +100,17 @@ export default function ContactMeComponent() {
                 <div className="flex items-center space-x-4">
                   <div
                     className="flex items-center justify-center w-12 h-12 rounded-lg flex-shrink-0 group-hover:scale-110 transition-transform duration-150"
-                    style={{ backgroundColor: 'rgba(29, 103, 147, 0.1)' }}
+                    style={{ backgroundColor: 'color-mix(in oklab, var(--color-pine) 10%, transparent)' }}
                   >
-                    <Mail className="w-6 h-6" style={{ color: '#1d6793' }} />
+                    <Mail className="w-6 h-6" style={{ color: 'var(--color-pine)' }} />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <h3 className="text-lg font-semibold text-gray-600 dark:text-white">
+                    <h3 className="text-lg font-semibold text-foreground">
                       Email
                     </h3>
                     <Link
                       href={`mailto:${userData.email}`}
-                      className="text-gray-400 hover:opacity-80 transition-colors break-words text-sm md:text-base"
+                      className="text-muted-foreground hover:opacity-80 transition-colors break-words text-sm md:text-base"
                     >
                       {userData.email}
                     </Link>
@@ -120,7 +120,7 @@ export default function ContactMeComponent() {
 
               {/* Social Media Section */}
               <div className="space-y-4">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                <h3 className="text-xl font-bold text-foreground">
                   Connect With Me
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -132,7 +132,7 @@ export default function ContactMeComponent() {
                     className="p-4 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-[transform,box-shadow] duration-150 ease-out group"
                     style={{
                       background:
-                        'linear-gradient(135deg, #a40e4c 0%, #bc1058 50%, #fb923c 100%)',
+                        'linear-gradient(135deg, var(--color-clay) 0%, var(--color-clay-deep) 50%, var(--color-ochre) 100%)',
                     }}
                   >
                     <div className="flex items-center space-x-3">
@@ -156,7 +156,7 @@ export default function ContactMeComponent() {
                     className="p-4 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-[transform,box-shadow] duration-150 ease-out group"
                     style={{
                       background:
-                        'linear-gradient(135deg, #1d6793 0%, #2278aa 100%)',
+                        'linear-gradient(135deg, var(--color-pine) 0%, var(--color-pine-light) 100%)',
                     }}
                   >
                     <div className="flex items-center space-x-3">
@@ -177,7 +177,7 @@ export default function ContactMeComponent() {
 
             {/* QR Code Image */}
             <div className="bg-card text-card-foreground border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-150 ease-out">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 text-center">
+              <h3 className="text-lg font-semibold text-foreground mb-4 text-center">
                 Scan to Connect
               </h3>
               <div className="relative w-full max-w-xs mx-auto aspect-square">
@@ -193,12 +193,12 @@ export default function ContactMeComponent() {
           </div>
 
           {/* Contact Form */}
-          <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-xl">
+          <div className="bg-card/80 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-xl">
             <div className="mb-6">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+              <h2 className="text-2xl font-bold text-foreground">
                 Send a Message
               </h2>
-              <p className="mt-2 text-gray-600 dark:text-gray-300">
+              <p className="mt-2 text-muted-foreground">
                 Fill out the form below and I&apos;ll get back to you as soon as
                 possible.
               </p>
@@ -210,7 +210,7 @@ export default function ContactMeComponent() {
               <div>
                 <label
                   htmlFor="name"
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                  className="block text-sm font-medium text-foreground/80 mb-2"
                 >
                   Name *
                 </label>
@@ -221,12 +221,12 @@ export default function ContactMeComponent() {
                     disabled={isSubmitting}
                     aria-invalid={errors.name ? 'true' : 'false'}
                     aria-describedby={errors.name ? 'name-error' : undefined}
-                    className={`w-full px-4 py-3 pr-10 border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-150 ease-out ${
+                    className={`w-full px-4 py-3 pr-10 border rounded-lg bg-background text-foreground disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-150 ease-out ${
                       errors.name
-                        ? 'border-red-500 focus-visible:outline-red-500'
+                        ? 'border-destructive focus-visible:outline-destructive'
                         : touchedFields.name
-                          ? 'border-green-500 focus-visible:outline-green-500'
-                          : 'border-gray-300 dark:border-gray-600'
+                          ? 'border-success focus-visible:outline-success'
+                          : 'border-input'
                     }`}
                     placeholder="Your name"
                     {...register('name', {
@@ -240,7 +240,7 @@ export default function ContactMeComponent() {
                   {errors.name && (
                     <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                       <AlertCircle
-                        className="h-5 w-5 text-red-500"
+                        className="h-5 w-5 text-destructive"
                         aria-hidden="true"
                       />
                     </div>
@@ -248,7 +248,7 @@ export default function ContactMeComponent() {
                   {touchedFields.name && !errors.name && (
                     <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                       <CheckCircle2
-                        className="h-5 w-5 text-green-500"
+                        className="h-5 w-5 text-success"
                         aria-hidden="true"
                       />
                     </div>
@@ -261,7 +261,7 @@ export default function ContactMeComponent() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
                       id="name-error"
-                      className="mt-2 text-sm text-red-600 dark:text-red-400 flex items-center gap-1"
+                      className="mt-2 text-sm text-destructive flex items-center gap-1"
                       role="alert"
                     >
                       <AlertCircle className="w-4 h-4" />
@@ -275,7 +275,7 @@ export default function ContactMeComponent() {
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                  className="block text-sm font-medium text-foreground/80 mb-2"
                 >
                   Email *
                 </label>
@@ -286,12 +286,12 @@ export default function ContactMeComponent() {
                     disabled={isSubmitting}
                     aria-invalid={errors.email ? 'true' : 'false'}
                     aria-describedby={errors.email ? 'email-error' : undefined}
-                    className={`w-full px-4 py-3 pr-10 border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-150 ease-out ${
+                    className={`w-full px-4 py-3 pr-10 border rounded-lg bg-background text-foreground disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-150 ease-out ${
                       errors.email
-                        ? 'border-red-500 focus-visible:outline-red-500'
+                        ? 'border-destructive focus-visible:outline-destructive'
                         : touchedFields.email
-                          ? 'border-green-500 focus-visible:outline-green-500'
-                          : 'border-gray-300 dark:border-gray-600'
+                          ? 'border-success focus-visible:outline-success'
+                          : 'border-input'
                     }`}
                     placeholder="your@email.com"
                     {...register('email', {
@@ -305,7 +305,7 @@ export default function ContactMeComponent() {
                   {errors.email && (
                     <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                       <AlertCircle
-                        className="h-5 w-5 text-red-500"
+                        className="h-5 w-5 text-destructive"
                         aria-hidden="true"
                       />
                     </div>
@@ -313,7 +313,7 @@ export default function ContactMeComponent() {
                   {touchedFields.email && !errors.email && (
                     <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                       <CheckCircle2
-                        className="h-5 w-5 text-green-500"
+                        className="h-5 w-5 text-success"
                         aria-hidden="true"
                       />
                     </div>
@@ -326,7 +326,7 @@ export default function ContactMeComponent() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
                       id="email-error"
-                      className="mt-2 text-sm text-red-600 dark:text-red-400 flex items-center gap-1"
+                      className="mt-2 text-sm text-destructive flex items-center gap-1"
                       role="alert"
                     >
                       <AlertCircle className="w-4 h-4" />
@@ -340,7 +340,7 @@ export default function ContactMeComponent() {
               <div>
                 <label
                   htmlFor="subject"
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                  className="block text-sm font-medium text-foreground/80 mb-2"
                 >
                   Subject *
                 </label>
@@ -353,12 +353,12 @@ export default function ContactMeComponent() {
                     aria-describedby={
                       errors.subject ? 'subject-error' : undefined
                     }
-                    className={`w-full px-4 py-3 pr-10 border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-150 ease-out ${
+                    className={`w-full px-4 py-3 pr-10 border rounded-lg bg-background text-foreground disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-150 ease-out ${
                       errors.subject
-                        ? 'border-red-500 focus-visible:outline-red-500'
+                        ? 'border-destructive focus-visible:outline-destructive'
                         : touchedFields.subject
-                          ? 'border-green-500 focus-visible:outline-green-500'
-                          : 'border-gray-300 dark:border-gray-600'
+                          ? 'border-success focus-visible:outline-success'
+                          : 'border-input'
                     }`}
                     placeholder="Project inquiry"
                     {...register('subject', {
@@ -372,7 +372,7 @@ export default function ContactMeComponent() {
                   {errors.subject && (
                     <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                       <AlertCircle
-                        className="h-5 w-5 text-red-500"
+                        className="h-5 w-5 text-destructive"
                         aria-hidden="true"
                       />
                     </div>
@@ -380,7 +380,7 @@ export default function ContactMeComponent() {
                   {touchedFields.subject && !errors.subject && (
                     <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                       <CheckCircle2
-                        className="h-5 w-5 text-green-500"
+                        className="h-5 w-5 text-success"
                         aria-hidden="true"
                       />
                     </div>
@@ -393,7 +393,7 @@ export default function ContactMeComponent() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
                       id="subject-error"
-                      className="mt-2 text-sm text-red-600 dark:text-red-400 flex items-center gap-1"
+                      className="mt-2 text-sm text-destructive flex items-center gap-1"
                       role="alert"
                     >
                       <AlertCircle className="w-4 h-4" />
@@ -407,7 +407,7 @@ export default function ContactMeComponent() {
               <div>
                 <label
                   htmlFor="userMessage"
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                  className="block text-sm font-medium text-foreground/80 mb-2"
                 >
                   Message *
                 </label>
@@ -419,12 +419,12 @@ export default function ContactMeComponent() {
                   aria-describedby={
                     errors.userMessage ? 'message-error' : undefined
                   }
-                  className={`w-full px-4 py-3 border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-150 ease-out resize-none ${
+                  className={`w-full px-4 py-3 border rounded-lg bg-background text-foreground disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-150 ease-out resize-none ${
                     errors.userMessage
-                      ? 'border-red-500 focus-visible:outline-red-500'
+                      ? 'border-destructive focus-visible:outline-destructive'
                       : touchedFields.userMessage
-                        ? 'border-green-500 focus-visible:outline-green-500'
-                        : 'border-gray-300 dark:border-gray-600'
+                        ? 'border-success focus-visible:outline-success'
+                        : 'border-input'
                   }`}
                   placeholder="Tell me about your project..."
                   {...register('userMessage', {
@@ -442,7 +442,7 @@ export default function ContactMeComponent() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
                       id="message-error"
-                      className="mt-2 text-sm text-red-600 dark:text-red-400 flex items-center gap-1"
+                      className="mt-2 text-sm text-destructive flex items-center gap-1"
                       role="alert"
                     >
                       <AlertCircle className="w-4 h-4" />
@@ -461,7 +461,7 @@ export default function ContactMeComponent() {
                 className="w-full text-white font-semibold py-3 px-6 rounded-lg hover:shadow-lg transition-[box-shadow,opacity] duration-150 ease-out disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
                 style={{
                   background:
-                    'linear-gradient(135deg, #1d6793 0%, #a40e4c 100%)',
+                    'linear-gradient(135deg, var(--color-pine) 0%, var(--color-clay) 100%)',
                 }}
               >
                 <AnimatePresence mode="wait">

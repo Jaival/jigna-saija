@@ -46,7 +46,7 @@ const ProcessCard = ({
         scale: 1.01,
         y: -4,
         rotateY: 1,
-        boxShadow: '0 15px 30px rgba(164, 14, 76, 0.3)',
+        boxShadow: '0 15px 30px color-mix(in oklab, var(--color-clay) 30%, transparent)',
       } : undefined}
       className={`relative group mb-4 ${height} rounded-2xl card p-6 md:p-8 overflow-hidden`}
       style={{ perspective: 1000 }}
@@ -56,8 +56,8 @@ const ProcessCard = ({
         className="absolute inset-0 opacity-0 group-hover:opacity-12 transition-opacity duration-150"
         style={{
           background: `
-            radial-gradient(circle at 30% 30%, rgba(29, 103, 147, 0.08) 0%, transparent 60%),
-            radial-gradient(circle at 70% 70%, rgba(164, 14, 76, 0.06) 0%, transparent 60%)
+            radial-gradient(circle at 30% 30%, color-mix(in oklab, var(--color-pine) 8%, transparent) 0%, transparent 60%),
+            radial-gradient(circle at 70% 70%, color-mix(in oklab, var(--color-clay) 6%, transparent) 0%, transparent 60%)
           `,
         }}
       />
@@ -71,20 +71,20 @@ const ProcessCard = ({
           className={`relative ${isLarge ? 'w-12 h-12' : 'w-10 h-10'} rounded-full flex items-center justify-center backdrop-blur-sm`}
           style={{
             background:
-              'linear-gradient(135deg, rgba(246, 246, 241, 0.25), rgba(246, 246, 241, 0.15))',
-            border: '1px solid rgba(246, 246, 241, 0.3)',
+              'linear-gradient(135deg, color-mix(in oklab, var(--color-foreground) 8%, transparent), color-mix(in oklab, var(--color-foreground) 4%, transparent))',
+            border: '1px solid color-mix(in oklab, var(--color-foreground) 15%, transparent)',
           }}
           whileHover={hasHover ? { scale: 1.05, rotate: 90 } : undefined}
           transition={{ duration: 0.3 }}
         >
-          <span className={`font-bold text-white ${isLarge ? 'text-lg' : 'text-sm'}`}>
+          <span className={`font-bold text-foreground ${isLarge ? 'text-lg' : 'text-sm'}`}>
             {step}
           </span>
 
           {/* Animated ring around step number */}
           <div
             className="absolute inset-0 rounded-full"
-            style={{ border: '2px solid rgba(246, 246, 241, 0.3)' }}
+            style={{ border: '2px solid color-mix(in oklab, var(--color-foreground) 15%, transparent)' }}
           />
         </motion.div>
       </motion.div>
@@ -92,7 +92,7 @@ const ProcessCard = ({
       {/* Card content */}
       <motion.div className="relative z-10">
         <motion.h3
-          className={`pt-1 pb-4 mb-3 font-bold tracking-tight text-white relative z-10 ${isLarge ? 'text-2xl md:text-4xl' : 'text-xl md:text-2xl'}`}
+          className={`pt-1 pb-4 mb-3 font-bold tracking-tight text-foreground relative z-10 ${isLarge ? 'text-2xl md:text-4xl' : 'text-xl md:text-2xl'}`}
           initial={{ x: -15, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
           transition={{ delay: STAGGER }}
@@ -104,7 +104,7 @@ const ProcessCard = ({
             className="absolute bottom-0 left-0 h-0.5 rounded-full"
             style={{
               background:
-                'linear-gradient(90deg, rgba(246, 246, 241, 0.8), transparent)',
+                'linear-gradient(90deg, color-mix(in oklab, var(--color-primary) 80%, transparent), transparent)',
             }}
             initial={{ width: 0 }}
             whileInView={{ width: '60%' }}
@@ -113,8 +113,7 @@ const ProcessCard = ({
         </motion.h3>
 
         <motion.p
-          className={`relative z-10 leading-relaxed ${isLarge ? 'text-lg md:text-xl' : 'text-base md:text-lg'}`}
-          style={{ color: '#f6f6f1' }}
+          className={`relative z-10 leading-relaxed text-muted-foreground ${isLarge ? 'text-lg md:text-xl' : 'text-base md:text-lg'}`}
           initial={{ y: 15, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           transition={{ delay: STAGGER * 2 }}
@@ -127,8 +126,8 @@ const ProcessCard = ({
       <motion.div
         className="absolute bottom-4 left-4 w-8 h-8 opacity-0 group-hover:opacity-100"
         style={{
-          borderLeft: '2px solid rgba(29, 103, 147, 0.4)',
-          borderBottom: '2px solid rgba(29, 103, 147, 0.4)',
+          borderLeft: '2px solid color-mix(in oklab, var(--color-pine) 40%, transparent)',
+          borderBottom: '2px solid color-mix(in oklab, var(--color-pine) 40%, transparent)',
         }}
         initial={{ scale: 0.96 }}
         whileHover={hasHover ? { scale: 1 } : undefined}
@@ -137,8 +136,8 @@ const ProcessCard = ({
       <motion.div
         className="absolute top-4 left-4 w-6 h-6 opacity-0 group-hover:opacity-100"
         style={{
-          borderTop: '2px solid rgba(164, 14, 76, 0.4)',
-          borderLeft: '2px solid rgba(164, 14, 76, 0.4)',
+          borderTop: '2px solid color-mix(in oklab, var(--color-clay) 40%, transparent)',
+          borderLeft: '2px solid color-mix(in oklab, var(--color-clay) 40%, transparent)',
         }}
         initial={{ scale: 0.96 }}
         whileHover={hasHover ? { scale: 1 } : undefined}
@@ -159,15 +158,15 @@ const ConnectingLine = ({ delay = 0 }: { delay?: number }) => (
     <div className="flex items-center space-x-2">
       <div
         className="w-2 h-2 rounded-full"
-        style={{ background: 'linear-gradient(135deg, #a40e4c, #bc1058)' }}
+        style={{ background: 'linear-gradient(135deg, var(--color-clay), var(--color-clay-deep))' }}
       />
       <div
         className="w-8 h-0.5"
-        style={{ background: 'linear-gradient(90deg, #a40e4c, #1d6793)' }}
+        style={{ background: 'linear-gradient(90deg, var(--color-clay), var(--color-pine))' }}
       />
       <div
         className="w-2 h-2 rounded-full"
-        style={{ background: 'linear-gradient(135deg, #1d6793, #2278aa)' }}
+        style={{ background: 'linear-gradient(135deg, var(--color-pine), var(--color-pine-light))' }}
       />
     </div>
   </motion.div>
@@ -222,14 +221,14 @@ export default function DesignProcessComponent() {
           className="absolute top-1/4 -left-32 w-64 h-64 rounded-full blur-3xl opacity-6"
           style={{
             background:
-              'radial-gradient(circle, rgba(29, 103, 147, 0.06), rgba(52, 211, 153, 0.03))',
+              'radial-gradient(circle, color-mix(in oklab, var(--color-pine) 6%, transparent), color-mix(in oklab, var(--color-pine-tint) 3%, transparent))',
           }}
         />
         <div
           className="absolute bottom-1/4 -right-32 w-96 h-96 rounded-full blur-3xl opacity-4"
           style={{
             background:
-              'radial-gradient(circle, rgba(164, 14, 76, 0.04), rgba(251, 146, 60, 0.02))',
+              'radial-gradient(circle, color-mix(in oklab, var(--color-clay) 4%, transparent), color-mix(in oklab, var(--color-ochre) 2%, transparent))',
           }}
         />
       </div>
@@ -245,7 +244,7 @@ export default function DesignProcessComponent() {
         >
           <motion.h2
             id="design-process-title"
-            className="font-bold text-3xl md:text-5xl mb-4 text-gray-300"
+            className="font-bold text-3xl md:text-5xl mb-4 text-foreground"
             whileHover={hasHover ? { scale: 1.01 } : undefined}
             transition={{ type: 'spring', stiffness: 300 }}
           >
@@ -261,7 +260,7 @@ export default function DesignProcessComponent() {
           />
 
           <motion.p
-            className="text-lg md:text-xl max-w-3xl mx-auto leading-relaxed text-gray-500"
+            className="text-lg md:text-xl max-w-3xl mx-auto leading-relaxed text-muted-foreground"
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: STAGGER * 4, duration: duration.enter }}
@@ -336,8 +335,8 @@ export default function DesignProcessComponent() {
             className="flex items-center space-x-4 px-6 py-3 rounded-full backdrop-blur-sm"
             style={{
               background:
-                'linear-gradient(135deg, rgba(29, 103, 147, 0.08), rgba(164, 14, 76, 0.08))',
-              border: '1px solid rgba(246, 246, 241, 0.2)',
+                'linear-gradient(135deg, color-mix(in oklab, var(--color-pine) 8%, transparent), color-mix(in oklab, var(--color-clay) 8%, transparent))',
+              border: '1px solid color-mix(in oklab, var(--color-foreground) 12%, transparent)',
             }}
             whileHover={hasHover ? { scale: 1.02 } : undefined}
             transition={{ type: 'spring', stiffness: 300 }}
@@ -345,16 +344,16 @@ export default function DesignProcessComponent() {
             <div
               className="w-3 h-3 rounded-full"
               style={{
-                background: 'linear-gradient(135deg, #1d6793, #2278aa)',
+                background: 'linear-gradient(135deg, var(--color-pine), var(--color-pine-light))',
               }}
             />
-            <span className="text-sm font-medium text-gray-400">
+            <span className="text-sm font-medium text-muted-foreground">
               From Concept to Completion
             </span>
             <div
               className="w-3 h-3 rounded-full"
               style={{
-                background: 'linear-gradient(135deg, #a40e4c, #fb923c)',
+                background: 'linear-gradient(135deg, var(--color-clay), var(--color-ochre))',
               }}
             />
           </motion.div>

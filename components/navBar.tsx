@@ -1,11 +1,13 @@
 'use client';
 
 import { Transition } from '@headlessui/react';
-import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Home, FolderOpen, Mail } from 'lucide-react';
 import { usePathname } from 'next/navigation';
+import { Logo } from '@/components/Logo';
+import { ThemeToggle } from '@/components/ThemeToggle';
+import { cn } from '@/lib/utils';
 
 // Extract navigation links to avoid duplication
 const navLinks = [
@@ -54,21 +56,15 @@ export default function NavBar() {
             href="/"
             className="flex items-center group transition-transform duration-150 hover:scale-[1.02]"
           >
-            <div className="relative w-28 sm:w-32 md:w-36 lg:w-40">
-              <Image
-                className="w-full h-auto"
-                alt="Jigna Saija"
-                width={320}
-                height={320}
-                src={'/logos/JiiJ_Designs.png'}
-                priority
-              />
-            </div>
+            <Logo
+              title="JiiJ Designs, home"
+              className="w-32 sm:w-36 md:w-40 lg:w-44 text-foreground"
+            />
           </Link>
 
           {/* Desktop Navigation */}
           <nav
-            className="hidden md:flex items-center space-x-1 lg:space-x-2"
+            className="hidden md:flex items-center gap-1 lg:gap-2"
             aria-label="Main navigation"
           >
             {navLinks.map((link) => {
@@ -79,13 +75,12 @@ export default function NavBar() {
                   key={link.href}
                   href={link.href}
                   aria-current={isActive ? 'page' : undefined}
-                  className={`flex items-center gap-2 px-4 py-2 min-h-[44px] rounded-full text-sm lg:text-base font-medium transition-colors duration-150 ease-out group ${
+                  className={cn(
+                    'flex items-center gap-2 px-4 py-2 min-h-[44px] rounded-full text-sm lg:text-base font-medium transition-colors duration-150 ease-out group',
                     isActive
-                      ? 'bg-blue-100 dark:bg-gray-700 text-blue-600 dark:text-blue-400'
-                      : isScrolled
-                        ? 'text-gray-700 dark:text-gray-200 hover:bg-blue-50 dark:hover:bg-gray-800'
-                        : 'text-white hover:bg-white/10'
-                  }`}
+                      ? 'bg-accent text-accent-foreground'
+                      : 'text-foreground/80 hover:text-foreground hover:bg-secondary',
+                  )}
                 >
                   <IconComponent
                     className="w-4 h-4 transition-transform duration-150 group-hover:scale-[1.06]"
@@ -95,18 +90,16 @@ export default function NavBar() {
                 </Link>
               );
             })}
+            <ThemeToggle className="ml-1 lg:ml-2" />
           </nav>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="flex items-center gap-1 md:hidden">
+            <ThemeToggle />
             <button
               onClick={() => setIsOpen(!isOpen)}
               type="button"
-              className={`p-2 min-h-[44px] min-w-[44px] rounded-lg transition-colors duration-150 ease-out ${
-                isScrolled
-                  ? 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800'
-                  : 'text-white hover:bg-white/10'
-              }`}
+              className="p-2 min-h-[44px] min-w-[44px] rounded-lg text-foreground/80 hover:text-foreground hover:bg-secondary transition-colors duration-150 ease-out"
               aria-controls="mobile-menu"
               aria-expanded={isOpen}
               aria-label={isOpen ? 'Close main menu' : 'Open main menu'}
@@ -141,7 +134,7 @@ export default function NavBar() {
               ref={ref as React.RefObject<HTMLDivElement>}
               className="glass border-t shadow-xl"
             >
-              <div className="px-4 py-6 space-y-2">
+              <div className="flex flex-col gap-2 px-4 py-6">
                 {navLinks.map((link) => {
                   const IconComponent = link.icon;
                   const isActive = pathname === link.href;
@@ -151,11 +144,12 @@ export default function NavBar() {
                       href={link.href}
                       onClick={() => setIsOpen(false)}
                       aria-current={isActive ? 'page' : undefined}
-                      className={`flex items-center gap-3 w-full px-4 py-3 min-h-[44px] text-base font-medium rounded-xl transition-colors duration-150 ease-out group ${
+                      className={cn(
+                        'flex items-center gap-3 w-full px-4 py-3 min-h-[44px] text-base font-medium rounded-xl transition-colors duration-150 ease-out group',
                         isActive
-                          ? 'bg-blue-100 dark:bg-gray-700 text-blue-600 dark:text-blue-400'
-                          : 'text-gray-700 dark:text-gray-200 hover:bg-blue-50 dark:hover:bg-gray-800'
-                      }`}
+                          ? 'bg-accent text-accent-foreground'
+                          : 'text-foreground/80 hover:text-foreground hover:bg-secondary',
+                      )}
                     >
                       <IconComponent
                         className="w-5 h-5 transition-transform duration-150 group-hover:scale-110"

@@ -3,7 +3,7 @@
  * This provides a better UX while images are loading
  */
 export function getBlurDataURL(
-  color: string = 'rgba(156, 163, 175, 0.2)',
+  color: string = 'rgba(166, 160, 154, 0.2)',
 ): string {
   const svg = `
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
@@ -26,8 +26,8 @@ export function getProjectBlurDataURL(
 ): string {
   const color =
     type === 'interior'
-      ? 'rgba(16, 185, 129, 0.1)' // emerald tint
-      : 'rgba(59, 130, 246, 0.1)'; // blue tint
+      ? 'rgba(180, 84, 49, 0.1)' // clay tint
+      : 'rgba(19, 85, 104, 0.1)'; // pine tint
 
   return getBlurDataURL(color);
 }
@@ -39,12 +39,12 @@ export const shimmer = (w: number, h: number) => `
 <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <defs>
     <linearGradient id="g">
-      <stop stop-color="#e5e7eb" offset="20%" />
-      <stop stop-color="#f3f4f6" offset="50%" />
-      <stop stop-color="#e5e7eb" offset="70%" />
+      <stop stop-color="#e5e0db" offset="20%" />
+      <stop stop-color="#f3f0eb" offset="50%" />
+      <stop stop-color="#e5e0db" offset="70%" />
     </linearGradient>
   </defs>
-  <rect width="${w}" height="${h}" fill="#e5e7eb" />
+  <rect width="${w}" height="${h}" fill="#e5e0db" />
   <rect id="r" width="${w}" height="${h}" fill="url(#g)" />
   <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
 </svg>`;

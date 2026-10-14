@@ -65,19 +65,19 @@ export default function AboutMeComponent() {
       value: 20,
       suffix: '',
       description: 'Years of Experience',
-      color: 'linear-gradient(135deg, #1d6793, #2278aa)',
+      color: 'linear-gradient(135deg, var(--color-pine), var(--color-pine-light))',
     },
     {
       value: 40,
       suffix: '+',
       description: 'Projects Completed',
-      color: 'linear-gradient(135deg, #a40e4c, #bc1058)',
+      color: 'linear-gradient(135deg, var(--color-clay), var(--color-clay-deep))',
     },
     {
       value: 15,
       suffix: '+',
       description: 'Happy Clients',
-      color: 'linear-gradient(135deg, #fb923c, #1d6793)',
+      color: 'linear-gradient(135deg, var(--color-ochre), var(--color-pine))',
     },
   ];
 
@@ -101,14 +101,14 @@ export default function AboutMeComponent() {
           className="absolute top-1/4 -left-20 w-40 h-40 rounded-full blur-3xl opacity-8"
           style={{
             background:
-              'radial-gradient(circle, rgba(29, 103, 147, 0.08), rgba(52, 211, 153, 0.04))',
+              'radial-gradient(circle, color-mix(in oklab, var(--color-pine) 8%, transparent), color-mix(in oklab, var(--color-pine-tint) 4%, transparent))',
           }}
         />
         <div
           className="absolute bottom-1/4 -right-20 w-60 h-60 rounded-full blur-3xl opacity-6"
           style={{
             background:
-              'radial-gradient(circle, rgba(164, 14, 76, 0.06), rgba(251, 146, 60, 0.03))',
+              'radial-gradient(circle, color-mix(in oklab, var(--color-clay) 6%, transparent), color-mix(in oklab, var(--color-ochre) 3%, transparent))',
           }}
         />
       </div>
@@ -123,7 +123,7 @@ export default function AboutMeComponent() {
           transition={{ duration: duration.enter }}
         >
           <motion.h2
-            className="text-3xl font-bold md:text-5xl text-gray-300"
+            className="text-3xl font-bold md:text-5xl text-foreground"
             whileHover={hasHover ? { scale: 1.01 } : undefined}
             transition={{ type: 'spring', stiffness: 300 }}
           >
@@ -156,13 +156,13 @@ export default function AboutMeComponent() {
               <div
                 className="absolute -top-6 -left-6 w-12 h-12 rounded-full opacity-15"
                 style={{
-                  background: 'linear-gradient(135deg, #1d6793, #34d399)',
+                  background: 'linear-gradient(135deg, var(--color-pine), var(--color-pine-tint))',
                 }}
               />
               <div
                 className="absolute -bottom-4 -right-4 w-8 h-8 rounded-square opacity-20"
                 style={{
-                  background: 'linear-gradient(135deg, #a40e4c, #fb923c)',
+                  background: 'linear-gradient(135deg, var(--color-clay), var(--color-ochre))',
                 }}
               />
 
@@ -200,14 +200,14 @@ export default function AboutMeComponent() {
                 className="absolute inset-0 rounded-xl opacity-0"
                 style={{
                   background:
-                    'linear-gradient(90deg, transparent, rgba(29, 103, 147, 0.04), transparent)',
+                    'linear-gradient(90deg, transparent, color-mix(in oklab, var(--color-pine) 4%, transparent), transparent)',
                 }}
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ delay: STAGGER * 3 }}
               />
               <motion.blockquote
-                className="font-light italic text-base md:text-lg relative z-10 leading-relaxed text-gray-500"
+                className="font-light italic text-base md:text-lg relative z-10 leading-relaxed text-muted-foreground"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ delay: STAGGER * 4 }}
@@ -216,7 +216,7 @@ export default function AboutMeComponent() {
                 functionality, where design speaks to both the heart and mind.
               </motion.blockquote>
               <motion.p
-                className="text-sm font-medium mt-3 md:text-base relative z-10 text-blue-600"
+                className="text-sm font-medium mt-3 md:text-base relative z-10 text-primary"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ delay: STAGGER * 5 }}
@@ -232,18 +232,15 @@ export default function AboutMeComponent() {
             className="flex flex-col w-full lg:ml-12"
           >
             <motion.p
-              className="text-lg leading-relaxed md:text-xl lg:text-2xl mb-8 text-gray-400"
+              className="text-lg leading-relaxed md:text-xl lg:text-2xl mb-8 text-muted-foreground"
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: STAGGER * 2, duration: duration.enter }}
             >
               With more than{' '}
               <motion.span
-                className="font-semibold px-2 py-1 rounded-md text-blue-600 bg-blue-50"
-                whileHover={hasHover ? {
-                  scale: 1.02,
-                  backgroundColor: '#dbeafe',
-                } : undefined}
+                className="font-semibold px-2 py-1 rounded-md text-brand-muted-foreground bg-brand-muted"
+                whileHover={hasHover ? { scale: 1.02 } : undefined}
                 transition={{ type: 'spring', stiffness: 400 }}
               >
                 fifteen years
@@ -257,14 +254,14 @@ export default function AboutMeComponent() {
 
             {/* Additional content for better flow */}
             <motion.p
-              className="text-base leading-relaxed md:text-lg mb-8 text-gray-400"
+              className="text-base leading-relaxed md:text-lg mb-8 text-muted-foreground"
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: STAGGER * 3, duration: duration.enter }}
             >
               My approach combines{' '}
               <motion.span
-                className="font-medium text-amaranth-purple dark:text-gold"
+                className="font-medium text-brand"
                 whileHover={hasHover ? { scale: 1.02 } : undefined}
               >
                 innovative design thinking
@@ -294,7 +291,7 @@ export default function AboutMeComponent() {
                 whileHover={hasHover ? {
                   scale: 1.02,
                   y: -5,
-                  boxShadow: '0 20px 40px rgba(164, 14, 76, 0.25)',
+                  boxShadow: '0 20px 40px color-mix(in oklab, var(--color-clay) 25%, transparent)',
                 } : undefined}
                 className="relative group card p-6 md:p-8 overflow-hidden"
                 key={index}
@@ -315,7 +312,7 @@ export default function AboutMeComponent() {
                 {/* Floating icon */}
                 <motion.div
                   className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center"
-                  style={{ backgroundColor: 'rgba(246, 246, 241, 0.25)' }}
+                  style={{ backgroundColor: 'color-mix(in oklab, var(--color-foreground) 8%, transparent)' }}
                   initial={{ scale: 0.96, opacity: 0 }}
                   whileInView={{ scale: 1, opacity: 1 }}
                   viewport={{ once: true }}
@@ -323,13 +320,13 @@ export default function AboutMeComponent() {
                 >
                   <div
                     className="w-3 h-3 rounded-full"
-                    style={{ backgroundColor: '#f6f6f1' }}
+                    style={{ backgroundColor: 'var(--color-primary)' }}
                   />
                 </motion.div>
 
                 {/* Animated counter */}
                 <motion.h5
-                  className="mb-2 md:mb-3 font-bold tracking-tight text-white text-3xl md:text-4xl relative z-10"
+                  className="mb-2 md:mb-3 font-bold tracking-tight text-foreground text-3xl md:text-4xl relative z-10"
                   initial={{ scale: 0.96, opacity: 0 }}
                   whileInView={{ scale: 1, opacity: 1 }}
                   viewport={{ once: true }}
@@ -342,8 +339,7 @@ export default function AboutMeComponent() {
                 </motion.h5>
 
                 <motion.p
-                  className="text-sm md:text-base font-normal relative z-10 leading-relaxed"
-                  style={{ color: '#f6f6f1' }}
+                  className="text-sm md:text-base font-normal relative z-10 leading-relaxed text-muted-foreground"
                   initial={{ opacity: 0, y: 8 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * STAGGER }}

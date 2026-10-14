@@ -52,14 +52,14 @@ const FloatingBgElements = () => (
       className="absolute top-1/4 left-10 w-32 h-32 rounded-full blur-xl opacity-15"
       style={{
         background:
-          'radial-gradient(circle, rgba(29, 103, 147, 0.12), rgba(34, 120, 170, 0.06))',
+          'radial-gradient(circle, color-mix(in oklab, var(--color-pine) 12%, transparent), color-mix(in oklab, var(--color-pine-light) 6%, transparent))',
       }}
     />
     <div
       className="absolute bottom-1/3 right-20 w-24 h-24 rounded-full blur-xl opacity-12"
       style={{
         background:
-          'radial-gradient(circle, rgba(164, 14, 76, 0.12), rgba(251, 146, 60, 0.06))',
+          'radial-gradient(circle, color-mix(in oklab, var(--color-clay) 12%, transparent), color-mix(in oklab, var(--color-ochre) 6%, transparent))',
       }}
     />
   </div>
@@ -113,11 +113,11 @@ export default function Hero() {
 
           <motion.p
             variants={itemVariants}
-            className="text-xl md:text-2xl lg:text-3xl text-center md:text-left leading-relaxed text-gray-500"
+            className="text-xl md:text-2xl lg:text-3xl text-center md:text-left leading-relaxed text-muted-foreground"
           >
             Turning your{' '}
             <motion.span
-              className="font-semibold text-blue-600"
+              className="font-semibold text-primary"
               whileHover={hasHover ? { scale: 1.02 } : undefined}
               transition={{ type: 'spring', stiffness: 400 }}
             >
@@ -130,7 +130,7 @@ export default function Hero() {
             <motion.div
               whileHover={hasHover ? {
                 scale: 1.02,
-                boxShadow: '0 20px 40px rgba(29, 103, 147, 0.3)',
+                boxShadow: '0 20px 40px color-mix(in oklab, var(--color-pine) 30%, transparent)',
               } : undefined}
               whileTap={{ scale: 0.98 }}
               transition={{ type: 'spring', stiffness: 400, damping: 15 }}
@@ -192,16 +192,16 @@ export default function Hero() {
 
           {/* Floating badge with modern colors */}
           <motion.div
-            className="absolute -bottom-6 -right-6 bg-white/95 backdrop-blur-sm rounded-full p-4 shadow-xl"
-            style={{ border: '2px solid #f6f6f1' }}
+            className="absolute -bottom-6 -right-6 bg-card/95 backdrop-blur-sm rounded-full p-4 shadow-xl"
+            style={{ border: '2px solid var(--color-paper)' }}
             initial={{ scale: 0.96, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ ...spring, delay: STAGGER * 2 }}
             whileHover={hasHover ? { scale: 1.03 } : undefined}
           >
             <div className="text-center">
-              <div className="text-2xl font-bold text-blue-600">20+</div>
-              <div className="text-xs text-gray-500">Years</div>
+              <div className="text-2xl font-bold text-primary">20+</div>
+              <div className="text-xs text-muted-foreground">Years</div>
             </div>
           </motion.div>
         </motion.div>
@@ -223,7 +223,7 @@ export default function Hero() {
           transition={{ duration: duration.enter }}
         >
           <motion.h2
-            className="text-3xl font-bold md:text-5xl text-gray-300"
+            className="text-3xl font-bold md:text-5xl text-foreground"
             whileHover={hasHover ? { scale: 1.01 } : undefined}
             transition={{ type: 'spring', stiffness: 300 }}
           >
@@ -252,7 +252,7 @@ export default function Hero() {
                 scale: 1.01,
                 y: -4,
                 rotateY: 1,
-                boxShadow: '0 15px 30px rgba(164, 14, 76, 0.3)',
+                boxShadow: '0 15px 30px color-mix(in oklab, var(--color-clay) 30%, transparent)',
               } : undefined}
               className="flex group card p-6 md:p-8 overflow-hidden max-w-96 rounded-2xl"
               key={key}
@@ -264,8 +264,8 @@ export default function Hero() {
                 className="absolute inset-0 opacity-0 group-hover:opacity-12 transition-opacity duration-150"
                 style={{
                   background: `
-                    radial-gradient(circle at 30% 30%, rgba(29, 103, 147, 0.08) 0%, transparent 60%),
-                    radial-gradient(circle at 70% 70%, rgba(164, 14, 76, 0.06) 0%, transparent 60%)
+                    radial-gradient(circle at 30% 30%, color-mix(in oklab, var(--color-pine) 8%, transparent) 0%, transparent 60%),
+                    radial-gradient(circle at 70% 70%, color-mix(in oklab, var(--color-clay) 6%, transparent) 0%, transparent 60%)
                   `,
                 }}
               />
@@ -282,20 +282,20 @@ export default function Hero() {
                   className="relative w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-sm"
                   style={{
                     background:
-                      'linear-gradient(135deg, rgba(246, 246, 241, 0.25), rgba(246, 246, 241, 0.15))',
-                    border: '1px solid rgba(246, 246, 241, 0.3)',
+                      'linear-gradient(135deg, color-mix(in oklab, var(--color-foreground) 8%, transparent), color-mix(in oklab, var(--color-foreground) 4%, transparent))',
+                    border: '1px solid color-mix(in oklab, var(--color-foreground) 15%, transparent)',
                   }}
                   whileHover={hasHover ? { scale: 1.05, rotate: 90 } : undefined}
                   transition={{ duration: 0.3 }}
                 >
-                  <span className="font-bold text-white text-sm">
+                  <span className="font-bold text-foreground text-sm">
                     {index + 1}
                   </span>
 
                   {/* Animated ring around step number */}
                   <div
                     className="absolute inset-0 rounded-full"
-                    style={{ border: '2px solid rgba(246, 246, 241, 0.3)' }}
+                    style={{ border: '2px solid color-mix(in oklab, var(--color-foreground) 15%, transparent)' }}
                   />
                 </motion.div>
               </motion.div>
@@ -303,7 +303,7 @@ export default function Hero() {
               {/* Card content */}
               <motion.div className="relative z-10">
                 <motion.h3
-                  className="pt-1 pb-4 mb-3 font-bold tracking-tight text-white relative z-10 text-xl md:text-2xl"
+                  className="pt-1 pb-4 mb-3 font-bold tracking-tight text-foreground relative z-10 text-xl md:text-2xl"
                   initial={{ x: -15, opacity: 0 }}
                   whileInView={{ x: 0, opacity: 1 }}
                   transition={{ delay: STAGGER }}
@@ -315,7 +315,7 @@ export default function Hero() {
                     className="absolute bottom-0 left-0 h-0.5 rounded-full"
                     style={{
                       background:
-                        'linear-gradient(90deg, rgba(246, 246, 241, 0.8), transparent)',
+                        'linear-gradient(90deg, color-mix(in oklab, var(--color-primary) 80%, transparent), transparent)',
                     }}
                     initial={{ width: 0 }}
                     whileInView={{ width: '60%' }}
@@ -324,8 +324,7 @@ export default function Hero() {
                 </motion.h3>
 
                 <motion.p
-                  className="relative z-10 leading-relaxed text-base md:text-lg"
-                  style={{ color: '#f6f6f1' }}
+                  className="relative z-10 leading-relaxed text-base md:text-lg text-muted-foreground"
                   initial={{ y: 15, opacity: 0 }}
                   whileInView={{ y: 0, opacity: 1 }}
                   transition={{ delay: STAGGER * 2 }}
@@ -338,8 +337,8 @@ export default function Hero() {
               <motion.div
                 className="absolute bottom-4 left-4 w-8 h-8 opacity-0 group-hover:opacity-100"
                 style={{
-                  borderLeft: '2px solid rgba(29, 103, 147, 0.4)',
-                  borderBottom: '2px solid rgba(29, 103, 147, 0.4)',
+                  borderLeft: '2px solid color-mix(in oklab, var(--color-pine) 40%, transparent)',
+                  borderBottom: '2px solid color-mix(in oklab, var(--color-pine) 40%, transparent)',
                 }}
                 initial={{ scale: 0.96 }}
                 whileHover={hasHover ? { scale: 1 } : undefined}
@@ -348,8 +347,8 @@ export default function Hero() {
               <motion.div
                 className="absolute top-4 left-4 w-6 h-6 opacity-0 group-hover:opacity-100"
                 style={{
-                  borderTop: '2px solid rgba(164, 14, 76, 0.4)',
-                  borderLeft: '2px solid rgba(164, 14, 76, 0.4)',
+                  borderTop: '2px solid color-mix(in oklab, var(--color-clay) 40%, transparent)',
+                  borderLeft: '2px solid color-mix(in oklab, var(--color-clay) 40%, transparent)',
                 }}
                 initial={{ scale: 0.96 }}
                 whileHover={hasHover ? { scale: 1 } : undefined}

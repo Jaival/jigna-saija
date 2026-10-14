@@ -157,7 +157,7 @@ export default function ImageGallery({
         className="text-center py-20"
       >
         <div className="text-6xl mb-6">📷</div>
-        <p className="text-gray-500 dark:text-gray-400 text-lg">
+        <p className="text-muted-foreground text-lg">
           No images available for this project.
         </p>
       </motion.div>
@@ -210,20 +210,20 @@ export default function ImageGallery({
         transition={{ duration: duration.enter }}
         className="flex items-center justify-between mb-8"
       >
-        <div className="text-gray-600 dark:text-gray-400 text-base font-medium">
+        <div className="text-muted-foreground text-base font-medium">
           {imageUrls.length} {imageUrls.length === 1 ? 'image' : 'images'}
         </div>
 
         {/* Layout Toggle */}
-        <div className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 rounded-xl p-1.5">
+        <div className="flex items-center gap-2 bg-muted rounded-xl p-1.5">
           <motion.button
             whileHover={hasHover ? { scale: 1.05 } : undefined}
             whileTap={{ scale: 0.95 }}
             onClick={() => setLayoutMode('grid')}
             className={`p-2.5 rounded-lg transition-[color,background-color,box-shadow] duration-150 ease-out ${
               layoutMode === 'grid'
-                ? 'bg-white dark:bg-gray-700 text-button-blue dark:text-light-periwinkle shadow-sm'
-                : 'text-gray-600 dark:text-gray-400'
+                ? 'bg-card text-primary shadow-sm'
+                : 'text-muted-foreground'
             }`}
             title="Grid Layout"
           >
@@ -235,8 +235,8 @@ export default function ImageGallery({
             onClick={() => setLayoutMode('masonry')}
             className={`p-2.5 rounded-lg transition-[color,background-color,box-shadow] duration-150 ease-out ${
               layoutMode === 'masonry'
-                ? 'bg-white dark:bg-gray-700 text-button-blue dark:text-light-periwinkle shadow-sm'
-                : 'text-gray-600 dark:text-gray-400'
+                ? 'bg-card text-primary shadow-sm'
+                : 'text-muted-foreground'
             }`}
             title="Bento Layout"
           >
@@ -279,9 +279,9 @@ export default function ImageGallery({
             }}
             className={`${
               layoutMode === 'masonry' ? `${getBentoSpan(index)}` : ''
-            } cursor-pointer group relative overflow-hidden rounded-2xl sm:rounded-3xl shadow-lg hover:shadow-xl transition-shadow duration-100 bg-white dark:bg-gray-900 ${
+            } cursor-pointer group relative overflow-hidden rounded-2xl sm:rounded-3xl shadow-lg hover:shadow-xl transition-shadow duration-100 bg-card ${
               layoutMode === 'masonry'
-                ? 'border border-gray-100 dark:border-gray-800'
+                ? 'border border-border'
                 : ''
             }`}
             onClick={(e) => handleImageClick(index, e)}
@@ -547,11 +547,11 @@ function ProfessionalImage({
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="flex items-center justify-center w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 rounded-2xl sm:rounded-3xl"
+          className="flex items-center justify-center w-full h-full bg-gradient-to-br from-muted to-secondary rounded-2xl sm:rounded-3xl"
         >
           <div className="text-center">
             <div className="text-4xl sm:text-5xl mb-4">🖼️</div>
-            <p className="text-gray-500 dark:text-gray-400 text-sm font-medium">
+            <p className="text-muted-foreground text-sm font-medium">
               Failed to load image
             </p>
           </div>
@@ -600,7 +600,7 @@ function ProfessionalImage({
                 initial={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 rounded-2xl sm:rounded-3xl flex items-center justify-center"
+                className="absolute inset-0 bg-gradient-to-br from-muted to-secondary rounded-2xl sm:rounded-3xl flex items-center justify-center"
               >
                 <motion.div
                   animate={{ rotate: 360 }}
@@ -609,7 +609,7 @@ function ProfessionalImage({
                     repeat: Infinity,
                     ease: 'linear',
                   }}
-                  className="w-8 h-8 border-3 border-button-blue border-t-transparent rounded-full"
+                  className="w-8 h-8 border-3 border-primary border-t-transparent rounded-full"
                 />
               </motion.div>
             )}

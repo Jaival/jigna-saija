@@ -1,27 +1,19 @@
 import Link from 'next/link';
 import { Instagram, Facebook, Mail, Phone, MapPin } from 'lucide-react';
-import Image from 'next/image';
 import userData from '@/data/data';
+import { Logo } from '@/components/Logo';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="py-12 mt-16 border-t border-gray-200 dark:border-gray-700">
+    <footer className="py-12 mt-16 border-t border-border">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* About Section */}
           <div className="space-y-4">
-            <div className="relative w-32 h-auto mb-4">
-              <Image
-                src="/logos/JiiJ_Designs.png"
-                alt="JiiJ Designs"
-                width={128}
-                height={128}
-                className="w-full h-auto"
-              />
-            </div>
-            <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+            <Logo className="w-44 mb-4 text-foreground" />
+            <p className="text-sm text-muted-foreground leading-relaxed">
               Professional architect and interior designer with 20+ years of
               experience creating beautiful, functional spaces.
             </p>
@@ -29,14 +21,14 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-bold text-lg mb-4 text-gray-900 dark:text-white">
+            <h3 className="font-bold text-lg mb-4 text-foreground">
               Quick Links
             </h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link
                   href="/"
-                  className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-150"
+                  className="text-muted-foreground hover:text-primary transition-colors duration-150"
                 >
                   Home
                 </Link>
@@ -44,7 +36,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/projects"
-                  className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-150"
+                  className="text-muted-foreground hover:text-primary transition-colors duration-150"
                 >
                   Projects
                 </Link>
@@ -52,7 +44,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/contact-me"
-                  className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-150"
+                  className="text-muted-foreground hover:text-primary transition-colors duration-150"
                 >
                   Contact Me
                 </Link>
@@ -62,10 +54,8 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h3 className="font-bold text-lg mb-4 text-gray-900 dark:text-white">
-              Services
-            </h3>
-            <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+            <h3 className="font-bold text-lg mb-4 text-foreground">Services</h3>
+            <ul className="space-y-2 text-sm text-muted-foreground">
               <li>Architecture Design</li>
               <li>Interior Design</li>
               <li>3D Visualization</li>
@@ -75,13 +65,11 @@ export default function Footer() {
 
           {/* Connect */}
           <div>
-            <h3 className="font-bold text-lg mb-4 text-gray-900 dark:text-white">
-              Connect
-            </h3>
+            <h3 className="font-bold text-lg mb-4 text-foreground">Connect</h3>
             <div className="space-y-3">
               <a
                 href={`mailto:${userData.email}`}
-                className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-150 group"
+                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors duration-150 group"
               >
                 <Mail className="w-4 h-4 group-hover:scale-110 transition-transform" />
                 <span className="break-all">{userData.email}</span>
@@ -93,7 +81,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Visit our Instagram page"
-                  className="p-2 rounded-lg bg-amaranth-purple text-white hover:shadow-lg transition-shadow duration-150 ease-out"
+                  className="p-2 rounded-lg bg-brand text-brand-foreground hover:shadow-lg transition-shadow duration-150 ease-out"
                 >
                   <Instagram className="w-5 h-5" />
                 </a>
@@ -102,7 +90,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Visit our Facebook page"
-                  className="p-2 rounded-lg bg-blue-600 text-white hover:shadow-lg transition-shadow duration-150 ease-out"
+                  className="p-2 rounded-lg bg-primary text-primary-foreground hover:shadow-lg transition-shadow duration-150 ease-out"
                 >
                   <Facebook className="w-5 h-5" />
                 </a>
@@ -111,20 +99,20 @@ export default function Footer() {
           </div>
         </div>
 
-        <hr className="my-6 border-gray-200 dark:border-gray-700" />
+        <hr className="my-6 border-border" />
 
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-gray-600 dark:text-gray-400 text-center sm:text-left">
+          <p className="text-sm text-muted-foreground text-center sm:text-left">
             © {currentYear} <span className="font-semibold">Jigna Saija</span>.
             All Rights Reserved.
           </p>
-          <p className="text-xs text-gray-500 dark:text-gray-500 text-center sm:text-right">
+          <p className="text-xs text-muted-foreground text-center sm:text-right">
             Designed with ❤️ by{' '}
             <a
               href="https://github.com/jaival"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              className="hover:text-primary transition-colors"
             >
               Jaival Saija
             </a>

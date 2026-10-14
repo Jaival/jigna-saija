@@ -3,7 +3,7 @@
 import { useTheme } from 'next-themes';
 import { useEffect } from 'react';
 
-const COLORS = { light: '#ffffff', dark: '#0f172a' } as const;
+const COLORS = { light: '#fcfaf6', dark: '#120f0c' } as const;
 
 /**
  * next-themes switches a class, but <meta name="theme-color"> is matched by

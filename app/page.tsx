@@ -22,9 +22,9 @@ export default function Home() {
         <div
           className="fixed inset-0 pointer-events-none opacity-25"
           style={{
-            background: `radial-gradient(circle at 20% 50%, rgba(29, 103, 147, 0.04) 0%, transparent 60%),
-          radial-gradient(circle at 80% 20%, rgba(164, 14, 76, 0.03) 0%, transparent 60%),
-          radial-gradient(circle at 40% 80%, rgba(251, 146, 60, 0.02) 0%, transparent 60%)`,
+            background: `radial-gradient(circle at 20% 50%, color-mix(in oklab, var(--color-pine) 4%, transparent) 0%, transparent 60%),
+          radial-gradient(circle at 80% 20%, color-mix(in oklab, var(--color-clay) 3%, transparent) 0%, transparent 60%),
+          radial-gradient(circle at 40% 80%, color-mix(in oklab, var(--color-ochre) 2%, transparent) 0%, transparent 60%)`,
           }}
         />
 

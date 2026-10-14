@@ -140,12 +140,12 @@ export default function ProjectsComponent() {
             <div className="flex-1 max-w-md">
               <div className="relative">
                 <Search
-                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4"
+                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4"
                   aria-hidden="true"
                 />
                 {isSearching && (
                   <Loader2
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-blue-500 w-4 h-4 animate-spin"
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-primary w-4 h-4 animate-spin"
                     aria-hidden="true"
                   />
                 )}
@@ -155,7 +155,7 @@ export default function ProjectsComponent() {
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
                   aria-label="Search projects"
-                  className="w-full pl-10 pr-10 py-3 border border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 transition-colors duration-150 ease-out shadow-sm"
+                  className="w-full pl-10 pr-10 py-3 border border-border rounded-xl bg-card text-foreground placeholder-gray-500 transition-colors duration-150 ease-out shadow-sm"
                 />
               </div>
             </div>
@@ -169,15 +169,15 @@ export default function ProjectsComponent() {
                 aria-expanded={showFilters}
                 className={`p-3 min-h-[44px] min-w-[44px] rounded-xl border transition-[color,background-color,border-color,box-shadow] duration-150 ease-out ${
                   showFilters
-                    ? 'bg-button-blue text-white border-button-blue shadow-lg'
-                    : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 shadow-sm'
+                    ? 'bg-primary text-primary-foreground border-primary shadow-lg'
+                    : 'bg-card text-muted-foreground border-border hover:bg-muted shadow-sm'
                 }`}
               >
                 <Filter className="w-4 h-4" aria-hidden="true" />
               </motion.button>
 
               <div
-                className="flex bg-gray-100 dark:bg-gray-800 rounded-xl p-1 shadow-sm"
+                className="flex bg-muted rounded-xl p-1 shadow-sm"
                 role="group"
                 aria-label="View mode"
               >
@@ -189,8 +189,8 @@ export default function ProjectsComponent() {
                   aria-pressed={viewMode === 'grid'}
                   className={`p-2 min-h-[44px] min-w-[44px] rounded-lg transition-[color,background-color,box-shadow] duration-150 ease-out ${
                     viewMode === 'grid'
-                      ? 'bg-white dark:bg-gray-700 text-button-blue dark:text-light-periwinkle shadow-sm'
-                      : 'text-gray-600 dark:text-gray-400'
+                      ? 'bg-card text-primary shadow-sm'
+                      : 'text-muted-foreground'
                   }`}
                 >
                   <Grid className="w-4 h-4" aria-hidden="true" />
@@ -203,8 +203,8 @@ export default function ProjectsComponent() {
                   aria-pressed={viewMode === 'list'}
                   className={`p-2 min-h-[44px] min-w-[44px] rounded-lg transition-[color,background-color,box-shadow] duration-150 ease-out ${
                     viewMode === 'list'
-                      ? 'bg-white dark:bg-gray-700 text-button-blue dark:text-light-periwinkle shadow-sm'
-                      : 'text-gray-600 dark:text-gray-400'
+                      ? 'bg-card text-primary shadow-sm'
+                      : 'text-muted-foreground'
                   }`}
                 >
                   <List className="w-4 h-4" aria-hidden="true" />
@@ -221,11 +221,11 @@ export default function ProjectsComponent() {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: -8 }}
                 transition={{ duration: 0.15, ease: 'easeOut' }}
-                className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-100 dark:border-gray-700 mb-6"
+                className="bg-card rounded-xl p-6 shadow-lg border border-border mb-6"
               >
                 <div className="flex flex-wrap gap-6 items-center">
                   <div className="flex items-center gap-3">
-                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                    <span className="text-sm font-medium text-foreground/80">
                       Category:
                     </span>
                     <select
@@ -233,7 +233,7 @@ export default function ProjectsComponent() {
                       onChange={(e) =>
                         setSelectedCategory(e.target.value as any)
                       }
-                      className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm shadow-sm"
+                      className="px-4 py-2 rounded-lg border border-border bg-card text-foreground text-sm shadow-sm"
                     >
                       <option value="all">All Projects</option>
                       <option value="interior">Interior Design</option>
@@ -242,13 +242,13 @@ export default function ProjectsComponent() {
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                    <span className="text-sm font-medium text-foreground/80">
                       Sort by:
                     </span>
                     <select
                       value={sortBy}
                       onChange={(e) => setSortBy(e.target.value as SortBy)}
-                      className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm shadow-sm"
+                      className="px-4 py-2 rounded-lg border border-border bg-card text-foreground text-sm shadow-sm"
                     >
                       <option value="newest">Newest First</option>
                       <option value="oldest">Oldest First</option>
@@ -256,7 +256,7 @@ export default function ProjectsComponent() {
                     </select>
                   </div>
 
-                  <div className="text-sm text-gray-500 dark:text-gray-400 font-medium">
+                  <div className="text-sm text-muted-foreground font-medium">
                     {filteredProjects.length} project
                     {filteredProjects.length !== 1 ? 's' : ''} found
                   </div>
@@ -303,10 +303,10 @@ export default function ProjectsComponent() {
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: duration.enter }}
-                      className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-8 flex items-center gap-3"
+                      className="text-3xl md:text-4xl font-bold text-foreground mb-8 flex items-center gap-3"
                     >
                       <span>{categoryTitle}</span>
-                      <span className="text-lg text-gray-500 dark:text-gray-400 font-normal">
+                      <span className="text-lg text-muted-foreground font-normal">
                         ({projects.length})
                       </span>
                     </motion.h2>
@@ -333,10 +333,10 @@ export default function ProjectsComponent() {
             className="text-center py-16"
           >
             <div className="text-6xl mb-4">🔍</div>
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+            <h3 className="text-xl font-semibold text-foreground mb-2">
               No projects found
             </h3>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-muted-foreground">
               Try adjusting your search or filter criteria
             </p>
           </motion.div>
@@ -484,8 +484,8 @@ const ProjectCard = ({
               <span
                 className={`px-3 py-1 text-xs font-semibold rounded-full backdrop-blur-sm border ${
                   project.type === 'interior'
-                    ? 'bg-emerald-500/20 text-emerald-100 border-emerald-400/30'
-                    : 'bg-blue-500/20 text-blue-100 border-blue-400/30'
+                    ? 'bg-clay/70 text-paper border-paper/20'
+                    : 'bg-pine/70 text-paper border-paper/20'
                 }`}
               >
                 {project.type === 'interior' ? 'Interior' : 'Architecture'}
@@ -508,20 +508,20 @@ const ProjectCard = ({
           {/* Card Content */}
           <div className="p-6">
             <div className="flex items-start justify-between mb-3">
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-button-blue dark:group-hover:text-light-periwinkle transition-colors duration-150 line-clamp-2">
+              <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors duration-150 line-clamp-2">
                 {project.title}
               </h3>
             </div>
 
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
+              <div className="flex items-center gap-2 text-muted-foreground">
                 <Calendar className="w-4 h-4" />
                 <span className="text-sm font-medium">{project.year}</span>
               </div>
 
               <motion.div
                 whileHover={hasHover ? { x: 4 } : undefined}
-                className="text-button-blue dark:text-honolulu-blue group-hover:text-honolulu-blue dark:group-hover:text-light-periwinkle transition-colors duration-150"
+                className="text-primary transition-colors duration-150"
               >
                 <svg
                   className="w-5 h-5"
@@ -568,7 +568,7 @@ const ProjectListItem = ({
       className="group"
     >
       <Link href={project.link} transitionTypes={NAV_FORWARD} className="block">
-        <div className="flex items-center gap-6 p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-150 ease-out border border-gray-100 dark:border-gray-700">
+        <div className="flex items-center gap-6 p-6 bg-card rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-150 ease-out border border-border">
           <div className="relative w-24 h-24 rounded-xl overflow-hidden flex-shrink-0">
             <ProjectImageTransition id={project.id}>
               <div className="absolute inset-0 overflow-hidden">
@@ -586,14 +586,14 @@ const ProjectListItem = ({
 
           <div className="flex-1 min-w-0">
             <div className="flex items-start justify-between mb-2">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-button-blue dark:group-hover:text-light-periwinkle transition-colors duration-150 truncate">
+              <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors duration-150 truncate">
                 {project.title}
               </h3>
               <span
                 className={`px-3 py-1 text-xs rounded-full font-medium ${
                   project.type === 'interior'
-                    ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900 dark:text-emerald-300'
-                    : 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'
+                    ? 'bg-brand-muted text-brand-muted-foreground'
+                    : 'bg-accent text-accent-foreground'
                 }`}
               >
                 {project.type === 'interior' ? 'Interior' : 'Architecture'}
@@ -601,14 +601,14 @@ const ProjectListItem = ({
             </div>
 
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
+              <div className="flex items-center gap-2 text-muted-foreground">
                 <Calendar className="w-4 h-4" />
                 <span className="text-sm">{project.year}</span>
               </div>
 
               <motion.div
                 whileHover={hasHover ? { x: 4 } : undefined}
-                className="text-gray-400 group-hover:text-button-blue dark:group-hover:text-light-periwinkle transition-colors duration-150"
+                className="text-muted-foreground group-hover:text-primary transition-colors duration-150"
               >
                 <svg
                   className="w-5 h-5"

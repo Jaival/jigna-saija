@@ -8,7 +8,7 @@ export function Skeleton({
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={`animate-pulse bg-gray-200 dark:bg-gray-700 rounded ${className}`}
+      className={`animate-pulse bg-muted rounded ${className}`}
       {...props}
     />
   );
@@ -37,7 +37,7 @@ export function ProjectCardSkeleton() {
 // Project list item skeleton for list view
 export function ProjectListSkeleton() {
   return (
-    <div className="flex items-center gap-6 p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700">
+    <div className="flex items-center gap-6 p-6 bg-card rounded-2xl shadow-lg border border-border">
       <Skeleton className="w-24 h-24 rounded-xl flex-shrink-0" />
       <div className="flex-1 space-y-3">
         <div className="flex items-start justify-between">
@@ -92,7 +92,7 @@ export function ImageSkeleton({
 }) {
   return (
     <motion.div
-      className={`relative overflow-hidden bg-gray-200 dark:bg-gray-700 ${aspectRatio} ${className}`}
+      className={`relative overflow-hidden bg-muted ${aspectRatio} ${className}`}
       initial={{ opacity: 0.6 }}
       animate={{ opacity: [0.6, 1, 0.6] }}
       transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}

@@ -42,8 +42,8 @@ function generateEmailHtml(data: any, sanitizedMessage: string) {
   body {
     font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     line-height: 1.6;
-    color: #1a1a1a;
-    background: #f8fafc;
+    color: #1a1511;
+    background: #fcfaf6;
   }
   
   .container {
@@ -56,7 +56,7 @@ function generateEmailHtml(data: any, sanitizedMessage: string) {
   }
   
   .header {
-    background: linear-gradient(135deg, #264653 0%, #a40e4c 50%, #bc1058 100%);
+    background: linear-gradient(135deg, #135568 0%, #b45431 50%, #95402b 100%);
     padding: 40px 32px;
     text-align: center;
     color: white;
@@ -95,8 +95,8 @@ function generateEmailHtml(data: any, sanitizedMessage: string) {
   }
   
   .field {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
+    background: #fcfaf6;
+    border: 1px solid #e5e0db;
     border-radius: 12px;
     padding: 20px;
     margin-bottom: 20px;
@@ -115,14 +115,14 @@ function generateEmailHtml(data: any, sanitizedMessage: string) {
   }
   
   .field:hover {
-    border-color: #cbd5e1;
-    background: #f1f5f9;
+    border-color: #d8d3cd;
+    background: #f3f0eb;
   }
   
   .field-label {
     font-size: 14px;
     font-weight: 600;
-    color: #475569;
+    color: #605954;
     margin-bottom: 8px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -130,56 +130,56 @@ function generateEmailHtml(data: any, sanitizedMessage: string) {
   
   .field-value {
     font-size: 16px;
-    color: #1e293b;
+    color: #2a2522;
     font-weight: 500;
     word-wrap: break-word;
   }
   
   .message-field {
     background: #fffbf0;
-    border: 1px solid #fb923c;
+    border: 1px solid #e4ac59;
   }
   
   .message-field:hover {
     background: #fef3e2;
-    border-color: #ea7c08;
+    border-color: #c98a2e;
   }
   
   .message-value {
     white-space: pre-wrap;
     line-height: 1.7;
     font-size: 15px;
-    color: #374151;
+    color: #443e3a;
   }
   
   .divider {
     height: 1px;
-    background: linear-gradient(to right, transparent, #e2e8f0, transparent);
+    background: linear-gradient(to right, transparent, #e5e0db, transparent);
     margin: 32px 0;
   }
   
   .footer {
-    background: #f8fafc;
+    background: #fcfaf6;
     padding: 24px 32px;
     text-align: center;
-    border-top: 1px solid #e2e8f0;
+    border-top: 1px solid #e5e0db;
   }
   
   .footer p {
     font-size: 14px;
-    color: #64748b;
+    color: #77706a;
     margin-bottom: 8px;
   }
   
   .timestamp {
     font-size: 12px;
-    color: #94a3b8;
+    color: #a6a09a;
     font-weight: 500;
   }
   
   .badge {
     display: inline-block;
-    background: linear-gradient(135deg, #1d6793 0%, #2278aa 100%);
+    background: linear-gradient(135deg, #135568 0%, #246a7e 100%);
     color: white;
     padding: 6px 12px;
     border-radius: 20px;
@@ -188,7 +188,7 @@ function generateEmailHtml(data: any, sanitizedMessage: string) {
     margin-bottom: 16px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    box-shadow: 0 2px 4px rgba(29, 103, 147, 0.2);
+    box-shadow: 0 2px 4px rgba(19, 85, 104, 0.2);
   }
   
   @media (max-width: 640px) {

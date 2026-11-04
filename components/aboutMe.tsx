@@ -182,7 +182,9 @@ export default function AboutMeComponent() {
                   className="rounded-2xl aspect-auto w-full h-auto"
                   alt="Jigna Saija - Professional architect and interior designer with over 20 years of experience"
                   width={3248}
-                  height={4062.1}
+                  height={4062}
+                  // Matches the wrapper: max-w-xs / sm / md / lg.
+                  sizes="(max-width: 640px) 320px, (max-width: 768px) 384px, (max-width: 1024px) 448px, 512px"
                   src={'/images/jignasaija.jpg'}
                   placeholder="blur"
                   blurDataURL="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PGZpbHRlciBpZD0iYiIgZmlsdGVyVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIyMCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InJnYmEoMTU2LCAxNjMsIDE3NSwgMC4yKSIgZmlsdGVyPSJ1cmwoI2IpIi8+PC9zdmc+"

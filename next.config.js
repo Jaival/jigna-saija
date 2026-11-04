@@ -28,13 +28,15 @@ const nextConfig = {
   // Image optimization
   images: {
     // Every `quality` a next/image uses must be listed (required since Next 16).
-    // 75: small thumbnails (the default). 90: cards and gallery tiles.
-    // 95: the full-screen lightbox only.
-    qualities: [75, 90, 95],
+    // 75: small thumbnails (the default). 90: cards, gallery tiles and the
+    // lightbox. Each extra value multiplies the variants Vercel bills for.
+    qualities: [75, 90],
     // Vercel bills one transformation per (image, width, quality, format).
     // WebP only: adding AVIF doubles every variant.
     formats: ['image/webp'],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    // Capped at 1920: source images are at most 1920px on the long edge, so
+    // wider variants would only re-encode the same pixels.
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     // Images in /public never change in place, so keep each transformation
     // cached for the Vercel maximum (31 days) instead of re-transforming.

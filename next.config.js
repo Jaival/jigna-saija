@@ -31,19 +31,17 @@ const nextConfig = {
     // 75: small thumbnails (the default). 90: cards and gallery tiles.
     // 95: the full-screen lightbox only.
     qualities: [75, 90, 95],
-    formats: ['image/webp', 'image/avif'],
+    // Vercel bills one transformation per (image, width, quality, format).
+    // WebP only: adding AVIF doubles every variant.
+    formats: ['image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'raw.githubusercontent.com',
-      },
-      {
-        protocol: 'https',
-        hostname: '51ebo9nf5p.ufs.sh'
-      }
-    ],
+    // Images in /public never change in place, so keep each transformation
+    // cached for the Vercel maximum (31 days) instead of re-transforming.
+    minimumCacheTTL: 2678400,
+    // No remotePatterns: every image is local. An open hostname such as
+    // raw.githubusercontent.com lets anyone run /_next/image on any file
+    // there and spend this project's transformation quota.
   },
   
   // Security headers

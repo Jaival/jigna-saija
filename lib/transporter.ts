@@ -1,4 +1,4 @@
-import nodemailer, { Transporter, SendMailOptions } from 'nodemailer';
+import nodemailer, { Transporter, SendMailOptions, SentMessageInfo } from 'nodemailer';
 
 // Define TypeScript interfaces for better type safety
 export interface EmailConfig {
@@ -37,7 +37,7 @@ export const mailOptions: SendMailOptions = {
 };
 
 // Helper function to send emails more easily
-export const sendEmail = async (options: EmailConfig): Promise<nodemailer.SentMessageInfo> => {
+export const sendEmail = async (options: EmailConfig): Promise<SentMessageInfo> => {
   try {
     return await transporter.sendMail({
       ...mailOptions,

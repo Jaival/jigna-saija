@@ -470,7 +470,7 @@ export default function ImageGallery({
                   fill
                   className="object-contain rounded-2xl"
                   sizes="100vw"
-                  quality={95}
+                  quality={CARD_IMAGE_QUALITY}
                   priority
                 />
               </motion.div>

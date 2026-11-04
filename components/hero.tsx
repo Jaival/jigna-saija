@@ -180,7 +180,7 @@ export default function Hero() {
               priority={true}
               width={1100}
               height={1100}
-              sizes="(max-width: 768px) 100vw, 1100px"
+              sizes="(max-width: 768px) 100vw, 50vw"
               style={{ objectFit: 'cover' }}
               placeholder="blur"
               blurDataURL="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PGZpbHRlciBpZD0iYiIgZmlsdGVyVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIyMCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InJnYmEoNTksIDEzMCwgMjQ2LCAwLjEpIiBmaWx0ZXI9InVybCgjYikiLz48L3N2Zz4="
